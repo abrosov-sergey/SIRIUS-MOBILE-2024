@@ -13,6 +13,11 @@ xcuserdata/
 
 # Project generated
 SiriusMapIOS.xcodeproj
+.pbxproj
 
 # Workspace generated
 SiriusMapIOS.xcworkspace
+
+# CocoaPods
+Pods/
+Podfile.lock
