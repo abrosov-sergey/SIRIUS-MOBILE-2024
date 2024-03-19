@@ -10,3 +10,9 @@ xcuserdata/
 
 # Backup files
 *~.nib
+
+# Project generated
+SiriusMapIOS.xcodeproj
+
+# Workspace generated
+SiriusMapIOS.xcworkspace
