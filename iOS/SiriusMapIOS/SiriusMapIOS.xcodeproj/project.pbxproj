@@ -3,26 +3,22 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		02976F567C1238A3548BCF3C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3FBD19414D327CE225416EA /* Main.storyboard */; };
 		145C07673C6782DDC8600B91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83159C937EE512A68238EF45 /* LaunchScreen.storyboard */; };
 		35AAE40DDA236047F35FAFE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F9D5060BF040128605AA894 /* Assets.xcassets */; };
 		582C18A78260B44BF7C2D1B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2710BA37D5DDC231498D40CE /* AppDelegate.swift */; };
-		6D9C3F59871EB2782F916AB4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9826A7935EABBD4BE6D057F7 /* SceneDelegate.swift */; };
 		B69C6D20A28F1892FF196A85 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD49A25F6B4F67FCA87F8F60 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2710BA37D5DDC231498D40CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		44636DD3CC622DDECC2DF3C2 /* SiriusMapIOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = SiriusMapIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		44636DD3CC622DDECC2DF3C2 /* SiriusMapIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SiriusMapIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F9D5060BF040128605AA894 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		75A775A993F57B378631C2CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		9826A7935EABBD4BE6D057F7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BC48F3C1CE609F128969BAF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		CC2927D5F2E0A9265923F020 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DD49A25F6B4F67FCA87F8F60 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -34,8 +30,6 @@
 				5F9D5060BF040128605AA894 /* Assets.xcassets */,
 				BC48F3C1CE609F128969BAF3 /* Info.plist */,
 				83159C937EE512A68238EF45 /* LaunchScreen.storyboard */,
-				E3FBD19414D327CE225416EA /* Main.storyboard */,
-				9826A7935EABBD4BE6D057F7 /* SceneDelegate.swift */,
 				DD49A25F6B4F67FCA87F8F60 /* ViewController.swift */,
 			);
 			path = SiriusMapIOS;
@@ -84,8 +78,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 2126F13ECC880FB22885CD5F /* Build configuration list for PBXProject "SiriusMapIOS" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -114,7 +106,6 @@
 			files = (
 				35AAE40DDA236047F35FAFE1 /* Assets.xcassets in Resources */,
 				145C07673C6782DDC8600B91 /* LaunchScreen.storyboard in Resources */,
-				02976F567C1238A3548BCF3C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,7 +117,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				582C18A78260B44BF7C2D1B4 /* AppDelegate.swift in Sources */,
-				6D9C3F59871EB2782F916AB4 /* SceneDelegate.swift in Sources */,
 				B69C6D20A28F1892FF196A85 /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -140,14 +130,6 @@
 				75A775A993F57B378631C2CC /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		E3FBD19414D327CE225416EA /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CC2927D5F2E0A9265923F020 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -268,6 +250,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SiriusMapIOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -288,6 +271,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SiriusMapIOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -308,6 +292,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SiriusMapIOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -445,6 +430,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SiriusMapIOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
