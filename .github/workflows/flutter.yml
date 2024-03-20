@@ -2,9 +2,9 @@ name: Flutter
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "develop", "flutter_ci" ,"flutter_ci_test" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "develop", "flutter_ci", "flutter_ci_test" ]
 jobs:
   analyze:
     runs-on: ubuntu-latest
