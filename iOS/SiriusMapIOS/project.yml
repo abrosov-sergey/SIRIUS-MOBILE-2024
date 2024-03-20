@@ -21,10 +21,6 @@ configs:
 # Packages
 ############
 
-packages:
-  Yams:
-    url: https://github.com/jpsim/Yams
-    from: 2.0.0
 
 ############
 # Settings
