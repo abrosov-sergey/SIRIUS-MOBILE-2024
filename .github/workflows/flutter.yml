@@ -38,7 +38,9 @@ jobs:
           cd flutter_sirius_map
           flutter pub get
       - name: Run tests
-        run: flutter test
+        run: |
+          cd flutter_sirius_map
+          flutter test
   build:
     runs-on: ubuntu-latest
     steps:
