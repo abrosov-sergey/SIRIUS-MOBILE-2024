@@ -10,3 +10,18 @@ xcuserdata/
 
 # Backup files
 *~.nib
+
+# Project generated
+SiriusMapIOS.xcodeproj
+SiriusMapIOS.xcodeproj/
+*.xcodeproj
+*.pbxproj
+
+# Workspace generated
+SiriusMapIOS.xcworkspace
+SiriusMapIOS.xcworkspace/
+*.xcworkspace
+
+# CocoaPods
+Pods/
+Podfile.lock
