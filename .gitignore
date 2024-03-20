@@ -12,11 +12,11 @@ xcuserdata/
 *~.nib
 
 # Project generated
-SiriusMapIOS.xcodeproj
+SiriusMapIOS.xcodeproj/
 .pbxproj
 
 # Workspace generated
-SiriusMapIOS.xcworkspace
+SiriusMapIOS.xcworkspace/
 
 # CocoaPods
 Pods/
