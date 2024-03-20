@@ -16,7 +16,8 @@ jobs:
         with:
           channel: 'stable'
           cache: true
-      - run: cd ../../flutter_sirius_map
+      - name: Switching to Flutter dependencies
+        run: cd ../../flutter_sirius_map
       - name: Install dependencies
         run: flutter pub get
       - name: Build runner build
@@ -34,8 +35,8 @@ jobs:
         with:
           channel: 'stable'
           cache: true
-      - name: Go to repo
-      - run: cd ../../flutter_sirius_map
+      - name: Switching to Flutter dependencies
+        run: cd ../../flutter_sirius_map
       - name: Install dependencies
         run: flutter pub get
       - name: Build runner build
@@ -55,7 +56,8 @@ jobs:
         with:
           channel: 'stable'
           cache: true
-      - run: cd ../../flutter_sirius_map
+      - name: Switching to Flutter dependencies
+        run: cd ../../flutter_sirius_map
       - name: Install dependencies
         run: flutter pub get
       - name: Build runner build
