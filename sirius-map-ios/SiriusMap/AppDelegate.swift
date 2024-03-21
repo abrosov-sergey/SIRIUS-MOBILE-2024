@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  SiriusMobileIOS
+//  SiriusMap
 //
 //  Created by Sergey Abrosov on 20.03.2024.
 //
@@ -20,6 +20,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-
 }
-
