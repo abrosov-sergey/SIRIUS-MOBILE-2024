@@ -1,0 +1,43 @@
+name: SiriusMap
+
+############
+# Options
+############
+
+options:
+  bundleIdPrefix: com.example
+
+############
+# Configs
+############
+
+configs:
+  Debug: debug
+  Release: release
+  Adhoc: release
+  Beta: release
+
+############
+# Packages
+############
+
+
+############
+# Settings
+############
+
+# settings:
+  # PRODUCT_BUNDLE_IDENTIFIER: $(AS_BUNDLE_IDENTIFIER)
+
+targets:
+  SiriusMap:
+    type: application
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources: [SiriusMap]
+    settings:
+      base:
+        MARKETING_VERSION: 1.0.0
+        SWIFT_VERSION: 5.2
+        SWIFT_OPTIMIZATION_LEVEL: "-Onone"
+        TARGETED_DEVICE_FAMILY: 1
