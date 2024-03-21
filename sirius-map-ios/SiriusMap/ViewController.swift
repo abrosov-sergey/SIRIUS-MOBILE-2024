@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  SiriusMobileIOS
+//  SiriusMap
 //
 //  Created by Sergey Abrosov on 20.03.2024.
 //
@@ -13,7 +13,5 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .green
     }
-
-
 }
 
