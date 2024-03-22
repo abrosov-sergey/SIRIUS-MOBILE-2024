@@ -28,9 +28,9 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.themeExtendColors.backgroundColor,
+      backgroundColor: context.themeExtendColors.primaryColor,
       appBar: AppBar(
-        backgroundColor: context.themeExtendColors.backgroundColor,
+        backgroundColor: context.themeExtendColors.primaryColor,
       ),
       body: SafeArea(
         child: Column(
@@ -49,6 +49,11 @@ class MyHomePage extends StatelessWidget {
             SettingButton(
               iconData: Icons.egg_rounded,
               onTap: () {},
+            ),
+            Text(
+              'Search',
+              style: context.themeExtendTextStyles.headerStyle
+                  .copyWith(color: context.themeExtendColors.iconColor),
             )
           ],
         ),

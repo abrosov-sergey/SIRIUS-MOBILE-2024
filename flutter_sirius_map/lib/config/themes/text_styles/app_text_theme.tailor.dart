@@ -11,29 +11,35 @@ part of 'app_text_theme.dart';
 class AppTextTheme extends ThemeExtension<AppTextTheme>
     with DiagnosticableTreeMixin {
   const AppTextTheme({
-    required this.w400S12H14Example,
+    required this.bodyStyle,
+    required this.headerStyle,
   });
 
-  final TextStyle w400S12H14Example;
+  final TextStyle bodyStyle;
+  final TextStyle headerStyle;
 
   static AppTextTheme get light => kDebugMode ? _lightGetter : _lightFinal;
 
   static AppTextTheme get dark => kDebugMode ? _darkGetter : _darkFinal;
 
   static AppTextTheme get _lightGetter => AppTextTheme(
-        w400S12H14Example: $_AppTextTheme.w400S12H14Example[0],
+        bodyStyle: $_AppTextTheme.bodyStyle[0],
+        headerStyle: $_AppTextTheme.headerStyle[0],
       );
 
   static final AppTextTheme _lightFinal = AppTextTheme(
-    w400S12H14Example: $_AppTextTheme.w400S12H14Example[0],
+    bodyStyle: $_AppTextTheme.bodyStyle[0],
+    headerStyle: $_AppTextTheme.headerStyle[0],
   );
 
   static AppTextTheme get _darkGetter => AppTextTheme(
-        w400S12H14Example: $_AppTextTheme.w400S12H14Example[1],
+        bodyStyle: $_AppTextTheme.bodyStyle[1],
+        headerStyle: $_AppTextTheme.headerStyle[1],
       );
 
   static final AppTextTheme _darkFinal = AppTextTheme(
-    w400S12H14Example: $_AppTextTheme.w400S12H14Example[1],
+    bodyStyle: $_AppTextTheme.bodyStyle[1],
+    headerStyle: $_AppTextTheme.headerStyle[1],
   );
 
   static final themes = [
@@ -43,10 +49,12 @@ class AppTextTheme extends ThemeExtension<AppTextTheme>
 
   @override
   AppTextTheme copyWith({
-    TextStyle? w400S12H14Example,
+    TextStyle? bodyStyle,
+    TextStyle? headerStyle,
   }) {
     return AppTextTheme(
-      w400S12H14Example: w400S12H14Example ?? this.w400S12H14Example,
+      bodyStyle: bodyStyle ?? this.bodyStyle,
+      headerStyle: headerStyle ?? this.headerStyle,
     );
   }
 
@@ -54,8 +62,8 @@ class AppTextTheme extends ThemeExtension<AppTextTheme>
   AppTextTheme lerp(ThemeExtension<AppTextTheme>? other, double t) {
     if (other is! AppTextTheme) return this;
     return AppTextTheme(
-      w400S12H14Example:
-          TextStyle.lerp(w400S12H14Example, other.w400S12H14Example, t)!,
+      bodyStyle: TextStyle.lerp(bodyStyle, other.bodyStyle, t)!,
+      headerStyle: TextStyle.lerp(headerStyle, other.headerStyle, t)!,
     );
   }
 
@@ -64,7 +72,8 @@ class AppTextTheme extends ThemeExtension<AppTextTheme>
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'AppTextTheme'))
-      ..add(DiagnosticsProperty('w400S12H14Example', w400S12H14Example));
+      ..add(DiagnosticsProperty('bodyStyle', bodyStyle))
+      ..add(DiagnosticsProperty('headerStyle', headerStyle));
   }
 
   @override
@@ -72,13 +81,16 @@ class AppTextTheme extends ThemeExtension<AppTextTheme>
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is AppTextTheme &&
+            const DeepCollectionEquality().equals(bodyStyle, other.bodyStyle) &&
             const DeepCollectionEquality()
-                .equals(w400S12H14Example, other.w400S12H14Example));
+                .equals(headerStyle, other.headerStyle));
   }
 
   @override
   int get hashCode {
     return Object.hash(
-        runtimeType, const DeepCollectionEquality().hash(w400S12H14Example));
+        runtimeType,
+        const DeepCollectionEquality().hash(bodyStyle),
+        const DeepCollectionEquality().hash(headerStyle));
   }
 }

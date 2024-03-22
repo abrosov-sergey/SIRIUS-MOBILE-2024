@@ -15,9 +15,9 @@ class $_AppColorsTheme {
     AppColors.iconColorLight,
     AppColors.iconColorDark,
   ];
-  static List<Color> backgroundColor = [
-    AppColors.backgroundLight,
-    AppColors.backgroundDark,
+  static List<Color> primaryColor = [
+    AppColors.primaryColorLight,
+    AppColors.primaryColorDark,
   ];
 
   static List<Color> secondaryColor = [

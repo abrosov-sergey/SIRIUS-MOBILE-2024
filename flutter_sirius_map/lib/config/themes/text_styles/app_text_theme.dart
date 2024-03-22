@@ -11,14 +11,22 @@ part 'app_text_theme.tailor.dart';
   generateStaticGetters: true,
 )
 class $_AppTextTheme {
-  static const w400S12H14 = TextStyle(
-    fontWeight: FontWeight.w400,
-    fontSize: 12,
-    height: 14 / 12,
+  static const _headerStyle = TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 15,
   );
 
-  static List<TextStyle> w400S12H14Example = [
-    w400S12H14.apply(color: AppColors.iconColorDark),
-    w400S12H14.apply(color: AppColors.iconColorDark),
+  static const _bodyStyle = TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 17,
+  );
+
+  static List<TextStyle> headerStyle = [
+    _headerStyle.apply(color: AppColors.headerTextColorLight),
+    _headerStyle.apply(color: AppColors.headerTextColorDark),
+  ];
+  static List<TextStyle> bodyStyle = [
+    _bodyStyle.apply(color: AppColors.bodyTextColorLight),
+    _bodyStyle.apply(color: AppColors.bodyTextColorDark),
   ];
 }
