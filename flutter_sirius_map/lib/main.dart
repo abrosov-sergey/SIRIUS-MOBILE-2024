@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sirius_map/config/localization/s.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sirius_map/config/themes/dark_theme.dart';
 import 'package:flutter_sirius_map/config/themes/light_theme.dart';
 import 'package:flutter_sirius_map/src/settings/presentation/controllers/locale_controller.dart';
@@ -21,17 +22,21 @@ class MyApp extends ConsumerWidget {
 
     final locale = ref.watch(localeProvider);
 
-    return MaterialApp(
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: S.supportedLocales,
-      locale: locale,
-      theme: isDarkTheme ? dartTheme : lightTheme,
-      home: const MyHomePage(),
+    return ScreenUtilInit(
+      designSize: const Size(448, 998),
+      minTextAdapt: true,
+      child: MaterialApp(
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: S.supportedLocales,
+        locale: locale,
+        theme: isDarkTheme ? dartTheme : lightTheme,
+        home: const MyHomePage(),
+      ),
     );
   }
 }
