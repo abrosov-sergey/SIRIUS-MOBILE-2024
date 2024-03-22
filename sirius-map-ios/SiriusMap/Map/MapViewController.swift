@@ -43,10 +43,10 @@ final class MapViewController: UIViewController {
         buttonStack.spacing = 10
         buttonStack.translatesAutoresizingMaskIntoConstraints = false
         
-        let searchButton = CircleButton(type: .search)
+        let searchButton = ButtonWithIcon(type: .search)
         searchButton.addTarget(self, action: #selector(onSearchButtonClicked), for: .allTouchEvents)
         
-        let geoButton = CircleButton(type: .pin)
+        let geoButton = ButtonWithIcon(type: .pin)
         geoButton.addTarget(self, action: #selector(onGeoButtonClicked), for: .allTouchEvents)
         
         buttonStack.addArrangedSubview(searchButton)

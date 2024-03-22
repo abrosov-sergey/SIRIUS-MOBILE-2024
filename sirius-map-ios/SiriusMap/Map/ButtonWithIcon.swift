@@ -1,0 +1,43 @@
+//
+//  SearchButton.swift
+//  SiriusMobileIOS
+//
+//  Created by Глеб Писарев on 21.03.2024.
+//
+
+import UIKit
+
+enum IconType: String {
+    case search = "magnifyingglass.circle.fill"
+    case geo = "paperplane.circle.fill"
+    case pin = "mappin.circle.fill"
+}
+
+class ButtonWithIcon: UIButton {
+    
+    init(type: IconType = .search) {
+        super.init(frame: .zero)
+        setup(type)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    func setup(_ type: IconType) {
+        
+        let config = UIImage.SymbolConfiguration(pointSize: 60)
+            .applying(UIImage.SymbolConfiguration(
+                paletteColors: [.darkGray, .white]))
+        
+        let searchImage = UIImage(systemName: type.rawValue, withConfiguration: config)
+        
+        layer.shadowColor = UIColor.gray.cgColor
+        layer.shadowOffset = CGSize(width: 0.7, height: 0.7)
+        layer.shadowOpacity = 0.1
+        
+        setImage(searchImage, for: [])
+    
+    }
+}
