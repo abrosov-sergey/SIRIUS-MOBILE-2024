@@ -14,10 +14,6 @@ extension String {
 
 final class SearchNavigationController: UINavigationController {
     
-    deinit {
-        print("x")
-    }
-    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
