@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sirius_map/config/themes/dark_theme.dart';
 import 'package:flutter_sirius_map/config/themes/light_theme.dart';
 import 'package:flutter_sirius_map/src/settings/presentation/controllers/theme_controller.dart';
@@ -15,9 +16,13 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isDarkTheme = ref.watch(themeProvider) == ThemeState.dark;
-    return MaterialApp(
-      theme: isDarkTheme ? dartTheme : lightTheme,
-      home: const MyHomePage(),
+    return ScreenUtilInit(
+      designSize: const Size(448, 998),
+      minTextAdapt: true,
+      child: MaterialApp(
+        theme: isDarkTheme ? dartTheme : lightTheme,
+        home: const MyHomePage(),
+      ),
     );
   }
 }
