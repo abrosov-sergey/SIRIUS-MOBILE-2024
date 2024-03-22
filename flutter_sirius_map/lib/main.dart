@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_sirius_map/config/localization/s.dart';
 import 'package:flutter_sirius_map/config/themes/dark_theme.dart';
 import 'package:flutter_sirius_map/config/themes/light_theme.dart';
+import 'package:flutter_sirius_map/src/settings/presentation/controllers/locale_controller.dart';
 import 'package:flutter_sirius_map/src/settings/presentation/controllers/theme_controller.dart';
 import 'package:flutter_sirius_map/src/settings/presentation/widgets/setting_button.dart';
 import 'package:flutter_sirius_map/utils/context.dart';
@@ -15,7 +18,18 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isDarkTheme = ref.watch(themeProvider) == ThemeState.dark;
+
+    final locale = ref.watch(localeProvider);
+
     return MaterialApp(
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.supportedLocales,
+      locale: locale,
       theme: isDarkTheme ? dartTheme : lightTheme,
       home: const MyHomePage(),
     );
@@ -33,29 +47,31 @@ class MyHomePage extends StatelessWidget {
         backgroundColor: context.themeExtendColors.primaryColor,
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            Consumer(
-              builder: (_, ref, __) {
-                final isDarkTheme = ref.watch(themeProvider) == ThemeState.dark;
-                return SettingButton(
+        child: Consumer(
+          builder: (_, ref, __) {
+            final isDarkTheme = ref.watch(themeProvider) == ThemeState.dark;
+            return Column(
+              children: [
+                SettingButton(
                   iconData: isDarkTheme ? Icons.dark_mode : Icons.light_mode,
                   onTap: () {
                     ref.read(themeProvider.notifier).changeTheme();
                   },
-                );
-              },
-            ),
-            SettingButton(
-              iconData: Icons.egg_rounded,
-              onTap: () {},
-            ),
-            Text(
-              'Search',
-              style: context.themeExtendTextStyles.headerStyle
-                  .copyWith(color: context.themeExtendColors.iconColor),
-            )
-          ],
+                ),
+                SettingButton(
+                  iconData: Icons.egg_rounded,
+                  onTap: () {
+                    ref.read(localeProvider.notifier).changeLocale();
+                  },
+                ),
+                Text(
+                  context.s.search,
+                  style: context.themeExtendTextStyles.headerStyle
+                      .copyWith(color: context.themeExtendColors.iconColor),
+                )
+              ],
+            );
+          },
         ),
       ),
     );
