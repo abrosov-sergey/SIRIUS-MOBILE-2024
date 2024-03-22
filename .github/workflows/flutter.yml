@@ -20,6 +20,7 @@ jobs:
         run: |
           cd flutter_sirius_map
           flutter pub get
+          flutter gen-l10n 
       - name: Analyze project source
         run: flutter analyze
       - name: Format check
@@ -37,11 +38,12 @@ jobs:
         run: |
           cd flutter_sirius_map
           flutter pub get
+          flutter gen-l10n 
       - name: Run tests
         run: |
           cd flutter_sirius_map
           flutter test
-  build:
+  build-android:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -58,7 +60,30 @@ jobs:
         run: |
           cd flutter_sirius_map
           flutter pub get
-      - name: Flutter build
+          flutter gen-l10n 
+      - name: Flutter build android
         run: |
           cd flutter_sirius_map
           flutter build apk
+  build-ios:
+    runs-on: macos-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+      - name: Install dependencies
+        run: |
+          cd flutter_sirius_map
+          flutter pub get
+          flutter gen-l10n 
+      - name: Flutter build ios
+        run: |
+          cd flutter_sirius_map
+          cd ios 
+          pod install
+          cd ..
+          flutter build ios --no-codesign
+    
