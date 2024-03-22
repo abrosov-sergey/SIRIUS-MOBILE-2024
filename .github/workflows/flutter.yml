@@ -82,5 +82,8 @@ jobs:
       - name: Flutter build ios
         run: |
           cd flutter_sirius_map
+          cd ios 
+          pod install
+          cd ..
           flutter build ios --no-codesign
     
