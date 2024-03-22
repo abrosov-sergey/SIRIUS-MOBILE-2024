@@ -26,14 +26,14 @@ class MyApp extends ConsumerWidget {
       designSize: const Size(448, 998),
       minTextAdapt: true,
       child: MaterialApp(
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: S.supportedLocales,
-      locale: locale,
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: S.supportedLocales,
+        locale: locale,
         theme: isDarkTheme ? dartTheme : lightTheme,
         home: const MyHomePage(),
       ),
