@@ -9,9 +9,14 @@ import UIKit
 
 extension String {
     static let title = "Куда"
+    static let cancel = "Отменить"
 }
 
 final class SearchNavigationController: UINavigationController {
+    
+    deinit {
+        print("x")
+    }
     
     // MARK: - Life Cycle
     
@@ -19,18 +24,26 @@ final class SearchNavigationController: UINavigationController {
         super.viewDidLoad()
         
         let viewController = makeSearchViewController()
+        addCancelButton(to: viewController)
         setViewControllers([viewController], animated: false)
     }
     
     // MARK: - Methods
     
     private func makeSearchViewController() -> UIViewController {
-        let searchViewController = SearchTableViewController(items: MapItem.sampleData.map {
-            $0.name
-        })
+        let searchViewController = SearchTableViewController(items: MapItem.sampleData.map { $0.name })
         searchViewController.delegate = self
         searchViewController.title = .title
         return searchViewController
+    }
+    
+    private func addCancelButton(to viewController: UIViewController) {
+        viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: .cancel,
+            primaryAction: UIAction { _ in
+                viewController.dismiss(animated: true)
+            }
+        )
     }
     
     private func makeMapDetailViewController(title: String) -> UIViewController {
