@@ -43,8 +43,7 @@ final class SearchNavigationController: UINavigationController {
     }
     
     private func makeMapDetailViewController(title: String) -> UIViewController {
-        let mapItemDetail = MapItemDetailViewController()
-        mapItemDetail.title = title
+        let mapItemDetail = MapItemDetailViewController(name: title)
         return mapItemDetail
     }
 }
