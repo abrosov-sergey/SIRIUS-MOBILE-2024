@@ -15,28 +15,29 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$FavoritePlace {
+mixin _$FavoritePlaceInstance {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $FavoritePlaceCopyWith<FavoritePlace> get copyWith =>
+  $FavoritePlaceInstanceCopyWith<FavoritePlaceInstance> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $FavoritePlaceCopyWith<$Res> {
-  factory $FavoritePlaceCopyWith(
-          FavoritePlace value, $Res Function(FavoritePlace) then) =
-      _$FavoritePlaceCopyWithImpl<$Res, FavoritePlace>;
+abstract class $FavoritePlaceInstanceCopyWith<$Res> {
+  factory $FavoritePlaceInstanceCopyWith(FavoritePlaceInstance value,
+          $Res Function(FavoritePlaceInstance) then) =
+      _$FavoritePlaceInstanceCopyWithImpl<$Res, FavoritePlaceInstance>;
   @useResult
   $Res call({int id, String name});
 }
 
 /// @nodoc
-class _$FavoritePlaceCopyWithImpl<$Res, $Val extends FavoritePlace>
-    implements $FavoritePlaceCopyWith<$Res> {
-  _$FavoritePlaceCopyWithImpl(this._value, this._then);
+class _$FavoritePlaceInstanceCopyWithImpl<$Res,
+        $Val extends FavoritePlaceInstance>
+    implements $FavoritePlaceInstanceCopyWith<$Res> {
+  _$FavoritePlaceInstanceCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -63,22 +64,24 @@ class _$FavoritePlaceCopyWithImpl<$Res, $Val extends FavoritePlace>
 }
 
 /// @nodoc
-abstract class _$$FavoritePlaceImplCopyWith<$Res>
-    implements $FavoritePlaceCopyWith<$Res> {
-  factory _$$FavoritePlaceImplCopyWith(
-          _$FavoritePlaceImpl value, $Res Function(_$FavoritePlaceImpl) then) =
-      __$$FavoritePlaceImplCopyWithImpl<$Res>;
+abstract class _$$FavoritePlaceInstanceImplCopyWith<$Res>
+    implements $FavoritePlaceInstanceCopyWith<$Res> {
+  factory _$$FavoritePlaceInstanceImplCopyWith(
+          _$FavoritePlaceInstanceImpl value,
+          $Res Function(_$FavoritePlaceInstanceImpl) then) =
+      __$$FavoritePlaceInstanceImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int id, String name});
 }
 
 /// @nodoc
-class __$$FavoritePlaceImplCopyWithImpl<$Res>
-    extends _$FavoritePlaceCopyWithImpl<$Res, _$FavoritePlaceImpl>
-    implements _$$FavoritePlaceImplCopyWith<$Res> {
-  __$$FavoritePlaceImplCopyWithImpl(
-      _$FavoritePlaceImpl _value, $Res Function(_$FavoritePlaceImpl) _then)
+class __$$FavoritePlaceInstanceImplCopyWithImpl<$Res>
+    extends _$FavoritePlaceInstanceCopyWithImpl<$Res,
+        _$FavoritePlaceInstanceImpl>
+    implements _$$FavoritePlaceInstanceImplCopyWith<$Res> {
+  __$$FavoritePlaceInstanceImplCopyWithImpl(_$FavoritePlaceInstanceImpl _value,
+      $Res Function(_$FavoritePlaceInstanceImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +90,7 @@ class __$$FavoritePlaceImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
   }) {
-    return _then(_$FavoritePlaceImpl(
+    return _then(_$FavoritePlaceInstanceImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -102,8 +105,8 @@ class __$$FavoritePlaceImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FavoritePlaceImpl implements _FavoritePlace {
-  const _$FavoritePlaceImpl({required this.id, required this.name});
+class _$FavoritePlaceInstanceImpl implements _FavoritePlaceInstance {
+  const _$FavoritePlaceInstanceImpl({required this.id, required this.name});
 
   @override
   final int id;
@@ -112,14 +115,14 @@ class _$FavoritePlaceImpl implements _FavoritePlace {
 
   @override
   String toString() {
-    return 'FavoritePlace(id: $id, name: $name)';
+    return 'FavoritePlaceInstance(id: $id, name: $name)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FavoritePlaceImpl &&
+            other is _$FavoritePlaceInstanceImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -130,14 +133,15 @@ class _$FavoritePlaceImpl implements _FavoritePlace {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$FavoritePlaceImplCopyWith<_$FavoritePlaceImpl> get copyWith =>
-      __$$FavoritePlaceImplCopyWithImpl<_$FavoritePlaceImpl>(this, _$identity);
+  _$$FavoritePlaceInstanceImplCopyWith<_$FavoritePlaceInstanceImpl>
+      get copyWith => __$$FavoritePlaceInstanceImplCopyWithImpl<
+          _$FavoritePlaceInstanceImpl>(this, _$identity);
 }
 
-abstract class _FavoritePlace implements FavoritePlace {
-  const factory _FavoritePlace(
+abstract class _FavoritePlaceInstance implements FavoritePlaceInstance {
+  const factory _FavoritePlaceInstance(
       {required final int id,
-      required final String name}) = _$FavoritePlaceImpl;
+      required final String name}) = _$FavoritePlaceInstanceImpl;
 
   @override
   int get id;
@@ -145,6 +149,6 @@ abstract class _FavoritePlace implements FavoritePlace {
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$FavoritePlaceImplCopyWith<_$FavoritePlaceImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$FavoritePlaceInstanceImplCopyWith<_$FavoritePlaceInstanceImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
