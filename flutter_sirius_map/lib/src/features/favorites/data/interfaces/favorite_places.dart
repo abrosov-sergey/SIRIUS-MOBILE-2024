@@ -1,4 +1,4 @@
-import 'package:flutter_sirius_map/src/features/domain/models/favorite_place.dart';
+import 'package:flutter_sirius_map/src/features/favorites/domain/models/favorite_place.dart';
 
 abstract class FavoritePlaces {
   Future<List<FavoritePlaceInstance>> getAllPlaces();
