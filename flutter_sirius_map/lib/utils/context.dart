@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sirius_map/config/localization/s.dart';
 import 'package:flutter_sirius_map/config/themes/colors/app_colors_theme.dart';
 import 'package:flutter_sirius_map/config/themes/text_styles/app_text_theme.dart';
 
@@ -10,4 +11,6 @@ extension ContextUtils on BuildContext {
 
   AppTextTheme get themeExtendTextStyles =>
       Theme.of(this).extension<AppTextTheme>()!;
+
+  AppLocalizations get s => S.of(this);
 }
