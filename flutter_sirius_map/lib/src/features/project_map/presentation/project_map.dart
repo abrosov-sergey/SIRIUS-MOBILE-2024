@@ -17,21 +17,34 @@ class _ProjectMapState extends State<ProjectMap> {
         LatLng(43.412741314440822, 39.949842052848332),
       ];
 
-  get _center => const LatLng(
-        (43.41601767565109 + 43.412678630221023) / 2,
-        (39.953505467745707 + 39.949135833185039) / 2,
+  final _maxPoint = const LatLng(43.412678630221023, 39.949135833185039);
+  final _minPoint = const LatLng(43.41601767565109, 39.953505467745707);
+
+  get _center => LatLng(
+        (_maxPoint.latitude + _minPoint.latitude) / 2,
+        (_maxPoint.longitude + _minPoint.longitude) / 2,
       );
+
+  LatLngBounds _bounds() {
+    final latChange = _maxPoint.latitude - _minPoint.latitude;
+    final lngChange = (_maxPoint.longitude - _minPoint.longitude) / 2;
+    final latMax =
+        _maxPoint.latitude + latChange;
+    final latMin = _minPoint.latitude - latChange;
+    final lngMax = _maxPoint.longitude + lngChange;
+    final lngMin = _minPoint.longitude - lngChange;
+
+    return LatLngBounds(LatLng(latMax, lngMax), LatLng(latMin, lngMin));
+  }
 
   @override
   Widget build(BuildContext context) {
     return FlutterMap(
       mapController: MapController(),
       options: MapOptions(
+        cameraConstraint: CameraConstraint.contain(bounds: _bounds()),
         maxZoom: 20,
         minZoom: 17,
-        interactionOptions: const InteractionOptions(
-          flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
-        ),
         initialCenter: _center,
         initialZoom: 17,
         onTap: (TapPosition tapPosition, LatLng point) {
