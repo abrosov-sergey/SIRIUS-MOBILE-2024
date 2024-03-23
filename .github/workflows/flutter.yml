@@ -65,21 +65,6 @@ jobs:
         run: |
           cd flutter_sirius_map
           flutter build apk
-      - name: Set Env Artifact 
-        run: |
-          cd flutter_sirius_map
-          cd ${{ env.main_project_module }}/build/app/outputs/flutter-apk/
-          files=(*)
-          echo "generated_name_aab=${files[0]%.*}" >> $GITHUB_ENV
-
-      
-      - name: Upload APK Debug - ${{ env.repository_name }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ env.date_today }} - ${{ env.playstore_name }} - ${{ env.repository_name }} - APK(s) debug generated
-          path: ${{ env.main_project_module }}/build/app/outputs/flutter-apk/
-
-
   build-ios:
     runs-on: macos-latest
     timeout-minutes: 15
