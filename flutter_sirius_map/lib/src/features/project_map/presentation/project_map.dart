@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map_cache/flutter_map_cache.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:dio_cache_interceptor_db_store/dio_cache_interceptor_db_store.dart';
 
 class ProjectMap extends StatefulWidget {
   const ProjectMap({super.key});
@@ -37,6 +40,15 @@ class _ProjectMapState extends State<ProjectMap> {
     return LatLngBounds(LatLng(latMax, lngMax), LatLng(latMin, lngMin));
   }
 
+  late String _path = '';
+
+  
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return FlutterMap(
@@ -57,6 +69,15 @@ class _ProjectMapState extends State<ProjectMap> {
         TileLayer(
           urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
           userAgentPackageName: 'com.example.flutter_map_example',
+          tileProvider: CachedTileProvider(
+            // maxStale keeps the tile cached for the given Duration and
+            // tries to revalidate the next time it gets requested
+            maxStale: const Duration(days: 30),
+            store: DbCacheStore(
+              databaseName: 'mapCache',
+              databasePath: _path,
+            ),
+          ),
         ),
         PolylineLayer(
           polylines: [
