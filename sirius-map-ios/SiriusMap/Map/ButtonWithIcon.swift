@@ -9,7 +9,6 @@ import UIKit
 
 enum IconType: String {
     case search = "magnifyingglass.circle.fill"
-    case geo = "paperplane.circle.fill"
     case pin = "mappin.circle.fill"
 }
 
@@ -27,14 +26,14 @@ class ButtonWithIcon: UIButton {
     
     func setup(_ type: IconType) {
         
-        let config = UIImage.SymbolConfiguration(pointSize: 60)
+        let config = UIImage.SymbolConfiguration(pointSize: 56)
             .applying(UIImage.SymbolConfiguration(
                 paletteColors: [.darkGray, .white]))
         
         let searchImage = UIImage(systemName: type.rawValue, withConfiguration: config)
         
         layer.shadowColor = UIColor.gray.cgColor
-        layer.shadowOffset = CGSize(width: 0.7, height: 0.7)
+        layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
         layer.shadowOpacity = 0.1
         
         setImage(searchImage, for: [])

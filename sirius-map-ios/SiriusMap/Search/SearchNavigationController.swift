@@ -47,6 +47,17 @@ final class SearchNavigationController: UINavigationController {
         mapItemDetail.deligate = self
         return mapItemDetail
     }
+}
+
+// MARK: - SearchViewControllerDelegate
+
+extension SearchNavigationController: SearchTableViewControllerDelegate {
+    func searchTableViewController(didSelectRowAt indexPath: IndexPath) {
+        let title = MapItem.sampleData[indexPath.row].name
+        let viewController = makeMapDetailViewController(title: title)
+        setSheetPresentation(multiplier: 0.2)
+        pushViewController(viewController, animated: true)
+    }
     
     private func setSheetPresentation(multiplier: Double) {
         if let sheet = self.sheetPresentationController {
@@ -60,17 +71,6 @@ final class SearchNavigationController: UINavigationController {
                 sheet.selectedDetentIdentifier = oldValue
             }
         }
-    }
-}
-
-// MARK: - SearchViewControllerDelegate
-
-extension SearchNavigationController: SearchTableViewControllerDelegate {
-    func searchTableViewController(didSelectRowAt indexPath: IndexPath) {
-        let title = MapItem.sampleData[indexPath.row].name
-        let viewController = makeMapDetailViewController(title: title)
-        setSheetPresentation(multiplier: 0.2)
-        pushViewController(viewController, animated: true)
     }
 }
 

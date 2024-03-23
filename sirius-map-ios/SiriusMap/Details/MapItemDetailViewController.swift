@@ -28,22 +28,27 @@ final class MapItemDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         isModalInPresentation = true
-        
         view.backgroundColor = .systemBackground
-        
+        setup()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        deligate.resize()
+    }
+    
+    func setup() {
         let nameLabel = UILabel()
         nameLabel.text = name
         nameLabel.font = UIFont.systemFont(ofSize: 24)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        let safeArea = view.safeAreaLayoutGuide
         
         view.addSubview(nameLabel)
         NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 0),
-            nameLabel.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor)
+            nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+            nameLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
         ])
         
         let fromHereButton = ButtonWithText("Отсюда")
@@ -67,12 +72,6 @@ final class MapItemDetailViewController: UIViewController {
             buttonStack.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 24),
             buttonStack.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
-        
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        deligate.resize()
     }
     
     

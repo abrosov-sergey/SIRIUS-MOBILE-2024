@@ -11,9 +11,7 @@ final class RootViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let mapViewController = MapViewController()
-        mapViewController.deligate = self
-        transition(to: mapViewController)
+        transition(to: MapViewController(deligate: self))
     }
 }
 

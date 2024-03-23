@@ -11,7 +11,7 @@ import UIKit
 final class ButtonWithText: UIButton {
     
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: 120, height: 36)
+        return CGSize(width: 130, height: 40)
     }
     
     convenience init(_ text: String) {
@@ -25,8 +25,8 @@ final class ButtonWithText: UIButton {
     
     func setup() {
         layer.shadowColor = UIColor.gray.cgColor
-        layer.shadowOffset = CGSize(width: 1, height: 1)
-        layer.shadowOpacity = 0.5
+        layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
+        layer.shadowOpacity = 0.1
     }
     
 }
