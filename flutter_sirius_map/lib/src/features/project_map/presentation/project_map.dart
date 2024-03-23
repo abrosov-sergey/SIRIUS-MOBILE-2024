@@ -28,7 +28,9 @@ class _ProjectMapState extends State<ProjectMap> {
       mapController: MapController(),
       options: MapOptions(
         interactionOptions: const InteractionOptions(
-          flags: InteractiveFlag.pinchZoom | InteractiveFlag.doubleTapZoom | InteractiveFlag.doubleTapDragZoom,
+          flags: InteractiveFlag.pinchZoom |
+              InteractiveFlag.doubleTapZoom |
+              InteractiveFlag.doubleTapDragZoom,
         ),
         initialCenter: _center,
         initialZoom: 17,
