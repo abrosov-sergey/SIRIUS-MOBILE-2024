@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sirius_map/config/localization/s.dart';
-import 'package:flutter_sirius_map/config/themes/colors/app_colors_theme.dart';
-import 'package:flutter_sirius_map/config/themes/text_styles/app_text_theme.dart';
+import 'package:flutter_sirius_map/src/config/localization/s.dart';
+import 'package:flutter_sirius_map/src/config/themes/colors/app_colors_theme.dart';
+import 'package:flutter_sirius_map/src/config/themes/text_styles/app_text_theme.dart';
 
 extension ContextUtils on BuildContext {
   // S get s => S.of(this);

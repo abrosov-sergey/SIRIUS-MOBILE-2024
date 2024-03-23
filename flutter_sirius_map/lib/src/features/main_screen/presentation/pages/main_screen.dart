@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_sirius_map/src/features/project_map/presentation/project_map.dart';
-import 'package:flutter_sirius_map/src/settings/presentation/controllers/locale_controller.dart';
-import 'package:flutter_sirius_map/src/settings/presentation/controllers/theme_controller.dart';
-import 'package:flutter_sirius_map/src/settings/presentation/widgets/setting_button.dart';
-import 'package:flutter_sirius_map/utils/context.dart';
+import 'package:flutter_sirius_map/src/app/presentation/providers/app_state_provider.dart';
+import 'package:flutter_sirius_map/src/app/presentation/states/app_state.dart';
+import 'package:flutter_sirius_map/src/features/map/presentation/widgets/project_map.dart';
+import 'package:flutter_sirius_map/src/features/main_screen/presentation/widgets/setting_button.dart';
+import 'package:flutter_sirius_map/src/utils/context.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -19,20 +19,21 @@ class MainScreen extends StatelessWidget {
           SafeArea(
             child: Consumer(
               builder: (_, ref, __) {
-                final isDarkTheme = ref.watch(themeProvider) == ThemeState.dark;
+                final isDarkTheme =
+                    ref.watch(appProvider).theme == ThemeState.dark;
                 return Column(
                   children: [
                     SettingButton(
                       iconData:
                           isDarkTheme ? Icons.dark_mode : Icons.light_mode,
                       onTap: () {
-                        ref.read(themeProvider.notifier).changeTheme();
+                        ref.read(appProvider.notifier).changeTheme();
                       },
                     ),
                     SettingButton(
                       iconData: Icons.egg_rounded,
                       onTap: () {
-                        ref.read(localeProvider.notifier).changeLocale();
+                        ref.read(appProvider.notifier).changeLocale();
                       },
                     ),
                     Text(
