@@ -5,6 +5,6 @@
 //  Created by Egor on 22.03.2024.
 //
 
-class Venue: Feature {
+final class Venue: Feature {
     var levels: [Level] = []
 }

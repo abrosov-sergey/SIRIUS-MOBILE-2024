@@ -10,24 +10,18 @@ import UIKit
 
 final class MapViewController: UIViewController {
     
-    private var mapView: MKMapView {
-        guard let view = self.view as? MapView else { fatalError("Unsupported view type.") }
-        return view.map
-    }
+    private lazy var mapView = MapView()
 
     // MARK: - Life Cycle
     
     override func loadView() {
-        view = MapView()
+        view = mapView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         addOverlays()
-        
-        mapView.delegate = self
+        mapView.map.delegate = self
     }
     
     // MARK: - Methods
@@ -41,16 +35,28 @@ final class MapViewController: UIViewController {
             print(error)
         }
         
-        if let level, let levelOverlay = level.geometry[0] as? MKOverlay {
-            mapView.setVisibleMapRect(levelOverlay.boundingMapRect, edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20), animated: true)
+        if let level, let levelOverlay = level.overlay {
+            mapView.map.setVisibleMapRect(
+                levelOverlay.boundingMapRect,
+                edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
+                animated: true
+            )
             
-            mapView.addOverlay(levelOverlay)
+            mapView.map.addOverlay(levelOverlay)
             
-            let unitOverlays = level.units.compactMap { $0.geometry[0] as? MKOverlay }
-            mapView.addOverlays(unitOverlays)
+            let unitOverlays = level.units.compactMap { $0.overlay }
+            mapView.map.addOverlays(unitOverlays)
         }
     }
 }
+
+extension Feature {
+    var overlay: MKOverlay? {
+        geometry.first as? MKOverlay
+    }
+}
+
+// MARK: - MKMapViewDelegate
 
 extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {

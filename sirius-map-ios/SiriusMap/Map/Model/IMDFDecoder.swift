@@ -8,8 +8,11 @@
 import MapKit
 
 enum IMDFError: Error {
-    case invalidType
     case invalidData
+    case invalidIdentifier
+    case invalidType
+    case invalidURL
+    case missingIdentifier
 }
 
 protocol IMDFDecodable {
@@ -27,16 +30,15 @@ struct IMDFDecoder {
         }
         
         func fileURL(for file: File) -> URL {
-            return baseDirectory.appending(component: file.filename)
+            baseDirectory.appending(component: file.filename)
         }
-        
         
         enum File {
             case level
             case unit
             
             var filename: String {
-                return "\(self).geojson"
+                "\(self).geojson"
             }
         }
     }
@@ -44,7 +46,9 @@ struct IMDFDecoder {
     private let geoJSONDecoder = MKGeoJSONDecoder()
     
     func decode() throws -> Level {
-        let imdfDirectory = Bundle.main.resourceURL!.appending(path: "IMDFData")
+        guard let imdfDirectory = Bundle.main.url(forResource: "IMDFData", withExtension: nil) else {
+            throw IMDFError.invalidURL
+        }
         let archive = IMDFArchive(directory: imdfDirectory)
         
         let levels = try decodeFeatures(type: Level.self, from: .level, in: archive)
