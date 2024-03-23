@@ -38,7 +38,7 @@ jobs:
       - name: Run gradle tests
         run: |
           cd flutter_sirius_map
-          ./gradlew test
+          'pwd'/./gradlew test
 
       # Run Build Project
       - name: Build gradle project
