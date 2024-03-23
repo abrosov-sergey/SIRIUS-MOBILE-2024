@@ -30,34 +30,47 @@ jobs:
           cache: 'gradle'
 
       - name: Change wrapper permissions
-        run: chmod +x ./gradlew
+        run: |
+          cd flutter_sirius_map
+          chmod +x ./gradlew
 
       # Run Tests Build
       - name: Run gradle tests
-        run: ./gradlew test
+        run: |
+          cd flutter_sirius_map
+          ./gradlew test
 
       # Run Build Project
       - name: Build gradle project
-        run: ./gradlew build
+        run: |
+          cd flutter_sirius_map
+          ./gradlew build
 
       # Create APK Debug
       - name: Build apk debug project (APK) - ${{ env.main_project_module }} module
-        run: ./gradlew assembleDebug
+        run: |
+          cd flutter_sirius_map
+          ./gradlew assembleDebug
 
       # Create APK Release
       - name: Build apk release project (APK) - ${{ env.main_project_module }} module
-        run: ./gradlew assemble
+        run: |
+          cd flutter_sirius_map
+          ./gradlew assemble
 
       # Create Bundle AAB Release
       # Noted for main module build [main_project_module]:bundleRelease
       - name: Build app bundle release (AAB) - ${{ env.main_project_module }} module
-        run: ./gradlew ${{ env.main_project_module }}:bundleRelease
+        run: |
+          cd flutter_sirius_map
+          ./gradlew ${{ env.main_project_module }}:bundleRelease
 
       # - name: Build APK(s) Debug from bundle using bundletool
       #   run: java -jar ".github/lib/bundletool.jar" build-apks --bundle=${{ env.main_project_module }}/build/outputs/bundle/debug/${{ env.artifact_name }}-debug.aab --output=${{ env.main_project_module }}/build/outputs/bundle/debug/${{ env.artifact_name }}-debug.apks --mode=universal
 
       - name: Set Env Artifact name from generated aab
         run: |
+          cd flutter_sirius_map
           cd ${{ env.main_project_module }}/build/outputs/bundle/release/
           files=(*)
           echo "generated_name_aab=${files[0]%.*}" >> $GITHUB_ENV
@@ -65,11 +78,14 @@ jobs:
       # Build APK From Bundle Using Bundletool
       # Noted For Output [main_project_module]/build/outputs/bundle/release/
       - name: Build APK(s) Release from bundle using bundletool (Path same with bundle output)
-        run: java -jar ".github/lib/bundletool.jar" build-apks --bundle=${{ env.main_project_module }}/build/outputs/bundle/release/${{ env.generated_name_aab }}.aab --output=${{ env.main_project_module }}/build/outputs/bundle/release/${{ env.generated_name_aab }}.apks --mode=universal --ks="app/${{ env.ks_path }}" --ks-pass=pass:${{ env.ks_store_pass }} --ks-key-alias=${{ env.ks_alias }} --key-pass=pass:${{ env.ks_alias_pass }}
+        run: |
+          cd flutter_sirius_map
+          java -jar ".github/lib/bundletool.jar" build-apks --bundle=${{ env.main_project_module }}/build/outputs/bundle/release/${{ env.generated_name_aab }}.aab --output=${{ env.main_project_module }}/build/outputs/bundle/release/${{ env.generated_name_aab }}.apks --mode=universal --ks="app/${{ env.ks_path }}" --ks-pass=pass:${{ env.ks_store_pass }} --ks-key-alias=${{ env.ks_alias }} --key-pass=pass:${{ env.ks_alias_pass }}
 
       # Duplicate APK(s) Release to zip file and extract
       - name: Duplicate APK(s) Release to zip file and extract
         run: |
+          cd flutter_sirius_map
           cd ${{ env.main_project_module }}/build/outputs/bundle/release/
           unzip -p ${{ env.generated_name_aab }}.apks universal.apk > ${{ env.generated_name_aab }}.apk
 
