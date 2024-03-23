@@ -40,6 +40,7 @@ class _ProjectMapState extends State<ProjectMap> {
         },
       ),
       children: [
+        // убрать карту когда будет готова картинка
         TileLayer(
           urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
           userAgentPackageName: 'com.example.flutter_map_example',
