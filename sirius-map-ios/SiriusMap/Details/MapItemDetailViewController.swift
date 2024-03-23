@@ -5,9 +5,15 @@
 //  Created by Egor on 21.03.2024.
 //
 
+protocol SearchNavigationControllerDeligate: AnyObject {
+    func resize()
+}
+
 import UIKit
 
 final class MapItemDetailViewController: UIViewController {
+    
+    weak var deligate: SearchNavigationControllerDeligate!
     
     let name: String
     
@@ -22,6 +28,9 @@ final class MapItemDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        isModalInPresentation = true
+        
         view.backgroundColor = .systemBackground
         
         let nameLabel = UILabel()
@@ -40,6 +49,9 @@ final class MapItemDetailViewController: UIViewController {
         let fromHereButton = ButtonWithText("Отсюда")
         let hereButton = ButtonWithText("Сюда")
         
+        fromHereButton.addTarget(self, action: #selector(onFromHereButtonClicked), for: .allTouchEvents)
+        hereButton.addTarget(self, action: #selector(onHereButtonClicked), for: .allTouchEvents)
+        
         let buttonStack = UIStackView()
         buttonStack.axis = .horizontal
         buttonStack.distribution = .fillEqually
@@ -55,6 +67,20 @@ final class MapItemDetailViewController: UIViewController {
             buttonStack.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 24),
             buttonStack.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        deligate.resize()
+    }
+    
+    
+    @objc func onFromHereButtonClicked() {
+        
+    }
+    
+    @objc func onHereButtonClicked() {
         
     }
 }

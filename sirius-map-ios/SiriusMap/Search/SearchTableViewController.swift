@@ -13,6 +13,7 @@ private extension String {
 
 protocol SearchTableViewControllerDelegate: AnyObject {
     func searchTableViewController(didSelectRowAt indexPath: IndexPath)
+    func resize()
 }
 
 final class SearchTableViewController: UITableViewController {

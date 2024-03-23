@@ -22,6 +22,4 @@ extension RootViewController: MapViewControllerDeligate {
         let searchViewController = SearchNavigationController()
         present(searchViewController, animated: true)
     }
-    
-    
 }

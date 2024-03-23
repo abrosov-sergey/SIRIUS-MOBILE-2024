@@ -44,7 +44,22 @@ final class SearchNavigationController: UINavigationController {
     
     private func makeMapDetailViewController(title: String) -> UIViewController {
         let mapItemDetail = MapItemDetailViewController(name: title)
+        mapItemDetail.deligate = self
         return mapItemDetail
+    }
+    
+    private func setSheetPresentation(multiplier: Double) {
+        if let sheet = self.sheetPresentationController {
+            let fraction = UISheetPresentationController.Detent.custom { context in
+                (self.view.window?.frame.height ?? 0) * multiplier
+                
+            }
+            sheet.detents = [fraction]
+            let oldValue = sheet.selectedDetentIdentifier ?? .medium
+            sheet.animateChanges {
+                sheet.selectedDetentIdentifier = oldValue
+            }
+        }
     }
 }
 
@@ -54,6 +69,19 @@ extension SearchNavigationController: SearchTableViewControllerDelegate {
     func searchTableViewController(didSelectRowAt indexPath: IndexPath) {
         let title = MapItem.sampleData[indexPath.row].name
         let viewController = makeMapDetailViewController(title: title)
+        setSheetPresentation(multiplier: 0.2)
         pushViewController(viewController, animated: true)
+    }
+}
+
+extension SearchNavigationController: SearchNavigationControllerDeligate {
+    func resize() {
+        if let sheet  = self.sheetPresentationController {
+            sheet.detents = [.large()]
+            let oldValue = sheet.selectedDetentIdentifier ?? .medium
+            sheet.animateChanges {
+                sheet.selectedDetentIdentifier = oldValue
+            }
+        }
     }
 }
