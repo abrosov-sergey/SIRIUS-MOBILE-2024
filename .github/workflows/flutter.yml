@@ -65,6 +65,21 @@ jobs:
         run: |
           cd flutter_sirius_map
           flutter build apk
+      - name: Set Env Artifact 
+        run: |
+          cd flutter_sirius_map
+          cd ${{ env.main_project_module }}/build/app/outputs/flutter-apk/
+          files=(*)
+          echo "generated_name_aab=${files[0]%.*}" >> $GITHUB_ENV
+
+      
+      - name: Upload APK Debug - ${{ env.repository_name }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.date_today }} - ${{ env.playstore_name }} - ${{ env.repository_name }} - APK(s) debug generated
+          path: ${{ env.main_project_module }}/build/app/outputs/flutter-apk/
+
+
   build-ios:
     runs-on: macos-latest
     timeout-minutes: 15
@@ -86,39 +101,3 @@ jobs:
           pod install
           cd ..
           flutter build ios --no-codesign
-    
-      - name: Set Env Artifact 
-        run: |
-          cd flutter_sirius_map
-          cd ${{ env.main_project_module }}/build/outputs/bundle/release/
-          files=(*)
-          echo "generated_name_aab=${files[0]%.*}" >> $GITHUB_ENV
-
-      - name: Build APK(s) Release from bundle using bundletool (Path same with bundle output)
-        run: |
-          cd flutter_sirius_map
-          java -jar ".github/lib/bundletool.jar" build-apks --bundle=${{ env.main_project_module }}/build/outputs/bundle/release/${{ env.generated_name_aab }}.aab --output=${{ env.main_project_module }}/build/outputs/bundle/release/${{ env.generated_name_aab }}.apks --mode=universal --ks="app/${{ env.ks_path }}" --ks-pass=pass:${{ env.ks_store_pass }} --ks-key-alias=${{ env.ks_alias }} --key-pass=pass:${{ env.ks_alias_pass }}
-
-      - name: Duplicate APK(s) Release to zip file and extract
-        run: |
-          cd flutter_sirius_map
-          cd ${{ env.main_project_module }}/build/outputs/bundle/release/
-          unzip -p ${{ env.generated_name_aab }}.apks universal.apk > ${{ env.generated_name_aab }}.apk
-
-      - name: Upload APK Debug - ${{ env.repository_name }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ env.date_today }} - ${{ env.playstore_name }} - ${{ env.repository_name }} - APK(s) debug generated
-          path: ${{ env.main_project_module }}/build/outputs/apk/debug/
-
-      - name: Upload APK Release - ${{ env.repository_name }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ env.date_today }} - ${{ env.playstore_name }} - ${{ env.repository_name }} - APK(s) release generated
-          path: ${{ env.main_project_module }}/build/outputs/apk/release/
-
-      - name: Upload AAB (App Bundle) Release - ${{ env.repository_name }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ env.date_today }} - ${{ env.playstore_name }} - ${{ env.repository_name }} - App bundle(s) AAB release generated
-          path: ${{ env.main_project_module }}/build/outputs/bundle/release/
