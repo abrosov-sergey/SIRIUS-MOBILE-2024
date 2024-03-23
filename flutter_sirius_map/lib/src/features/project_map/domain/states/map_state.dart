@@ -5,10 +5,8 @@ part 'map_state.freezed.dart';
 
 @freezed
 sealed class MapState with _$MapState {
-  const factory MapState.pathLoaded({
+  const factory MapState({
     required String cachePath,
     required List<LatLng> route,
-  }) = pathLoaded;
-  const factory MapState.error([String? message]) = MapStateError;
-  const factory MapState.loading([String? message]) = Loading;
+  }) = _MapState;
 }

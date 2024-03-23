@@ -7,24 +7,7 @@ part 'map_provider.g.dart';
 @riverpod
 class MapNotifier extends _$MapNotifier {
   @override
-  MapState build(MapCacheDB mapCache) {
-    return const MapState.loading();
-  }
-
-  void tryLoadPath() {
-    mapCache.getPath().then(_gotPath).onError(_onError);
-    state = const MapState.loading();
-  }
-
-  void _gotPath(String path) {
-    state = MapState.pathLoaded(cachePath: path, route: []);
-  }
-
-  void _onError(Object? error, StackTrace stackTrace) {
-    if (error != null) {
-      // ignore: avoid_print
-      print(error);
-    }
-    state = MapState.error(error?.toString());
+  Future<MapState> build(MapCacheDB mapCache) async {
+    return MapState(cachePath: await mapCache.getPath(), route: []) ;
   }
 }

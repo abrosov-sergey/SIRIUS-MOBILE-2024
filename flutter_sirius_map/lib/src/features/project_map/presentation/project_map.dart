@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_cache/flutter_map_cache.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_sirius_map/src/features/project_map/data/map_cache_realisation.dart';
+import 'package:flutter_sirius_map/src/features/project_map/domain/providers/map_provider.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:dio_cache_interceptor_db_store/dio_cache_interceptor_db_store.dart';
 
-class ProjectMap extends StatefulWidget {
+class ProjectMap extends ConsumerWidget {
   const ProjectMap({super.key});
 
-  @override
-  State<ProjectMap> createState() => _ProjectMapState();
-}
-
-class _ProjectMapState extends State<ProjectMap> {
   get _marshrut => const [
         LatLng(43.41482521465457, 39.951312004328557),
         LatLng(43.414671691690607, 39.951024080506684),
@@ -21,6 +18,7 @@ class _ProjectMapState extends State<ProjectMap> {
       ];
 
   final _maxPoint = const LatLng(43.412678630221023, 39.949135833185039);
+
   final _minPoint = const LatLng(43.41601767565109, 39.953505467745707);
 
   get _center => LatLng(
@@ -40,17 +38,10 @@ class _ProjectMapState extends State<ProjectMap> {
     return LatLngBounds(LatLng(latMax, lngMax), LatLng(latMin, lngMin));
   }
 
-  late String _path = '';
-
-  
-
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(context, ref) {
+    final mapState =
+        ref.watch(mapNotifierProvider.call(const MapCacheDB()));
     return FlutterMap(
       mapController: MapController(),
       options: MapOptions(
@@ -66,19 +57,20 @@ class _ProjectMapState extends State<ProjectMap> {
       ),
       children: [
         // убрать карту когда будет готова картинка
-        TileLayer(
-          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-          userAgentPackageName: 'com.example.flutter_map_example',
-          tileProvider: CachedTileProvider(
-            // maxStale keeps the tile cached for the given Duration and
-            // tries to revalidate the next time it gets requested
-            maxStale: const Duration(days: 30),
-            store: DbCacheStore(
-              databaseName: 'mapCache',
-              databasePath: _path,
+        if (mapState.hasValue)
+          TileLayer(
+            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            userAgentPackageName: 'com.example.flutter_map_example',
+            tileProvider: CachedTileProvider(
+              // maxStale keeps the tile cached for the given Duration and
+              // tries to revalidate the next time it gets requested
+              maxStale: const Duration(days: 30),
+              store: DbCacheStore(
+                databaseName: 'mapCache',
+                databasePath: mapState.value!.cachePath,
+              ),
             ),
           ),
-        ),
         PolylineLayer(
           polylines: [
             Polyline(

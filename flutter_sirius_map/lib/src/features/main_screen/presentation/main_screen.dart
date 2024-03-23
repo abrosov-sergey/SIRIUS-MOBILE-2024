@@ -15,7 +15,7 @@ class MainScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          const ProjectMap(),
+          ProjectMap(),
           SafeArea(
             child: Consumer(
               builder: (_, ref, __) {

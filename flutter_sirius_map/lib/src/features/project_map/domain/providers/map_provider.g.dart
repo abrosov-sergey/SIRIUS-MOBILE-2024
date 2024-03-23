@@ -6,7 +6,7 @@ part of 'map_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$mapNotifierHash() => r'd82642cd4409f0f110bc5386a824e4e8d909ae43';
+String _$mapNotifierHash() => r'241b9ebe63b0ed9fd4023ca5beaeb0122afc391c';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,10 +29,11 @@ class _SystemHash {
   }
 }
 
-abstract class _$MapNotifier extends BuildlessAutoDisposeNotifier<MapState> {
+abstract class _$MapNotifier
+    extends BuildlessAutoDisposeAsyncNotifier<MapState> {
   late final MapCacheDB mapCache;
 
-  MapState build(
+  FutureOr<MapState> build(
     MapCacheDB mapCache,
   );
 }
@@ -42,7 +43,7 @@ abstract class _$MapNotifier extends BuildlessAutoDisposeNotifier<MapState> {
 const mapNotifierProvider = MapNotifierFamily();
 
 /// See also [MapNotifier].
-class MapNotifierFamily extends Family<MapState> {
+class MapNotifierFamily extends Family<AsyncValue<MapState>> {
   /// See also [MapNotifier].
   const MapNotifierFamily();
 
@@ -81,7 +82,7 @@ class MapNotifierFamily extends Family<MapState> {
 
 /// See also [MapNotifier].
 class MapNotifierProvider
-    extends AutoDisposeNotifierProviderImpl<MapNotifier, MapState> {
+    extends AutoDisposeAsyncNotifierProviderImpl<MapNotifier, MapState> {
   /// See also [MapNotifier].
   MapNotifierProvider(
     MapCacheDB mapCache,
@@ -112,7 +113,7 @@ class MapNotifierProvider
   final MapCacheDB mapCache;
 
   @override
-  MapState runNotifierBuild(
+  FutureOr<MapState> runNotifierBuild(
     covariant MapNotifier notifier,
   ) {
     return notifier.build(
@@ -137,7 +138,8 @@ class MapNotifierProvider
   }
 
   @override
-  AutoDisposeNotifierProviderElement<MapNotifier, MapState> createElement() {
+  AutoDisposeAsyncNotifierProviderElement<MapNotifier, MapState>
+      createElement() {
     return _MapNotifierProviderElement(this);
   }
 
@@ -155,13 +157,13 @@ class MapNotifierProvider
   }
 }
 
-mixin MapNotifierRef on AutoDisposeNotifierProviderRef<MapState> {
+mixin MapNotifierRef on AutoDisposeAsyncNotifierProviderRef<MapState> {
   /// The parameter `mapCache` of this provider.
   MapCacheDB get mapCache;
 }
 
 class _MapNotifierProviderElement
-    extends AutoDisposeNotifierProviderElement<MapNotifier, MapState>
+    extends AutoDisposeAsyncNotifierProviderElement<MapNotifier, MapState>
     with MapNotifierRef {
   _MapNotifierProviderElement(super.provider);
 
