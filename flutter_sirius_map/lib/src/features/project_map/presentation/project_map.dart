@@ -27,10 +27,10 @@ class _ProjectMapState extends State<ProjectMap> {
     return FlutterMap(
       mapController: MapController(),
       options: MapOptions(
+        maxZoom: 20,
+        minZoom: 17,
         interactionOptions: const InteractionOptions(
-          flags: InteractiveFlag.pinchZoom |
-              InteractiveFlag.doubleTapZoom |
-              InteractiveFlag.doubleTapDragZoom,
+          flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
         ),
         initialCenter: _center,
         initialZoom: 17,
