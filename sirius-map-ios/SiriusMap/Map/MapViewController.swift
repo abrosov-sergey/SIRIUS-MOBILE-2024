@@ -2,88 +2,61 @@
 //  MapViewController.swift
 //  SiriusMap
 //
-//  Created by Глеб Писарев on 22.03.2024.
+//  Created by Egor on 22.03.2024.
 //
 
-import Foundation
-import UIKit
 import MapKit
-
-protocol MapViewControllerDeligate: AnyObject {
-    func onSearchButtonClicked()
-}
+import UIKit
 
 final class MapViewController: UIViewController {
     
-    weak var deligate: MapViewControllerDeligate!
-    
-    private var mapView = MKMapView()
-    
-    init(deligate: MapViewControllerDeligate) {
-        self.deligate = deligate
-        super.init(nibName: nil, bundle: nil)
+    private var mapView: MKMapView {
+        guard let view = self.view as? MapView else { fatalError("Unsupported view type.") }
+        return view.map
     }
+
+    // MARK: - Life Cycle
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    override func loadView() {
+        view = MapView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
+        
+        
+        addOverlays()
+        
+        mapView.delegate = self
     }
     
-    func setup() {
-        mapView.translatesAutoresizingMaskIntoConstraints = false
-        
-        let initialLocation = CLLocationCoordinate2D(latitude: 43.414713, longitude: 39.950758)
-        let regionRadius: CLLocationDistance = 300
-        let region = MKCoordinateRegion(center: initialLocation, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
-        mapView.setRegion(region, animated: true)
-        
-        view.addSubview(mapView)
-        
-        NSLayoutConstraint.activate([
-            mapView.topAnchor.constraint(equalTo: view.topAnchor),
-            mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-        
-        let buttonStack = UIStackView()
-        buttonStack.axis = .vertical
-        buttonStack.distribution = .fillEqually
-        buttonStack.spacing = 10
-        buttonStack.translatesAutoresizingMaskIntoConstraints = false
-        
-        let searchButton = ButtonWithIcon(type: .search)
-        searchButton.addTarget(self, action: #selector(onSearchButtonClicked), for: .allTouchEvents)
-        
-        let geoButton = ButtonWithIcon(type: .pin)
-        geoButton.addTarget(self, action: #selector(onGeoButtonClicked), for: .allTouchEvents)
-        
-        buttonStack.addArrangedSubview(searchButton)
-        buttonStack.addArrangedSubview(geoButton)
-        
-        mapView.addSubview(buttonStack)
-        
-        NSLayoutConstraint.activate([
-            buttonStack.bottomAnchor.constraint(equalTo: mapView.bottomAnchor, constant: -60),
-            buttonStack.trailingAnchor.constraint(equalTo: mapView.trailingAnchor, constant: -18),
-            buttonStack.widthAnchor.constraint(equalToConstant: 60),
-            buttonStack.heightAnchor.constraint(equalToConstant: 130)
-        ])
-    }
+    // MARK: - Methods
     
-    @objc private func onSearchButtonClicked() {
-        deligate.onSearchButtonClicked()
+    private func addOverlays() {
+        
+        var level: Level?
+        do {
+            level = try IMDFDecoder().decode()
+        } catch {
+            print(error)
+        }
+        
+        if let level, let levelOverlay = level.geometry[0] as? MKOverlay {
+            mapView.setVisibleMapRect(levelOverlay.boundingMapRect, edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20), animated: true)
+            
+            mapView.addOverlay(levelOverlay)
+            
+            let unitOverlays = level.units.compactMap { $0.geometry[0] as? MKOverlay }
+            mapView.addOverlays(unitOverlays)
+        }
     }
-    
-    @objc private func onGeoButtonClicked() {
-        let initialLocation = CLLocationCoordinate2D(latitude: 43.414713, longitude: 39.950758)
-        let regionRadius: CLLocationDistance = 300
-        let region = MKCoordinateRegion(center: initialLocation, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
-        mapView.setRegion(region, animated: true)
+}
+
+extension MapViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolygonRenderer(overlay: overlay)
+        renderer.strokeColor = UIColor(named: "LevelStroke")
+        renderer.lineWidth = 2.0
+        return renderer
     }
-    
 }
