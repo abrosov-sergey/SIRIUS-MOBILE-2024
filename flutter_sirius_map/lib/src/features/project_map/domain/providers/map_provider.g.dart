@@ -6,7 +6,7 @@ part of 'map_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$mapNotifierHash() => r'241b9ebe63b0ed9fd4023ca5beaeb0122afc391c';
+String _$mapNotifierHash() => r'8d0e18d506566f5d1e3336efebff961368fd4732';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -31,10 +31,10 @@ class _SystemHash {
 
 abstract class _$MapNotifier
     extends BuildlessAutoDisposeAsyncNotifier<MapState> {
-  late final MapCacheDB mapCache;
+  late final MapCache mapCache;
 
   FutureOr<MapState> build(
-    MapCacheDB mapCache,
+    MapCache mapCache,
   );
 }
 
@@ -49,7 +49,7 @@ class MapNotifierFamily extends Family<AsyncValue<MapState>> {
 
   /// See also [MapNotifier].
   MapNotifierProvider call(
-    MapCacheDB mapCache,
+    MapCache mapCache,
   ) {
     return MapNotifierProvider(
       mapCache,
@@ -85,7 +85,7 @@ class MapNotifierProvider
     extends AutoDisposeAsyncNotifierProviderImpl<MapNotifier, MapState> {
   /// See also [MapNotifier].
   MapNotifierProvider(
-    MapCacheDB mapCache,
+    MapCache mapCache,
   ) : this._internal(
           () => MapNotifier()..mapCache = mapCache,
           from: mapNotifierProvider,
@@ -110,7 +110,7 @@ class MapNotifierProvider
     required this.mapCache,
   }) : super.internal();
 
-  final MapCacheDB mapCache;
+  final MapCache mapCache;
 
   @override
   FutureOr<MapState> runNotifierBuild(
@@ -159,7 +159,7 @@ class MapNotifierProvider
 
 mixin MapNotifierRef on AutoDisposeAsyncNotifierProviderRef<MapState> {
   /// The parameter `mapCache` of this provider.
-  MapCacheDB get mapCache;
+  MapCache get mapCache;
 }
 
 class _MapNotifierProviderElement
@@ -168,7 +168,7 @@ class _MapNotifierProviderElement
   _MapNotifierProviderElement(super.provider);
 
   @override
-  MapCacheDB get mapCache => (origin as MapNotifierProvider).mapCache;
+  MapCache get mapCache => (origin as MapNotifierProvider).mapCache;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
