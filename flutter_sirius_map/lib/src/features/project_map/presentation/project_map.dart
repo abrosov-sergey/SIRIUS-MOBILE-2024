@@ -26,6 +26,7 @@ class _ProjectMapState extends State<ProjectMap> {
       );
 
   LatLngBounds _bounds() {
+    // вертикальный отступ больше, чтобы с вертикальной ореинтацией было удобнее визуально
     final latChange = _maxPoint.latitude - _minPoint.latitude;
     final lngChange = (_maxPoint.longitude - _minPoint.longitude) / 2;
     final latMax = _maxPoint.latitude + latChange;
