@@ -28,8 +28,7 @@ class _ProjectMapState extends State<ProjectMap> {
   LatLngBounds _bounds() {
     final latChange = _maxPoint.latitude - _minPoint.latitude;
     final lngChange = (_maxPoint.longitude - _minPoint.longitude) / 2;
-    final latMax =
-        _maxPoint.latitude + latChange;
+    final latMax = _maxPoint.latitude + latChange;
     final latMin = _minPoint.latitude - latChange;
     final lngMax = _maxPoint.longitude + lngChange;
     final lngMin = _minPoint.longitude - lngChange;
