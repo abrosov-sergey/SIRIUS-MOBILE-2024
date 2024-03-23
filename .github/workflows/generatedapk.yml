@@ -32,13 +32,13 @@ jobs:
       - name: Change wrapper permissions
         run: |
           cd flutter_sirius_map
-          chmod +x ./gradlew
+          chmod +x 'pwd'/./gradlew
 
       # Run Tests Build
       - name: Run gradle tests
         run: |
           cd flutter_sirius_map
-          'pwd'/./gradlew test
+          ./gradlew test
 
       # Run Build Project
       - name: Build gradle project
