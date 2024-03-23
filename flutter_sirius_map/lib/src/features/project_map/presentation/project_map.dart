@@ -40,8 +40,7 @@ class ProjectMap extends ConsumerWidget {
 
   @override
   Widget build(context, ref) {
-    final mapState =
-        ref.watch(mapNotifierProvider.call(const MapCacheDB()));
+    final mapState = ref.watch(mapNotifierProvider.call(const MapCacheDB()));
     return FlutterMap(
       mapController: MapController(),
       options: MapOptions(
