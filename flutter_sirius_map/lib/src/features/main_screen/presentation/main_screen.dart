@@ -30,7 +30,7 @@ class MainScreen extends StatelessWidget {
                       },
                     ),
                     SettingButton(
-                      iconData: Icons.egg_rounded,
+                      text: context.s.language,
                       onTap: () {
                         ref.read(localeProvider.notifier).changeLocale();
                       },
