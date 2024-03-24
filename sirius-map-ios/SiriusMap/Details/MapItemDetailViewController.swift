@@ -13,7 +13,7 @@ import UIKit
 
 final class MapItemDetailViewController: UIViewController {
     
-    weak var delegate: SearchNavigationControllerDelegate!
+    weak var delegate: SearchNavigationControllerDelegate?
     
     let name: String
     
@@ -35,7 +35,7 @@ final class MapItemDetailViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        delegate.resize()
+        delegate?.resize()
     }
     
     func setup() {

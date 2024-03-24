@@ -21,7 +21,7 @@ final class MapViewController: UIViewController {
         return button
     }()
     
-    let delegate: MapViewControlelrDelegate!
+    weak var delegate: MapViewControlelrDelegate?
     
     init(delegate: MapViewControlelrDelegate) {
         self.delegate = delegate
@@ -80,7 +80,7 @@ final class MapViewController: UIViewController {
     }
     
     @objc private func onSearchButtonClicked() {
-        delegate.onSearchButtonClicked()
+        delegate?.onSearchButtonClicked()
     }
 }
 
