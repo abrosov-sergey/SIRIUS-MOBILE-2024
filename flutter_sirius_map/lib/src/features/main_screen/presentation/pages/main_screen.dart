@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_sirius_map/src/features/map/presentation/widgets/project_map.dart';
+import 'package:flutter_sirius_map/src/features/project_map/presentation/project_map.dart';
 import 'package:flutter_sirius_map/src/features/settings/presentation/providers/locale_provider.dart';
 import 'package:flutter_sirius_map/src/features/settings/presentation/providers/theme_provider.dart';
 import 'package:flutter_sirius_map/src/features/settings/presentation/widgets/setting_button.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sirius_map/src/app/presentation/providers/app_state_provider.dart';
 import 'package:flutter_sirius_map/src/app/presentation/states/app_state.dart';
-import 'package:flutter_sirius_map/src/features/map/presentation/states/map_state/map_state.dart';
+import 'package:flutter_sirius_map/src/features/project_map/presentation/states/map_state/map_state.dart';
 
 final mapProvider = StateNotifierProvider.autoDispose<MapController, MapState>(
   (ref) => MapController(
