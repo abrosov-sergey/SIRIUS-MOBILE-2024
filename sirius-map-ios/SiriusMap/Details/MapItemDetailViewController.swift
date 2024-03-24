@@ -7,13 +7,7 @@
 
 import UIKit
 
-protocol SearchNavigationControllerDelegate: AnyObject {
-    func resize()
-}
-
 final class MapItemDetailViewController: UIViewController {
-    
-    weak var delegate: SearchNavigationControllerDelegate?
     
     private let nameLabel: UILabel = {
         let label = UILabel()
@@ -47,24 +41,14 @@ final class MapItemDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        isModalInPresentation = true
         view.backgroundColor = .systemBackground
         setup()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        delegate?.resize()
     }
     
     private func setup() {
         nameLabel.text = name
         
         view.addSubview(nameLabel)
-        NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0.0),
-            nameLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
-        ])
         
         fromHereButton.addTarget(
             self,
@@ -81,6 +65,11 @@ final class MapItemDetailViewController: UIViewController {
         buttonStack.addArrangedSubview(hereButton)
         
         view.addSubview(buttonStack)
+        
+        NSLayoutConstraint.activate([
+            nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            nameLabel.leadingAnchor.constraint(equalTo: buttonStack.leadingAnchor)
+        ])
         
         NSLayoutConstraint.activate([
             buttonStack.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 24.0),

@@ -13,7 +13,6 @@ private extension String {
 
 protocol SearchTableViewControllerDelegate: AnyObject {
     func searchTableViewController(didSelectRowAt indexPath: IndexPath)
-    func resize()
 }
 
 final class SearchTableViewController: UITableViewController {
@@ -49,6 +48,16 @@ final class SearchTableViewController: UITableViewController {
         setupSearchController()
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: .reuseIdentifier)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let sheet = sheetPresentationController {
+            sheet.detents = [.large()]
+            sheet.animateChanges {
+                sheet.selectedDetentIdentifier = sheet.selectedDetentIdentifier ?? .medium
+            }
+        }
     }
     
     // MARK: - Methods

@@ -44,8 +44,17 @@ final class SearchNavigationController: UINavigationController {
     
     private func makeMapDetailViewController(title: String) -> UIViewController {
         let mapItemDetail = MapItemDetailViewController(name: title)
-        mapItemDetail.delegate = self
+        mapItemDetail.navigationItem.leftBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
+        mapItemDetail.navigationItem.rightBarButtonItem = .init(
+            barButtonSystemItem: .close,
+            target: self,
+            action: #selector(onCloseButtonTapped)
+        )
         return mapItemDetail
+    }
+    
+    @objc private func onCloseButtonTapped() {
+        self.popViewController(animated: true)
     }
 }
 
@@ -67,17 +76,6 @@ extension SearchNavigationController: SearchTableViewControllerDelegate {
             }
             sheet.detents = [fraction]
             
-            sheet.animateChanges {
-                sheet.selectedDetentIdentifier = sheet.selectedDetentIdentifier ?? .medium
-            }
-        }
-    }
-}
-
-extension SearchNavigationController: SearchNavigationControllerDelegate {
-    func resize() {
-        if let sheet = self.sheetPresentationController {
-            sheet.detents = [.large()]
             sheet.animateChanges {
                 sheet.selectedDetentIdentifier = sheet.selectedDetentIdentifier ?? .medium
             }
