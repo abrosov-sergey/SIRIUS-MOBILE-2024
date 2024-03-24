@@ -5,4 +5,4 @@
 //  Created by Egor on 23.03.2024.
 //
 
-class Unit: Feature {}
+final class Unit: Feature {}

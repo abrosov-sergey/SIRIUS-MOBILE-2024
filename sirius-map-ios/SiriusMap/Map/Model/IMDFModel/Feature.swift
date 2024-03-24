@@ -13,13 +13,13 @@ class Feature: IMDFDecodable {
     
     required init(feature: MKGeoJSONFeature) throws {
         guard let uuidString = feature.identifier else {
-            throw IMDFError.invalidData
+            throw IMDFError.missingIdentifier
         }
         
         if let identifier = UUID(uuidString: uuidString) {
             self.identifier = identifier
         } else {
-            throw IMDFError.invalidData
+            throw IMDFError.invalidIdentifier
         }
         
         self.geometry = feature.geometry
