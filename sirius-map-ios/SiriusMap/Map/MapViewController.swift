@@ -8,10 +8,30 @@
 import MapKit
 import UIKit
 
+protocol MapViewControlelrDelegate: AnyObject {
+    func onSearchButtonClicked()
+}
+
 final class MapViewController: UIViewController {
     
     private lazy var mapView = MapView()
-
+    private lazy var searchButton: UIButton = {
+        let button = ButtonWithIcon(type: .search)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    let delegate: MapViewControlelrDelegate!
+    
+    init(delegate: MapViewControlelrDelegate) {
+        self.delegate = delegate
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Life Cycle
     
     override func loadView() {
@@ -22,6 +42,7 @@ final class MapViewController: UIViewController {
         super.viewDidLoad()
         addOverlays()
         mapView.map.delegate = self
+        setupButtons()
     }
     
     // MARK: - Methods
@@ -47,6 +68,19 @@ final class MapViewController: UIViewController {
             let unitOverlays = level.units.compactMap { $0.overlay }
             mapView.map.addOverlays(unitOverlays)
         }
+    }
+    
+    private func setupButtons() {
+        searchButton.addTarget(self, action: #selector(onSearchButtonClicked), for: .allTouchEvents)
+        mapView.addSubview(searchButton)
+        NSLayoutConstraint.activate([
+            searchButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -24),
+            searchButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -18)
+        ])
+    }
+    
+    @objc private func onSearchButtonClicked() {
+        delegate.onSearchButtonClicked()
     }
 }
 

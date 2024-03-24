@@ -11,6 +11,13 @@ final class RootNavigationController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setViewControllers([MapViewController()], animated: false)
+        setViewControllers([MapViewController(delegate: self)], animated: false)
+    }
+}
+
+extension RootNavigationController: MapViewControlelrDelegate {
+    func onSearchButtonClicked() {
+        let searchNavigationViewCotroller = SearchNavigationController()
+        present(searchNavigationViewCotroller, animated: true)
     }
 }
