@@ -12,7 +12,7 @@ enum IconType: String {
     case pin = "mappin.circle.fill"
 }
 
-class ButtonWithIcon: UIButton {
+final class ButtonWithIcon: UIButton {
     
     init(type: IconType = .search) {
         super.init(frame: .zero)
