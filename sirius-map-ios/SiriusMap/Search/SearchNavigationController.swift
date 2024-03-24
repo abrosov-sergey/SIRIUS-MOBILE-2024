@@ -44,7 +44,7 @@ final class SearchNavigationController: UINavigationController {
     
     private func makeMapDetailViewController(title: String) -> UIViewController {
         let mapItemDetail = MapItemDetailViewController(name: title)
-        mapItemDetail.deligate = self
+        mapItemDetail.delegate = self
         return mapItemDetail
     }
 }
@@ -74,7 +74,7 @@ extension SearchNavigationController: SearchTableViewControllerDelegate {
     }
 }
 
-extension SearchNavigationController: SearchNavigationControllerDeligate {
+extension SearchNavigationController: SearchNavigationControllerDelegate {
     func resize() {
         if let sheet  = self.sheetPresentationController {
             sheet.detents = [.large()]

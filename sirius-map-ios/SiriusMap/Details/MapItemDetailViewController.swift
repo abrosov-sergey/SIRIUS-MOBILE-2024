@@ -5,7 +5,7 @@
 //  Created by Egor on 21.03.2024.
 //
 
-protocol SearchNavigationControllerDeligate: AnyObject {
+protocol SearchNavigationControllerDelegate: AnyObject {
     func resize()
 }
 
@@ -13,7 +13,7 @@ import UIKit
 
 final class MapItemDetailViewController: UIViewController {
     
-    weak var deligate: SearchNavigationControllerDeligate!
+    weak var delegate: SearchNavigationControllerDelegate!
     
     let name: String
     
@@ -35,7 +35,7 @@ final class MapItemDetailViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        deligate.resize()
+        delegate.resize()
     }
     
     func setup() {

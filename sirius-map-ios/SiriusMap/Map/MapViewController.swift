@@ -14,6 +14,12 @@ final class MapViewController: UIViewController {
         guard let view = self.view as? MapView else { fatalError("Unsupported view type.") }
         return view.map
     }
+    
+    private var searchButton: UIButton = {
+        let button = ButtonWithIcon(type: .search)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
 
     // MARK: - Life Cycle
     
@@ -28,6 +34,12 @@ final class MapViewController: UIViewController {
         addOverlays()
         
         mapView.delegate = self
+        
+        view.addSubview(searchButton)
+        NSLayoutConstraint.activate([
+            searchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            searchButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)
+        ])
     }
     
     // MARK: - Methods
