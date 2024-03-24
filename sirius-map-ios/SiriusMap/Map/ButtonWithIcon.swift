@@ -23,12 +23,19 @@ final class ButtonWithIcon: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    func setup(_ type: IconType) {
+    private func setup(_ type: IconType) {
         
-        let config = UIImage.SymbolConfiguration(pointSize: 56)
-            .applying(UIImage.SymbolConfiguration(
-                paletteColors: [.darkGray, .white]))
+        let config = UIImage.SymbolConfiguration(
+            pointSize: 56
+        )
+            .applying(
+                UIImage.SymbolConfiguration(
+                    paletteColors: [
+                        .darkGray,
+                        .white
+                    ]
+                )
+            )
         
         let searchImage = UIImage(systemName: type.rawValue, withConfiguration: config)
         

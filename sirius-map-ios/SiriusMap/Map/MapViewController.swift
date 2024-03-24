@@ -15,6 +15,7 @@ protocol MapViewControlelrDelegate: AnyObject {
 final class MapViewController: UIViewController {
     
     private lazy var mapView = MapView()
+    
     private lazy var searchButton: UIButton = {
         let button = ButtonWithIcon(type: .search)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -74,8 +75,8 @@ final class MapViewController: UIViewController {
         searchButton.addTarget(self, action: #selector(onSearchButtonClicked), for: .allTouchEvents)
         mapView.addSubview(searchButton)
         NSLayoutConstraint.activate([
-            searchButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -24),
-            searchButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -18)
+            searchButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -24.0),
+            searchButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -18.0)
         ])
     }
     

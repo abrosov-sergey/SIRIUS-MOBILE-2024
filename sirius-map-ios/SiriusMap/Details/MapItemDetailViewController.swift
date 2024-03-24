@@ -5,15 +5,34 @@
 //  Created by Egor on 21.03.2024.
 //
 
+import UIKit
+
 protocol SearchNavigationControllerDelegate: AnyObject {
     func resize()
 }
 
-import UIKit
-
 final class MapItemDetailViewController: UIViewController {
     
     weak var delegate: SearchNavigationControllerDelegate?
+    
+    private let nameLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 24.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let fromHereButton = ButtonWithText("Отсюда")
+    private let hereButton = ButtonWithText("Сюда")
+    
+    let buttonStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.distribution = .fillEqually
+        stack.spacing = 36.0
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
     
     let name: String
     
@@ -38,30 +57,25 @@ final class MapItemDetailViewController: UIViewController {
         delegate?.resize()
     }
     
-    func setup() {
-        let nameLabel = UILabel()
+    private func setup() {
         nameLabel.text = name
-        nameLabel.font = UIFont.systemFont(ofSize: 24)
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         
         view.addSubview(nameLabel)
         NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+            nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0.0),
             nameLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
         ])
         
-        let fromHereButton = ButtonWithText("Отсюда")
-        let hereButton = ButtonWithText("Сюда")
-        
-        fromHereButton.addTarget(self, action: #selector(onFromHereButtonClicked), for: .allTouchEvents)
-        hereButton.addTarget(self, action: #selector(onHereButtonClicked), for: .allTouchEvents)
-        
-        let buttonStack = UIStackView()
-        buttonStack.axis = .horizontal
-        buttonStack.distribution = .fillEqually
-        buttonStack.spacing = 36
-        buttonStack.translatesAutoresizingMaskIntoConstraints = false
+        fromHereButton.addTarget(
+            self,
+            action: #selector(onFromHereButtonClicked),
+            for: .allTouchEvents
+        )
+        hereButton.addTarget(
+            self,
+            action: #selector(onHereButtonClicked),
+            for: .allTouchEvents
+        )
         
         buttonStack.addArrangedSubview(fromHereButton)
         buttonStack.addArrangedSubview(hereButton)
@@ -69,7 +83,7 @@ final class MapItemDetailViewController: UIViewController {
         view.addSubview(buttonStack)
         
         NSLayoutConstraint.activate([
-            buttonStack.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 24),
+            buttonStack.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 24.0),
             buttonStack.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }

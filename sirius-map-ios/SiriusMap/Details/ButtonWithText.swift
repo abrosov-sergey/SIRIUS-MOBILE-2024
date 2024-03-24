@@ -10,8 +10,11 @@ import UIKit
 
 final class ButtonWithText: UIButton {
     
+    private let width = 130.0
+    private let height = 40.0
+    
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: 130, height: 40)
+        CGSize(width: width, height: height)
     }
     
     convenience init(_ text: String) {
@@ -32,12 +35,12 @@ final class ButtonWithText: UIButton {
 }
 
 extension UIButton.Configuration {
-    public static func outline() -> UIButton.Configuration {
+    static func outline() -> UIButton.Configuration {
         var style = UIButton.Configuration.plain()
         var background = UIButton.Configuration.plain().background
         style.baseForegroundColor = .white
-        background.cornerRadius = 10
-        background.strokeWidth = 1
+        background.cornerRadius = 10.0
+        background.strokeWidth = 1.0
         background.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.7)
         style.background = background
         

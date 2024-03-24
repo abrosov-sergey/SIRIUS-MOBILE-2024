@@ -62,13 +62,13 @@ extension SearchNavigationController: SearchTableViewControllerDelegate {
     private func setSheetPresentation(multiplier: Double) {
         if let sheet = self.sheetPresentationController {
             let fraction = UISheetPresentationController.Detent.custom { context in
-                (self.view.window?.frame.height ?? 0) * multiplier
+                (self.view.window?.frame.height ?? 0.0) * multiplier
                 
             }
             sheet.detents = [fraction]
-            let oldValue = sheet.selectedDetentIdentifier ?? .medium
+            
             sheet.animateChanges {
-                sheet.selectedDetentIdentifier = oldValue
+                sheet.selectedDetentIdentifier = sheet.selectedDetentIdentifier ?? .medium
             }
         }
     }
@@ -76,11 +76,10 @@ extension SearchNavigationController: SearchTableViewControllerDelegate {
 
 extension SearchNavigationController: SearchNavigationControllerDelegate {
     func resize() {
-        if let sheet  = self.sheetPresentationController {
+        if let sheet = self.sheetPresentationController {
             sheet.detents = [.large()]
-            let oldValue = sheet.selectedDetentIdentifier ?? .medium
             sheet.animateChanges {
-                sheet.selectedDetentIdentifier = oldValue
+                sheet.selectedDetentIdentifier = sheet.selectedDetentIdentifier ?? .medium
             }
         }
     }
