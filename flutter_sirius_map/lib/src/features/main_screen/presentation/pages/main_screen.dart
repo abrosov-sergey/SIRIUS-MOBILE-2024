@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_sirius_map/src/app/presentation/providers/app_state_provider.dart';
-import 'package:flutter_sirius_map/src/app/presentation/states/app_state.dart';
 import 'package:flutter_sirius_map/src/features/map/presentation/widgets/project_map.dart';
-import 'package:flutter_sirius_map/src/features/main_screen/presentation/widgets/setting_button.dart';
+import 'package:flutter_sirius_map/src/features/settings/presentation/providers/locale_provider.dart';
+import 'package:flutter_sirius_map/src/features/settings/presentation/providers/theme_provider.dart';
+import 'package:flutter_sirius_map/src/features/settings/presentation/widgets/setting_button.dart';
 import 'package:flutter_sirius_map/src/utils/context.dart';
 
 class MainScreen extends StatelessWidget {
@@ -19,25 +19,24 @@ class MainScreen extends StatelessWidget {
           SafeArea(
             child: Consumer(
               builder: (_, ref, __) {
-                final isDarkTheme =
-                    ref.watch(appProvider).theme == ThemeState.dark;
+                final isDarkTheme = ref.watch(themeProvider).isDarkTheme;
                 return Column(
                   children: [
                     SettingButton(
                       iconData:
                           isDarkTheme ? Icons.dark_mode : Icons.light_mode,
                       onTap: () {
-                        ref.read(appProvider.notifier).changeTheme();
+                        ref.read(themeProvider.notifier).changeTheme();
                       },
                     ),
                     SettingButton(
                       iconData: Icons.egg_rounded,
                       onTap: () {
-                        ref.read(appProvider.notifier).changeLocale();
+                        ref.read(localeProvider.notifier).changeLocale();
                       },
                     ),
                     Text(
-                      context.s.search,
+                      context.localization.search,
                       style: context.themeExtendTextStyles.headerStyle
                           .copyWith(color: context.themeExtendColors.iconColor),
                     )

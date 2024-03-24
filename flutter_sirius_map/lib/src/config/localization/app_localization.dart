@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 export 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class S {
+class AppLocalization {
   static const en = Locale('en');
   static const ru = Locale('ru');
 
@@ -17,5 +17,5 @@ class S {
 
   static bool isEn(Locale locale) => locale == en;
 
-  const S._();
+  const AppLocalization._();
 }

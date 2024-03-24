@@ -1,16 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_sirius_map/src/app/presentation/states/app_global_state.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+sealed class AppState {}
 
-part 'app_state.freezed.dart';
+class BaseAppState extends AppState {}
 
-enum ThemeState { light, dark }
+class ChoiceAppState extends AppState {}
 
-@freezed
-class AppState with _$AppState {
-  const factory AppState({
-    required Locale locale,
-    required ThemeState theme,
-    required AppGlobalState state,
-  }) = _AppState;
-}
+class RouteBuilderAppState extends AppState {}
+
+class RouteAppState extends AppState {}
