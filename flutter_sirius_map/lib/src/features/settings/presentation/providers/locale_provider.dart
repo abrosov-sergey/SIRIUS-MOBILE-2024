@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_sirius_map/config/localization/s.dart';
+import 'package:flutter_sirius_map/src/config/localization/app_localization.dart';
 
 final localeProvider =
     StateNotifierProvider.autoDispose<LocaleProvider, Locale>(
@@ -8,13 +8,13 @@ final localeProvider =
 );
 
 class LocaleProvider extends StateNotifier<Locale> {
-  LocaleProvider() : super(S.ru);
+  LocaleProvider() : super(AppLocalization.ru);
 
   void changeLocale() {
-    if (S.isEn(state)) {
-      state = S.ru;
+    if (AppLocalization.isEn(state)) {
+      state = AppLocalization.ru;
     } else {
-      state = S.en;
+      state = AppLocalization.en;
     }
   }
 }

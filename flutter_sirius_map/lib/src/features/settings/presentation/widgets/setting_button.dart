@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sirius_map/utils/context.dart';
+import 'package:flutter_sirius_map/src/utils/context.dart';
 
 class SettingButton extends StatelessWidget {
   const SettingButton({super.key, required this.iconData, required this.onTap});

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sirius_map/config/themes/colors/app_colors.dart';
+import 'package:flutter_sirius_map/src/config/themes/colors/app_colors.dart';
 import 'package:theme_tailor_annotation/theme_tailor_annotation.dart';
 
 part 'app_colors_theme.tailor.dart';

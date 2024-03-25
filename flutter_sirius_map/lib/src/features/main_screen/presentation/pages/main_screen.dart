@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sirius_map/src/features/project_map/presentation/project_map.dart';
-import 'package:flutter_sirius_map/src/settings/presentation/controllers/locale_controller.dart';
-import 'package:flutter_sirius_map/src/settings/presentation/controllers/theme_controller.dart';
-import 'package:flutter_sirius_map/src/settings/presentation/widgets/setting_button.dart';
-import 'package:flutter_sirius_map/utils/context.dart';
+import 'package:flutter_sirius_map/src/features/settings/presentation/providers/locale_provider.dart';
+import 'package:flutter_sirius_map/src/features/settings/presentation/providers/theme_provider.dart';
+import 'package:flutter_sirius_map/src/features/settings/presentation/widgets/setting_button.dart';
+import 'package:flutter_sirius_map/src/utils/context.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -19,7 +19,7 @@ class MainScreen extends StatelessWidget {
           SafeArea(
             child: Consumer(
               builder: (_, ref, __) {
-                final isDarkTheme = ref.watch(themeProvider) == ThemeState.dark;
+                final isDarkTheme = ref.watch(themeProvider).isDarkTheme;
                 return Column(
                   children: [
                     SettingButton(
@@ -36,7 +36,7 @@ class MainScreen extends StatelessWidget {
                       },
                     ),
                     Text(
-                      context.s.search,
+                      context.localization.search,
                       style: context.themeExtendTextStyles.headerStyle
                           .copyWith(color: context.themeExtendColors.iconColor),
                     )
