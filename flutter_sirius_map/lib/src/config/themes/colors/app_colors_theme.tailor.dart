@@ -16,6 +16,7 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme>
     required this.iconColor,
     required this.primaryColor,
     required this.secondaryColor,
+    required this.shadowColor,
   });
 
   final Color accentColor;
@@ -23,6 +24,7 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme>
   final Color iconColor;
   final Color primaryColor;
   final Color secondaryColor;
+  final Color shadowColor;
 
   static AppColorsTheme get light => kDebugMode ? _lightGetter : _lightFinal;
 
@@ -34,6 +36,7 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme>
         iconColor: $_AppColorsTheme.iconColor[0],
         primaryColor: $_AppColorsTheme.primaryColor[0],
         secondaryColor: $_AppColorsTheme.secondaryColor[0],
+        shadowColor: $_AppColorsTheme.shadowColor[0],
       );
 
   static final AppColorsTheme _lightFinal = AppColorsTheme(
@@ -42,6 +45,7 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme>
     iconColor: $_AppColorsTheme.iconColor[0],
     primaryColor: $_AppColorsTheme.primaryColor[0],
     secondaryColor: $_AppColorsTheme.secondaryColor[0],
+    shadowColor: $_AppColorsTheme.shadowColor[0],
   );
 
   static AppColorsTheme get _darkGetter => AppColorsTheme(
@@ -50,6 +54,7 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme>
         iconColor: $_AppColorsTheme.iconColor[1],
         primaryColor: $_AppColorsTheme.primaryColor[1],
         secondaryColor: $_AppColorsTheme.secondaryColor[1],
+        shadowColor: $_AppColorsTheme.shadowColor[1],
       );
 
   static final AppColorsTheme _darkFinal = AppColorsTheme(
@@ -58,6 +63,7 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme>
     iconColor: $_AppColorsTheme.iconColor[1],
     primaryColor: $_AppColorsTheme.primaryColor[1],
     secondaryColor: $_AppColorsTheme.secondaryColor[1],
+    shadowColor: $_AppColorsTheme.shadowColor[1],
   );
 
   static final themes = [
@@ -72,6 +78,7 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme>
     Color? iconColor,
     Color? primaryColor,
     Color? secondaryColor,
+    Color? shadowColor,
   }) {
     return AppColorsTheme(
       accentColor: accentColor ?? this.accentColor,
@@ -79,6 +86,7 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme>
       iconColor: iconColor ?? this.iconColor,
       primaryColor: primaryColor ?? this.primaryColor,
       secondaryColor: secondaryColor ?? this.secondaryColor,
+      shadowColor: shadowColor ?? this.shadowColor,
     );
   }
 
@@ -92,6 +100,7 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme>
       iconColor: Color.lerp(iconColor, other.iconColor, t)!,
       primaryColor: Color.lerp(primaryColor, other.primaryColor, t)!,
       secondaryColor: Color.lerp(secondaryColor, other.secondaryColor, t)!,
+      shadowColor: Color.lerp(shadowColor, other.shadowColor, t)!,
     );
   }
 
@@ -104,7 +113,8 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme>
       ..add(DiagnosticsProperty('iconBackgroundColor', iconBackgroundColor))
       ..add(DiagnosticsProperty('iconColor', iconColor))
       ..add(DiagnosticsProperty('primaryColor', primaryColor))
-      ..add(DiagnosticsProperty('secondaryColor', secondaryColor));
+      ..add(DiagnosticsProperty('secondaryColor', secondaryColor))
+      ..add(DiagnosticsProperty('shadowColor', shadowColor));
   }
 
   @override
@@ -120,7 +130,9 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme>
             const DeepCollectionEquality()
                 .equals(primaryColor, other.primaryColor) &&
             const DeepCollectionEquality()
-                .equals(secondaryColor, other.secondaryColor));
+                .equals(secondaryColor, other.secondaryColor) &&
+            const DeepCollectionEquality()
+                .equals(shadowColor, other.shadowColor));
   }
 
   @override
@@ -131,6 +143,7 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme>
         const DeepCollectionEquality().hash(iconBackgroundColor),
         const DeepCollectionEquality().hash(iconColor),
         const DeepCollectionEquality().hash(primaryColor),
-        const DeepCollectionEquality().hash(secondaryColor));
+        const DeepCollectionEquality().hash(secondaryColor),
+        const DeepCollectionEquality().hash(shadowColor));
   }
 }

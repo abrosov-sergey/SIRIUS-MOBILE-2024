@@ -14,6 +14,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
+        alignment: Alignment.topRight,
         children: [
           const ProjectMap(),
           SafeArea(
@@ -22,24 +23,19 @@ class MainScreen extends StatelessWidget {
                 final isDarkTheme = ref.watch(themeProvider).isDarkTheme;
                 return Column(
                   children: [
-                    SettingButton(
+                    SettingButton.icon(
                       iconData:
                           isDarkTheme ? Icons.dark_mode : Icons.light_mode,
                       onTap: () {
                         ref.read(themeProvider.notifier).changeTheme();
                       },
                     ),
-                    SettingButton(
-                      iconData: Icons.egg_rounded,
+                    SettingButton.text(
+                      text: context.localization.language,
                       onTap: () {
                         ref.read(localeProvider.notifier).changeLocale();
                       },
                     ),
-                    Text(
-                      context.localization.search,
-                      style: context.themeExtendTextStyles.headerStyle
-                          .copyWith(color: context.themeExtendColors.iconColor),
-                    )
                   ],
                 );
               },
