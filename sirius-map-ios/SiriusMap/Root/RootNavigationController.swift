@@ -11,7 +11,9 @@ final class RootNavigationController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setViewControllers([MapViewController(delegate: self)], animated: false)
+        let mapViewController = MapViewController()
+        mapViewController.delegate = self
+        setViewControllers([mapViewController], animated: false)
     }
 }
 

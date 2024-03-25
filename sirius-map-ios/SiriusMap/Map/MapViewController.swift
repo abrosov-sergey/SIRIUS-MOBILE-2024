@@ -24,15 +24,6 @@ final class MapViewController: UIViewController {
     
     weak var delegate: MapViewControlelrDelegate?
     
-    init(delegate: MapViewControlelrDelegate) {
-        self.delegate = delegate
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     // MARK: - Life Cycle
     
     override func loadView() {
@@ -72,8 +63,8 @@ final class MapViewController: UIViewController {
     }
     
     private func setupButtons() {
-        searchButton.addTarget(self, action: #selector(onSearchButtonClicked), for: .allTouchEvents)
-        mapView.addSubview(searchButton)
+        searchButton.addTarget(self, action: #selector(onSearchButtonClicked), for: .touchUpInside)
+        view.addSubview(searchButton)
         NSLayoutConstraint.activate([
             searchButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -24.0),
             searchButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -18.0)

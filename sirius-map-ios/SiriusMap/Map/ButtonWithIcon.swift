@@ -37,13 +37,13 @@ final class ButtonWithIcon: UIButton {
                 )
             )
         
-        let searchImage = UIImage(systemName: type.rawValue, withConfiguration: config)
+        let buttonImage = UIImage(systemName: type.rawValue, withConfiguration: config)
         
         layer.shadowColor = UIColor.gray.cgColor
         layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
         layer.shadowOpacity = 0.1
         
-        setImage(searchImage, for: [])
+        setImage(buttonImage, for: [])
     
     }
 }

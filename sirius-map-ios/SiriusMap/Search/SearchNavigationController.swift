@@ -44,7 +44,7 @@ final class SearchNavigationController: UINavigationController {
     
     private func makeMapDetailViewController(title: String) -> UIViewController {
         let mapItemDetail = MapItemDetailViewController(name: title)
-        mapItemDetail.navigationItem.leftBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
+        mapItemDetail.navigationItem.setHidesBackButton(true, animated: true)
         mapItemDetail.navigationItem.rightBarButtonItem = .init(
             barButtonSystemItem: .close,
             target: self,
@@ -64,12 +64,12 @@ extension SearchNavigationController: SearchTableViewControllerDelegate {
     func searchTableViewController(didSelectRowAt indexPath: IndexPath) {
         let title = MapItem.sampleData[indexPath.row].name
         let viewController = makeMapDetailViewController(title: title)
-        setSheetPresentation(multiplier: 0.2)
+        setSheetPresentation(multiplier: 0.15)
         pushViewController(viewController, animated: true)
     }
     
     private func setSheetPresentation(multiplier: Double) {
-        if let sheet = self.sheetPresentationController {
+        if let sheet = sheetPresentationController {
             let fraction = UISheetPresentationController.Detent.custom { context in
                 (self.view.window?.frame.height ?? 0.0) * multiplier
                 

@@ -8,20 +8,24 @@
 import Foundation
 import UIKit
 
+enum ButtonWithTextStyle {
+    case blue
+    case gray
+}
+
 final class ButtonWithText: UIButton {
     
-    private let width = 130.0
-    private let height = 40.0
-    
-    override var intrinsicContentSize: CGSize {
-        CGSize(width: width, height: height)
-    }
-    
-    convenience init(_ text: String) {
-        var configuration = UIButton.Configuration.outline()
-        configuration.title = text
-        
-        self.init(configuration: configuration, primaryAction: nil)
+    convenience init(_ text: String, style: ButtonWithTextStyle = .blue) {
+        switch style {
+        case .blue:
+            var configuration = UIButton.Configuration.outlineBlue()
+            configuration.title = text
+            self.init(configuration: configuration, primaryAction: nil)
+        case .gray:
+            var configuration = UIButton.Configuration.outlineGray()
+            configuration.title = text
+            self.init(configuration: configuration, primaryAction: nil)
+        }
         
         setup()
     }
@@ -35,13 +39,23 @@ final class ButtonWithText: UIButton {
 }
 
 extension UIButton.Configuration {
-    static func outline() -> UIButton.Configuration {
+    static func outlineBlue() -> UIButton.Configuration {
         var style = UIButton.Configuration.plain()
         var background = UIButton.Configuration.plain().background
         style.baseForegroundColor = .white
         background.cornerRadius = 10.0
-        background.strokeWidth = 1.0
         background.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.7)
+        style.background = background
+        
+        return style
+    }
+    static func outlineGray() -> UIButton.Configuration {
+        var style = UIButton.Configuration.plain()
+        var background = UIButton.Configuration.plain().background
+        style.baseForegroundColor = .systemGray
+        background.cornerRadius = 10.0
+        background.strokeWidth = 1.0
+        background.strokeColor = .systemGray
         style.background = background
         
         return style
