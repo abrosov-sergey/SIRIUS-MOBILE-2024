@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_sirius_map/src/features/project_map/presentation/db_cache_provider/db_cache_provider.dart';
 import 'package:flutter_sirius_map/src/features/project_map/presentation/widgets/background_map.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -38,7 +37,6 @@ class ProjectMap extends ConsumerWidget {
 
   @override
   Widget build(context, ref) {
-    final cacheState = ref.watch(dBCacheProvider);
     return FlutterMap(
       mapController: MapController(),
       options: MapOptions(
@@ -54,8 +52,7 @@ class ProjectMap extends ConsumerWidget {
       ),
       children: [
         // убрать карту когда будет готова картинка (????)
-        BackgroundMap(),
-
+        const BackgroundMap(),
         OverlayImageLayer(overlayImages: [
           OverlayImage(
               imageProvider: const AssetImage('assets/images/sirius_plan.png'),

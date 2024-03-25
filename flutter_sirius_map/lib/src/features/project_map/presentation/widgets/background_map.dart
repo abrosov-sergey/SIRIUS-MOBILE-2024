@@ -29,7 +29,7 @@ class BackgroundMap extends ConsumerWidget {
     if (!dbCache.hasValue) {
       return const GridPaper();
     }
-    
+
     final isLight = !ref.watch(themeProvider).isDarkTheme;
 
     return TileLayer(
@@ -39,11 +39,10 @@ class BackgroundMap extends ConsumerWidget {
       },
       userAgentPackageName: 'com.example.flutter_map_example',
       tileProvider: CachedTileProvider(
-        // maxStale keeps the tile cached for the given Duration and
-        // tries to revalidate the next time it gets requested
-        maxStale: const Duration(days: 30),
-        store: dbCache.value!
-      ),
+          // maxStale keeps the tile cached for the given Duration and
+          // tries to revalidate the next time it gets requested
+          maxStale: const Duration(days: 30),
+          store: dbCache.value!),
     );
   }
 }
