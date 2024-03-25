@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'DB_cache_provider.dart';
+part of 'db_cache_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator

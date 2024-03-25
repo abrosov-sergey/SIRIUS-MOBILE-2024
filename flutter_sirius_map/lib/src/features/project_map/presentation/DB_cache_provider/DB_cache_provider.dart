@@ -3,7 +3,7 @@ import 'package:flutter_sirius_map/src/features/project_map/data/map_cache_inter
 import 'package:flutter_sirius_map/src/features/project_map/data/map_cache_realisation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'DB_cache_provider.g.dart';
+part 'db_cache_provider.g.dart';
 
 final dBCacheProvider = dBCacheNotifierProvider(const MapCacheDB());
 

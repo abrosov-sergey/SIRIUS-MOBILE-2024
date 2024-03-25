@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_cache/flutter_map_cache.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_sirius_map/src/features/project_map/presentation/DB_cache_provider/DB_cache_provider.dart';
+import 'package:flutter_sirius_map/src/features/project_map/presentation/DB_cache_provider/db_cache_provider.dart';
 import 'package:latlong2/latlong.dart';
 
 class ProjectMap extends ConsumerWidget {
@@ -59,11 +59,10 @@ class ProjectMap extends ConsumerWidget {
             urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
             userAgentPackageName: 'com.example.flutter_map_example',
             tileProvider: CachedTileProvider(
-              // maxStale keeps the tile cached for the given Duration and
-              // tries to revalidate the next time it gets requested
-              maxStale: const Duration(days: 30),
-              store: cacheState.value!
-            ),
+                // maxStale keeps the tile cached for the given Duration and
+                // tries to revalidate the next time it gets requested
+                maxStale: const Duration(days: 30),
+                store: cacheState.value!),
           ),
 
         OverlayImageLayer(overlayImages: [
