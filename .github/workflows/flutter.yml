@@ -74,10 +74,10 @@ jobs:
           cd flutter_sirius_map
           flutter build appbundle --release
       - name: Create Github Release
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
           name: release-apk
-          path: ~/flutter_sirius_map/android/build/app/outputs/flutter-apk/app-release.apk
+          path: flutter_sirius_map/android/build/app/outputs/flutter-apk/app-release.apk
           
 
           
