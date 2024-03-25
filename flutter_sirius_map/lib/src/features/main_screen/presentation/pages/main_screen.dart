@@ -14,6 +14,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
+        alignment: Alignment.topRight,
         children: [
           const ProjectMap(),
           SafeArea(
@@ -35,11 +36,6 @@ class MainScreen extends StatelessWidget {
                         ref.read(localeProvider.notifier).changeLocale();
                       },
                     ),
-                    Text(
-                      context.localization.search,
-                      style: context.themeExtendTextStyles.headerStyle
-                          .copyWith(color: context.themeExtendColors.iconColor),
-                    )
                   ],
                 );
               },

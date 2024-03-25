@@ -31,20 +31,23 @@ class SettingButton extends StatelessWidget {
         ),
       );
     }
-    return InkWell(
-      borderRadius: BorderRadius.circular(30),
-      onTap: onTap,
-      child: Container(
-        width: 50.w,
-        height: 50.h,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          color: context.themeExtendColors.iconBackgroundColor,
-        ),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: body,
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 16.w),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(30),
+        onTap: onTap,
+        child: Container(
+          width: 50.w,
+          height: 50.h,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            color: context.themeExtendColors.iconBackgroundColor,
+          ),
+          child: Center(
+            child: Padding(
+              padding: EdgeInsets.all(8.h),
+              child: body,
+            ),
           ),
         ),
       ),
