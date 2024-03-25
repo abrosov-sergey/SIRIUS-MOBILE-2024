@@ -1,0 +1,69 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_sirius_map/src/features/menu/presentation/providers/scroll_controller_providrr.dart';
+import 'package:flutter_sirius_map/src/utils/context.dart';
+import 'package:flutter_sirius_map/src/utils/sliver_utils.dart';
+
+class MenuBottomSheet extends StatelessWidget {
+  const MenuBottomSheet({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return DraggableScrollableSheet(
+      builder: (context, scrollController) => ProviderScope(
+        overrides: [
+          scrollControllerProvider.overrideWith((ref) => scrollController)
+        ],
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
+            ),
+            color: context.themeExtendColors.primaryColor,
+          ),
+          child: Stack(
+            alignment: Alignment.topCenter,
+            children: [
+              CustomScrollView(
+                slivers: [
+                  SizedBox(
+                    height: 15.h,
+                  ).sliver,
+                ],
+                controller: scrollController,
+              ),
+              Column(
+                children: [
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Container(
+                    height: 5.h,
+                    width: 35.w,
+                    decoration: BoxDecoration(
+                      color: context.themeExtendColors.iconBackgroundColor,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+      initialChildSize: 0.15,
+      minChildSize: 0.15,
+      maxChildSize: 0.9,
+      shouldCloseOnMinExtent: false,
+      expand: false,
+      snap: true,
+      snapSizes: const [
+        0.15,
+        0.4,
+        0.9,
+      ],
+    );
+  }
+}

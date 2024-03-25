@@ -7,7 +7,7 @@ class AppColors {
   static const Color iconColorLight = Color(0xFF760CFE);
   static const Color iconColorDark = Color(0xFFA86CF3);
 
-  // блоки под поисковой стракой и фон маршрутной иконки
+  // блоки под поисковой строкой и фон маршрутной иконки
   static const Color secondaryColorLight = Color(0xFFFFFFFF);
   static const Color secondaryColorDark = Color(0xFF1E1E1E);
 
