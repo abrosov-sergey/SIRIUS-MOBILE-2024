@@ -74,11 +74,10 @@ jobs:
           cd flutter_sirius_map
           flutter build appbundle --release
       - name: Create Github Release
-        uses: ncipollo/release-action@v1
+        uses: actions/upload-artifact@v1
         with:
-          allowUpdates: true
-          artifactErrorsFailBuild: true
-          artifacts: "build/app/outputs/apk/release/*.apk,build/app/outputs/bundle/release/*.aab"
+          name: release-apk
+          path: android/build/app/outputs/flutter-apk/app-release.apk
           
 
           
