@@ -9,7 +9,7 @@ class PointsServise {
   PointsServise() {
     _loadGraph();
   }
-  
+
   Map<int, LatLng>? _pointsById;
 
   Future<Map<int, LatLng>> get _getPointsById async {
