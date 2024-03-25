@@ -22,6 +22,14 @@ class MenuBottomSheet extends StatelessWidget {
               topRight: Radius.circular(30),
             ),
             color: context.themeExtendColors.primaryColor,
+            boxShadow: [
+              BoxShadow(
+                color: context.themeExtendColors.shadowColor,
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: const Offset(0, 3),
+              ),
+            ],
           ),
           child: Stack(
             alignment: Alignment.topCenter,
