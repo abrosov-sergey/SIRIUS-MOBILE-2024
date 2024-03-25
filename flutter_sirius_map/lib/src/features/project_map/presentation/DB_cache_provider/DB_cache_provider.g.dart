@@ -6,7 +6,7 @@ part of 'DB_cache_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$dBCacheNotifierHash() => r'ca688146499d30f0e54e9736910a1d7e0e90c2be';
+String _$dBCacheNotifierHash() => r'295e0f4ade7c93919dcc9a8e9716685b2346ba2a';
 
 /// Copied from Dart SDK
 class _SystemHash {
