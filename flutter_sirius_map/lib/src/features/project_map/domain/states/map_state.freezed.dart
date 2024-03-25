@@ -16,7 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MapState {
-  String get cachePath => throw _privateConstructorUsedError;
   List<LatLng> get route => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -29,7 +28,7 @@ abstract class $MapStateCopyWith<$Res> {
   factory $MapStateCopyWith(MapState value, $Res Function(MapState) then) =
       _$MapStateCopyWithImpl<$Res, MapState>;
   @useResult
-  $Res call({String cachePath, List<LatLng> route});
+  $Res call({List<LatLng> route});
 }
 
 /// @nodoc
@@ -45,14 +44,9 @@ class _$MapStateCopyWithImpl<$Res, $Val extends MapState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cachePath = null,
     Object? route = null,
   }) {
     return _then(_value.copyWith(
-      cachePath: null == cachePath
-          ? _value.cachePath
-          : cachePath // ignore: cast_nullable_to_non_nullable
-              as String,
       route: null == route
           ? _value.route
           : route // ignore: cast_nullable_to_non_nullable
@@ -69,7 +63,7 @@ abstract class _$$MapStateImplCopyWith<$Res>
       __$$MapStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String cachePath, List<LatLng> route});
+  $Res call({List<LatLng> route});
 }
 
 /// @nodoc
@@ -83,14 +77,9 @@ class __$$MapStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cachePath = null,
     Object? route = null,
   }) {
     return _then(_$MapStateImpl(
-      cachePath: null == cachePath
-          ? _value.cachePath
-          : cachePath // ignore: cast_nullable_to_non_nullable
-              as String,
       route: null == route
           ? _value._route
           : route // ignore: cast_nullable_to_non_nullable
@@ -102,12 +91,8 @@ class __$$MapStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$MapStateImpl implements _MapState {
-  const _$MapStateImpl(
-      {required this.cachePath, required final List<LatLng> route})
-      : _route = route;
+  const _$MapStateImpl({required final List<LatLng> route}) : _route = route;
 
-  @override
-  final String cachePath;
   final List<LatLng> _route;
   @override
   List<LatLng> get route {
@@ -118,7 +103,7 @@ class _$MapStateImpl implements _MapState {
 
   @override
   String toString() {
-    return 'MapState(cachePath: $cachePath, route: $route)';
+    return 'MapState(route: $route)';
   }
 
   @override
@@ -126,14 +111,12 @@ class _$MapStateImpl implements _MapState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MapStateImpl &&
-            (identical(other.cachePath, cachePath) ||
-                other.cachePath == cachePath) &&
             const DeepCollectionEquality().equals(other._route, _route));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, cachePath, const DeepCollectionEquality().hash(_route));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_route));
 
   @JsonKey(ignore: true)
   @override
@@ -143,12 +126,8 @@ class _$MapStateImpl implements _MapState {
 }
 
 abstract class _MapState implements MapState {
-  const factory _MapState(
-      {required final String cachePath,
-      required final List<LatLng> route}) = _$MapStateImpl;
+  const factory _MapState({required final List<LatLng> route}) = _$MapStateImpl;
 
-  @override
-  String get cachePath;
   @override
   List<LatLng> get route;
   @override
