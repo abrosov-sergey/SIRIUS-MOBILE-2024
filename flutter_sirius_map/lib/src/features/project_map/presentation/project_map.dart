@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_cache/flutter_map_cache.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_sirius_map/src/features/project_map/presentation/DB_cache_provider/db_cache_provider.dart';
+import 'package:flutter_sirius_map/src/features/project_map/presentation/db_cache_provider/db_cache_provider.dart';
 import 'package:latlong2/latlong.dart';
 
 class ProjectMap extends ConsumerWidget {
