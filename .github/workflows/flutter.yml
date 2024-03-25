@@ -79,7 +79,7 @@ jobs:
           allowUpdates: true
           artifactErrorsFailBuild: true
           artifacts: "build/app/outputs/apk/release/*.apk,build/app/outputs/bundle/release/*.aab"
-          token: ${{ secrets.TOKEN }}
+          
 
           
   build-ios:
