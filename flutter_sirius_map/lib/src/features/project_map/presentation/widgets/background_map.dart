@@ -27,7 +27,7 @@ class BackgroundMap extends ConsumerWidget {
     final dbCache = ref.watch(dBCacheProvider);
 
     if (!dbCache.hasValue) {
-      return const GridPaper();
+      return const SizedBox();
     }
 
     final isLight = !ref.watch(themeProvider).isDarkTheme;
