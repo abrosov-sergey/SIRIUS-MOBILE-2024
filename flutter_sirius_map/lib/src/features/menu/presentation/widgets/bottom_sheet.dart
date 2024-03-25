@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sirius_map/src/features/menu/presentation/providers/scroll_controller_providrr.dart';
+import 'package:flutter_sirius_map/src/features/menu/presentation/widgets/build_route_button.dart';
 import 'package:flutter_sirius_map/src/utils/context.dart';
 import 'package:flutter_sirius_map/src/utils/sliver_utils.dart';
 
@@ -30,6 +31,13 @@ class MenuBottomSheet extends StatelessWidget {
                 slivers: [
                   SizedBox(
                     height: 15.h,
+                  ).sliver,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [BuildRouteButton()],
+                    ),
                   ).sliver,
                 ],
                 controller: scrollController,
