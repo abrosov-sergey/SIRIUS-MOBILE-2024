@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_map_cache/flutter_map_cache.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_sirius_map/src/features/project_map/presentation/db_cache_provider/db_cache_provider.dart';
+import 'package:flutter_sirius_map/src/features/project_map/presentation/widgets/background_map.dart';
 import 'package:latlong2/latlong.dart';
 
 class ProjectMap extends ConsumerWidget {
@@ -38,7 +37,6 @@ class ProjectMap extends ConsumerWidget {
 
   @override
   Widget build(context, ref) {
-    final cacheState = ref.watch(dBCacheProvider);
     return FlutterMap(
       mapController: MapController(),
       options: MapOptions(
@@ -53,18 +51,8 @@ class ProjectMap extends ConsumerWidget {
         },
       ),
       children: [
-        // убрать карту когда будет готова картинка
-        if (cacheState.hasValue)
-          TileLayer(
-            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-            userAgentPackageName: 'com.example.flutter_map_example',
-            tileProvider: CachedTileProvider(
-                // maxStale keeps the tile cached for the given Duration and
-                // tries to revalidate the next time it gets requested
-                maxStale: const Duration(days: 30),
-                store: cacheState.value!),
-          ),
-
+        // убрать карту когда будет готова картинка (????)
+        const BackgroundMap(),
         OverlayImageLayer(overlayImages: [
           OverlayImage(
               imageProvider: const AssetImage('assets/images/sirius_plan.png'),
@@ -72,7 +60,7 @@ class ProjectMap extends ConsumerWidget {
                   const LatLng(43.41601767565109, 39.953505467745707),
                   const LatLng(43.412678630221023, 39.949135833185039)))
         ]),
-
+        // отрисовка маршрута
         PolylineLayer(
           polylines: [
             Polyline(
