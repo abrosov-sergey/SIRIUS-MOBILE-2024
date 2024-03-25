@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sirius_map/src/features/project_map/presentation/db_cache_provider/db_cache_provider.dart';
+import 'package:flutter_sirius_map/src/features/project_map/presentation/widgets/background_map.dart';
 import 'package:latlong2/latlong.dart';
 
 class ProjectMap extends ConsumerWidget {
@@ -53,8 +54,7 @@ class ProjectMap extends ConsumerWidget {
       ),
       children: [
         // убрать карту когда будет готова картинка (????)
-        if (mapState.hasValue)
-          BackgroundMap(cachePath: mapState.value!.cachePath),
+        BackgroundMap(),
         // отрисовка маршрута
         PolylineLayer(
           polylines: [
