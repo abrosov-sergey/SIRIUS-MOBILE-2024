@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'package:dijkstra/dijkstra.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_sirius_map/src/app/domain/place_point.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -107,6 +108,9 @@ class PointsServise {
     try {
       route = Dijkstra.findPathFromGraph(graph, start, finish) as List<int>;
     } catch (e) {
+      if (kDebugMode) {
+        print('error while dijkstra: $e');
+      }
       return [];
     }
 
