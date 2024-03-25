@@ -3,16 +3,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sirius_map/src/utils/context.dart';
 
 class SettingButton extends StatelessWidget {
-  const SettingButton({
+  const SettingButton.icon({
     super.key,
-    this.iconData,
+    required this.iconData,
     required this.onTap,
-    this.text,
-  });
+  }) : text = null;
+
+  const SettingButton.text({
+    super.key,
+    required this.text,
+    required this.onTap,
+  }) : iconData = null;
+
   final IconData? iconData;
   final VoidCallback onTap;
   final String? text;
-
   @override
   Widget build(BuildContext context) {
     Widget body = const SizedBox();
@@ -40,6 +45,14 @@ class SettingButton extends StatelessWidget {
           width: 50.w,
           height: 50.h,
           decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: context.themeExtendColors.shadowColor,
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: const Offset(0, 3),
+              ),
+            ],
             borderRadius: BorderRadius.circular(30),
             color: context.themeExtendColors.iconBackgroundColor,
           ),

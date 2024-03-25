@@ -23,14 +23,14 @@ class MainScreen extends StatelessWidget {
                 final isDarkTheme = ref.watch(themeProvider).isDarkTheme;
                 return Column(
                   children: [
-                    SettingButton(
+                    SettingButton.icon(
                       iconData:
                           isDarkTheme ? Icons.dark_mode : Icons.light_mode,
                       onTap: () {
                         ref.read(themeProvider.notifier).changeTheme();
                       },
                     ),
-                    SettingButton(
+                    SettingButton.text(
                       text: context.localization.language,
                       onTap: () {
                         ref.read(localeProvider.notifier).changeLocale();
