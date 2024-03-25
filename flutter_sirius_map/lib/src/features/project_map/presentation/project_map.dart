@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_cache/flutter_map_cache.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_sirius_map/src/features/project_map/data/map_cache_realisation.dart';
 import 'package:flutter_sirius_map/src/features/project_map/domain/providers/map_provider.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:dio_cache_interceptor_db_store/dio_cache_interceptor_db_store.dart';
@@ -40,7 +39,7 @@ class ProjectMap extends ConsumerWidget {
 
   @override
   Widget build(context, ref) {
-    final mapState = ref.watch(mapNotifierProvider.call(const MapCacheDB()));
+    final mapState = ref.watch(mapNotifierProviderDB);
     return FlutterMap(
       mapController: MapController(),
       options: MapOptions(
