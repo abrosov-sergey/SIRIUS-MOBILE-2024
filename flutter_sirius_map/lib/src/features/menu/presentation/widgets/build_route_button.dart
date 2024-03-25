@@ -25,7 +25,7 @@ class _BuildRouteButtonState extends State<BuildRouteButton> {
           opacity = 0.3;
         });
       },
-      onTapCancel: () {
+      onTapCancel: (){
         setState(() {
           opacity = 0.3;
         });
