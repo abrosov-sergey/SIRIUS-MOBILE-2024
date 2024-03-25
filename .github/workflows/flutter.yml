@@ -101,4 +101,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: release-apk
-          path: flutter_sirius_map/android/build/app/outputs/flutter-apk/app-release.apk
+          path: SIRIUS-MOBILE-2024/flutter_sirius_map/android/build/app/outputs/flutter-apk/app-release.apk
