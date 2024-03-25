@@ -6,7 +6,7 @@ final appProvider = StateNotifierProvider.autoDispose<AppProvider, AppState>(
 );
 
 class AppProvider extends StateNotifier<AppState> {
-  AppProvider() : super(BaseAppState());
+  AppProvider() : super(const BaseAppState());
 
   void changeAppGlobalState(AppState appState) {
     state = appState;
