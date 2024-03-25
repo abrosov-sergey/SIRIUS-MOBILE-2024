@@ -59,15 +59,13 @@ class _ProjectMapState extends State<ProjectMap> {
           userAgentPackageName: 'com.example.flutter_map_example',
         ),
 
-        OverlayImageLayer(
-            overlayImages:[
-              OverlayImage(
-                  imageProvider: const AssetImage('assets/images/sirius_plan.png'),
-                  bounds: LatLngBounds(
-                      const LatLng(43.41601767565109, 39.953505467745707),
-                      const LatLng(43.412678630221023, 39.949135833185039)
-                  ))
-            ]),
+        OverlayImageLayer(overlayImages: [
+          OverlayImage(
+              imageProvider: const AssetImage('assets/images/sirius_plan.png'),
+              bounds: LatLngBounds(
+                  const LatLng(43.41601767565109, 39.953505467745707),
+                  const LatLng(43.412678630221023, 39.949135833185039)))
+        ]),
 
         PolylineLayer(
           polylines: [
