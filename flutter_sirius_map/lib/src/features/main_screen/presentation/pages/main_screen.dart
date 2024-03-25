@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_sirius_map/src/features/menu/presentation/widgets/bottom_sheet.dart';
 import 'package:flutter_sirius_map/src/features/project_map/presentation/project_map.dart';
 import 'package:flutter_sirius_map/src/features/settings/presentation/providers/locale_provider.dart';
 import 'package:flutter_sirius_map/src/features/settings/presentation/providers/theme_provider.dart';
@@ -47,21 +47,7 @@ class MainScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomSheet: _bottomSheet,
+      bottomSheet: const MenuBottomSheet(),
     );
   }
-
-  get _bottomSheet => BottomSheet(
-        builder: (_) => ColoredBox(
-          color: Colors.purpleAccent,
-          child: SizedBox(
-            height: 100.h,
-            width: 100.w,
-          ),
-        ),
-        onClosing: () {
-          // ignore: avoid_print
-          print('BOOBA');
-        },
-      );
 }
