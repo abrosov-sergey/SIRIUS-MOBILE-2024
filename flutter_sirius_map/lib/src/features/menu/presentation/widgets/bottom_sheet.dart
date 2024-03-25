@@ -23,29 +23,33 @@ class MenuBottomSheet extends StatelessWidget {
             ),
             color: context.themeExtendColors.primaryColor,
           ),
-          child: Padding(
-            padding: EdgeInsets.all(16.h),
-            child: Stack(
-              alignment: Alignment.topCenter,
-              children: [
-                CustomScrollView(
-                  slivers: [
-                    SizedBox(
-                      height: 15.h,
-                    ).sliver,
-                  ],
-                  controller: scrollController,
-                ),
-                Container(
-                  height: 5.h,
-                  width: 35.w,
-                  decoration: BoxDecoration(
-                    color: context.themeExtendColors.iconBackgroundColor,
-                    borderRadius: BorderRadius.circular(16),
+          child: Stack(
+            alignment: Alignment.topCenter,
+            children: [
+              CustomScrollView(
+                slivers: [
+                  SizedBox(
+                    height: 15.h,
+                  ).sliver,
+                ],
+                controller: scrollController,
+              ),
+              Column(
+                children: [
+                  SizedBox(
+                    height: 10.h,
                   ),
-                ),
-              ],
-            ),
+                  Container(
+                    height: 5.h,
+                    width: 35.w,
+                    decoration: BoxDecoration(
+                      color: context.themeExtendColors.iconBackgroundColor,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
