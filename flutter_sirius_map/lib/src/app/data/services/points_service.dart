@@ -10,13 +10,15 @@ import 'package:latlong2/latlong.dart';
 final pointsServiceProvider = Provider<PointsService>((_) => PointsService());
 
 class PointsService {
+  // при создании подгружаем сразу все
   PointsService() {
     _loadGraph();
   }
 
+  /// точки, храним оптимизированно для обращения по индексу
   Map<int, LatLng>? _pointsById;
 
-  // Получение точек с подгрузкой, если не обходимо
+  /// Получение точек с подгрузкой, если не обходимо
   Future<Map<int, LatLng>> get _getPointsById async {
     if (_pointsById == null) {
       await _loadPoints();
@@ -24,6 +26,7 @@ class PointsService {
     return _pointsById!;
   }
 
+  /// подгрузка и декодинг координат точек
   static const _pointsPath =
       r'flutter_sirius_map\assets\points\positions.geojson';
   Future<void> _loadPoints() async {
@@ -42,6 +45,7 @@ class PointsService {
     }
   }
 
+  /// получение точки по ее id, если не нашлась - null
   Future<PlacePoint?> getById(int id) async {
     final points = await _getPointsById;
     if (points.containsKey(id)) {
@@ -50,12 +54,14 @@ class PointsService {
     return null;
   }
 
+  /// расстояние между точками
   double _dist(LatLng l1, LatLng l2) {
     return sqrt(pow(l1.latitude - l2.latitude, 2) +
         pow(l1.longitude - l2.longitude, 2));
   }
 
-  //если отсутсвуют какие-либо точки, выкинет ошибку
+  /// возвращает ближайшую к данным координатам точку
+  /// если отсутсвуют какие-либо точки, выкинет ошибку
   Future<PlacePoint> getClosest(LatLng ll) async {
     final points = await _getPointsById;
 
@@ -74,7 +80,7 @@ class PointsService {
 
   Map<int, Map<int, double>>? _graph;
 
-  // Получение графа с подгрузкой, если не обходимо
+  /// Получение графа с подгрузкой, если не обходимо
   Future<Map<int, Map<int, double>>> get _getGraph async {
     if (_graph == null) {
       await _loadGraph();
@@ -82,6 +88,7 @@ class PointsService {
     return _graph!;
   }
 
+  /// подгрузка графа + подсчет длины ребер
   final String _graphPath = r'flutter_sirius_map\assets\points\Graph.txt';
   Future<void> _loadGraph() async {
     // для графа сразу нужны расстояния между точками
@@ -110,6 +117,7 @@ class PointsService {
     }
   }
 
+  /// получение маршрута с помощью дейкстры
   Future<List<PlacePoint>> getRoute(PlacePoint start, PlacePoint finish) async {
     final graph = await _getGraph;
     final points = await _getPointsById;
