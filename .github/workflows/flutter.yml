@@ -65,6 +65,15 @@ jobs:
         run: |
           cd flutter_sirius_map
           flutter build apk
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      - name: "Upload apk artifacts"
+        uses: actions/upload-artifact@v2
+        with:
+          name: release-apk
+          path: flutter_sirius_map/build/app/outputs/flutter-apk/app-release.apk
+
   build-ios:
     runs-on: macos-latest
     timeout-minutes: 15
@@ -86,4 +95,5 @@ jobs:
           pod install
           cd ..
           flutter build ios --no-codesign
-    
+
+      
