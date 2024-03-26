@@ -27,13 +27,16 @@ class SerchField extends ConsumerWidget{
                 onChanged: (String value){
                   pointName = value;
                 },
-                placeholder: "Search",
+                placeholder: context.localization.search,
                 placeholderStyle: GoogleFonts.andadaPro(
                   textStyle: TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 17.sp,
                     color: context.themeExtendColors.searchFieldFillerColor,
                   )
+                ),
+                style: TextStyle(
+                  color: context.themeExtendColors.searchFieldFillerColor,
                 ),
                 prefix: Padding(
                   padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
