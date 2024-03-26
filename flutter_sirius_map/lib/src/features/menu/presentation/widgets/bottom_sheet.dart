@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sirius_map/src/features/menu/presentation/providers/scroll_controller_providrr.dart';
+import 'package:flutter_sirius_map/src/features/search_field/presentation/search_field.dart';
 import 'package:flutter_sirius_map/src/utils/context.dart';
 import 'package:flutter_sirius_map/src/utils/sliver_utils.dart';
 
@@ -47,6 +48,10 @@ class MenuBottomSheet extends StatelessWidget {
                       borderRadius: BorderRadius.circular(16),
                     ),
                   ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  SerchField(),
                 ],
               ),
             ],

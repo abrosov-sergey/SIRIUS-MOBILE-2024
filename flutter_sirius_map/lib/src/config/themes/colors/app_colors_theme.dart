@@ -38,4 +38,23 @@ class $_AppColorsTheme {
     Colors.grey.withOpacity(0.5),
     Colors.white10.withOpacity(0.5)
   ];
+
+  static List<Color> searchFieldColor = [
+    getColorFromHex('#E9E9E9'),
+    getColorFromHex('#4A4A4A')
+  ];
+  
+  static List<Color> searchFieldFillerColor = [
+    getColorFromHex("#6C6C6C"),
+    getColorFromHex("#F1F1F1")
+  ];
+
+}
+
+Color getColorFromHex(String hexColor) {
+  var hex = hexColor.replaceAll('#', '');
+  if (hex.length == 6) {
+    hex = 'FF$hex';
+  }
+  return Color(int.parse(hex, radix: 16));
 }
