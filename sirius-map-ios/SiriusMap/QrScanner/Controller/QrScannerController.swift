@@ -51,7 +51,7 @@ final class QrScannerController: UIViewController {
         if (captureSession.canAddInput(videoInput)) {
             captureSession.addInput(videoInput)
         } else {
-//            failed()
+            failed()
             return
         }
         
@@ -63,7 +63,7 @@ final class QrScannerController: UIViewController {
             metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             metadataOutput.metadataObjectTypes = [.qr]
         } else {
-//            failed()
+            failed()
             return
         }
         
