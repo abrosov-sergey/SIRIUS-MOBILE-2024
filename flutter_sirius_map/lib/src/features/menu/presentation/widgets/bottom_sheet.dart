@@ -43,10 +43,6 @@ class MenuBottomSheet extends StatelessWidget {
                   ).sliver,
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [BuildRouteButton()],
-                    ),
                   ).sliver,
                 ],
                 controller: scrollController,
@@ -65,13 +61,9 @@ class MenuBottomSheet extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 10.h,),
-                  Row(
-                    children: [
-                      SerchField(),
-                      BuildRouteButton()
-                    ],
+                    height: 10.h,
                   ),
+                  SearchField(),
                 ],
               ),
             ],

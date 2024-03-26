@@ -2,13 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_sirius_map/src/features/menu/presentation/widgets/build_route_button.dart';
 import 'package:flutter_sirius_map/src/utils/context.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SerchField extends ConsumerWidget{
+class SearchField extends ConsumerWidget{
 
   String? pointName;
-  SerchField();
+  SearchField();
   TextEditingController _controller1 = TextEditingController();
 
   @override
@@ -49,6 +50,10 @@ class SerchField extends ConsumerWidget{
                 ),
               ),
             ),
+            SizedBox(
+              width: 10.w,
+            ),
+            BuildRouteButton(),
           ],
         )),
     );
