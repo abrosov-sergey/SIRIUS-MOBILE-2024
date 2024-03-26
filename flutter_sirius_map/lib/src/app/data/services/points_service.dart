@@ -7,10 +7,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sirius_map/src/app/domain/place_point.dart';
 import 'package:latlong2/latlong.dart';
 
-final pointsServiseProvider = Provider<PointsServise>((_) => PointsServise());
+final pointsServiceProvider = Provider<PointsService>((_) => PointsService());
 
-class PointsServise {
-  PointsServise() {
+class PointsService {
+  PointsService() {
     _loadGraph();
   }
 
