@@ -7,6 +7,6 @@ class PlacePoint {
   const PlacePoint({
     required this.id,
     required this.pos,
-    required this.name
+    this.name
   });
 }
