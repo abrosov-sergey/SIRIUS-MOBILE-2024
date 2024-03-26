@@ -4,6 +4,10 @@ sealed class AppState {
   const AppState();
 }
 
+class InitAppState extends AppState {
+  const InitAppState();
+}
+
 class BaseAppState extends AppState {
   const BaseAppState();
 }

@@ -8,7 +8,8 @@ part 'map_provider.g.dart';
 class MapNotifier extends _$MapNotifier {
   @override
   List<LatLng> build() {
-    ref.watch(appProvider);
+    // ignore: unused_local_variable
+    final appState = ref.watch(appStateNotifierProvider);
     return [];
   }
 }
