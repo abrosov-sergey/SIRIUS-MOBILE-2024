@@ -4,13 +4,13 @@ import 'package:flutter_sirius_map/src/app/data/services/points_service.dart';
 import 'package:flutter_sirius_map/src/app/domain/place_point.dart';
 import 'package:latlong2/latlong.dart';
 
-final routeImplementationProvider =
-    Provider((_) => RouteImplementation(pointsService: pointsServiceProvider));
+final routeRepositoryProvider =
+    Provider((_) => RouteRepositoryImpl(pointsService: pointsServiceProvider));
 
-class RouteImplementation implements RouteRepository {
+class RouteRepositoryImpl implements RouteRepository {
   final PointsService _pointsService;
 
-  RouteImplementation({required pointsService})
+  const RouteRepositoryImpl({required pointsService})
       : _pointsService = pointsService;
 
   @override
