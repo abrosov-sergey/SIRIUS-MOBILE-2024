@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_sirius_map/src/features/project_map/domain/providers/map_provider.dart';
 import 'package:flutter_sirius_map/src/features/project_map/presentation/widgets/background_map.dart';
 import 'package:latlong2/latlong.dart';
 
 class ProjectMap extends ConsumerWidget {
   const ProjectMap({super.key});
 
+  // ignore: unused_element
   get _marshrut => const [
         LatLng(43.41482521465457, 39.951312004328557),
         LatLng(43.414671691690607, 39.951024080506684),
@@ -37,6 +39,9 @@ class ProjectMap extends ConsumerWidget {
 
   @override
   Widget build(context, ref) {
+    final mapNotifier = ref.watch(mapNotifierProvider.notifier);
+    final route = ref.watch(mapNotifierProvider);
+
     return FlutterMap(
       mapController: MapController(),
       options: MapOptions(
@@ -46,8 +51,7 @@ class ProjectMap extends ConsumerWidget {
         initialCenter: _center,
         initialZoom: 17,
         onTap: (TapPosition tapPosition, LatLng point) {
-          // ignore: avoid_print
-          print("${tapPosition.toString()}   -   ${point.toString()}");
+          mapNotifier.onMapTap(point);
         },
       ),
       children: [
@@ -64,7 +68,7 @@ class ProjectMap extends ConsumerWidget {
         PolylineLayer(
           polylines: [
             Polyline(
-              points: _marshrut,
+              points: route,
               gradientColors: [Colors.blue, Colors.purple, Colors.pink],
               strokeWidth: 10,
             ),

@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:flutter/services.dart';
 import 'package:flutter_sirius_map/src/app/data/services/dist.dart';
 import 'package:flutter_sirius_map/src/app/data/services/loaders/points_loader.dart';
 
@@ -11,16 +10,17 @@ class GraphLoader {
   late Map<int, Map<int, double>> graph;
 
   /// подгрузка графа + подсчет длины ребер
-  final String _graphPath = r'flutter_sirius_map\assets\points\Graph.txt';
+  final String _graphPath = 'assets/points/graph.txt';
   Future<void> init() async {
     // для графа сразу нужны расстояния между точками
     final points = pointsLoader.pointsById;
 
-    List<String> lines = await File(_graphPath).readAsLines();
+    List<String> lines =
+        (await rootBundle.loadString(_graphPath)).split('\n').toList();
 
     graph = <int, Map<int, double>>{};
     for (var line in lines) {
-      final lineParsed = line.split(' :').map((e) => int.parse(e)).toList();
+      final lineParsed = line.split(RegExp(':? ')).map((e) => int.parse(e)).toList();
       final v = lineParsed[0];
       for (int i = 1; i < lineParsed.length; i++) {
         final u = lineParsed[i];

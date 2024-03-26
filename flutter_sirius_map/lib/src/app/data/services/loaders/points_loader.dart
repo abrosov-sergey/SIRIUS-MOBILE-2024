@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
+import 'package:flutter/services.dart';
 import 'package:latlong2/latlong.dart';
 
 class PointsLoader {
@@ -10,9 +10,9 @@ class PointsLoader {
 
   /// подгрузка и декодинг координат точек
   static const _pointsPath =
-      r'flutter_sirius_map\assets\points\positions.geojson';
+      'assets/points/positions.geojson';
   Future<void> init() async {
-    final json = await File(_pointsPath).readAsString();
+    final json = await rootBundle.loadString(_pointsPath);
     final info = jsonDecode(json)['features'];
 
     pointsById = <int, LatLng>{};
