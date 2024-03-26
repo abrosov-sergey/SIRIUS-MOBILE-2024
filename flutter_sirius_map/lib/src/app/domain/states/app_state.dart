@@ -4,6 +4,10 @@ sealed class AppState {
   const AppState();
 }
 
+class InitAppState extends AppState {
+  const InitAppState();
+}
+
 class BaseAppState extends AppState {
   const BaseAppState();
 }
@@ -34,7 +38,7 @@ sealed class RouteBuilderAppState extends AppState {
 class RouteBuilderLoading extends RouteBuilderAppState {}
 
 class RouteBuilderError extends RouteBuilderAppState {
-  final String? error;
+  final Object? error;
   final StackTrace? stackTrace;
   const RouteBuilderError({this.error, this.stackTrace});
 }
