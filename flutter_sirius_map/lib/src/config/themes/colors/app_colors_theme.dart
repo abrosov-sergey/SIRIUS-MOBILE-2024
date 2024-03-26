@@ -35,7 +35,7 @@ class $_AppColorsTheme {
     AppColors.accentColorDark,
   ];
   static List<Color> shadowColor = [
-    Colors.grey.withOpacity(0.5),
-    Colors.white10.withOpacity(0.5)
+    Colors.grey.withOpacity(0.3),
+    Colors.black.withOpacity(0.3)
   ];
 }

@@ -50,6 +50,16 @@ final class SearchTableViewController: UITableViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: .reuseIdentifier)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let sheet = sheetPresentationController {
+            sheet.detents = [.large()]
+            sheet.animateChanges {
+                sheet.selectedDetentIdentifier = sheet.selectedDetentIdentifier ?? .medium
+            }
+        }
+    }
+    
     // MARK: - Methods
     
     func updateTable(for searchString: String) {

@@ -8,10 +8,22 @@
 import MapKit
 import UIKit
 
+protocol MapViewControlelrDelegate: AnyObject {
+    func onSearchButtonClicked()
+}
+
 final class MapViewController: UIViewController {
     
     private lazy var mapView = MapView()
-
+    
+    private lazy var searchButton: UIButton = {
+        let button = ButtonWithIcon(type: .search)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    weak var delegate: MapViewControlelrDelegate?
+    
     // MARK: - Life Cycle
     
     override func loadView() {
@@ -22,6 +34,7 @@ final class MapViewController: UIViewController {
         super.viewDidLoad()
         addOverlays()
         mapView.map.delegate = self
+        setupButtons()
     }
     
     // MARK: - Methods
@@ -47,6 +60,19 @@ final class MapViewController: UIViewController {
             let unitOverlays = level.units.compactMap { $0.overlay }
             mapView.map.addOverlays(unitOverlays)
         }
+    }
+    
+    private func setupButtons() {
+        searchButton.addTarget(self, action: #selector(onSearchButtonClicked), for: .touchUpInside)
+        view.addSubview(searchButton)
+        NSLayoutConstraint.activate([
+            searchButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -24.0),
+            searchButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -18.0)
+        ])
+    }
+    
+    @objc private func onSearchButtonClicked() {
+        delegate?.onSearchButtonClicked()
     }
 }
 
