@@ -9,6 +9,7 @@ class SerchField extends ConsumerWidget{
 
   String? pointName;
   SerchField();
+  TextEditingController _controller1 = TextEditingController();
 
   @override
   Widget build(context, ref){
@@ -24,6 +25,7 @@ class SerchField extends ConsumerWidget{
                   color: context.themeExtendColors.searchFieldColor,
                   borderRadius: BorderRadius.circular((10)),
                 ),
+                controller: _controller1,
                 onChanged: (String value){
                   pointName = value;
                 },
