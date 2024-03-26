@@ -7,7 +7,14 @@
 
 import UIKit
 
+protocol MapItemDetailDelegate: AnyObject {
+    func onHereButtonTouched()
+    func onFromHereButtonTouched()
+}
+
 final class MapItemDetailViewController: UIViewController {
+    
+    weak var delegate: MapItemDetailDelegate?
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
@@ -55,18 +62,30 @@ final class MapItemDetailViewController: UIViewController {
         setup()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let sheet = sheetPresentationController {
+            let fraction = UISheetPresentationController.Detent.custom { _ in 130 }
+            sheet.detents = [fraction]
+            
+            sheet.animateChanges {
+                sheet.selectedDetentIdentifier = sheet.selectedDetentIdentifier ?? .medium
+            }
+        }
+    }
+    
     private func setup() {
         view.addSubview(nameLabel)
         view.addSubview(descriptionLabel)
         
         fromHereButton.addTarget(
             self,
-            action: #selector(onFromHereButtonClicked),
+            action: #selector(onFromHereButtonTouched),
             for: .touchUpInside
         )
         hereButton.addTarget(
             self,
-            action: #selector(onHereButtonClicked),
+            action: #selector(onHereButtonTouched),
             for: .touchUpInside
         )
         
@@ -102,11 +121,11 @@ final class MapItemDetailViewController: UIViewController {
     }
     
     
-    @objc func onFromHereButtonClicked() {
-        
+    @objc func onFromHereButtonTouched() {
+        delegate?.onFromHereButtonTouched()
     }
     
-    @objc func onHereButtonClicked() {
-        
+    @objc func onHereButtonTouched() {
+        delegate?.onHereButtonTouched()
     }
 }
