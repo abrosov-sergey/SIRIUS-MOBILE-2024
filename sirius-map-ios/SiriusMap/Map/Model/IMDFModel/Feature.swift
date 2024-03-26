@@ -7,7 +7,7 @@
 
 import MapKit
 
-class Feature: IMDFDecodable {
+class Feature: NSObject, IMDFDecodable {
     let identifier: UUID
     let geometry: [MKShape & MKGeoJSONObject]
     

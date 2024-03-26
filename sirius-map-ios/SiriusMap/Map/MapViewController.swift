@@ -58,7 +58,77 @@ final class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupMap()
+        
+        addOverlays()
+        
+        mapView.map.delegate = self
         setupButtons()
+        
+        mapView.map.addAnnotation(routeEnd)
+        navigationItem.rightBarButtonItem = buildRouteButton
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupAnnotations()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    private func setupAnnotations() {
+        mapView.map.pointOfInterestFilter = .excludingAll
+
+        for annotation in mapView.map.annotations {
+            mapView.map.view(for: annotation)?.alpha = 0
+        }
+    }
+    
+    @objc
+    private func clearRoute() {
+        for annotation in mapView.map.annotations {
+            if annotation is RouteEndAnnotation {
+                mapView.map.view(for: annotation)?.setSelected(false, animated: true)
+                UIView.animate(withDuration: 0.5) {
+                    self.mapView.map.view(for: annotation)?.alpha = 0
+                }
+                
+            }
+        }
+        route.locations = []
+        mapView.map.removeOverlay(route)
+        
+        //mapView.map.removeAnnotation
+        navigationItem.rightBarButtonItem = buildRouteButton
+    }
+    
+    @objc
+    private func buildRoute() {
+        
+        mapView.map.view(for: routeEnd)?.setSelected(true, animated: true)
+        
+        
+        for annotation in mapView.map.annotations {
+            if annotation is RouteEndAnnotation {
+                mapView.map.view(for: annotation)?.alpha = 1
+                mapView.map.view(for: annotation)?.setSelected(true, animated: true)
+            }
+        }
+        route.locations = [
+            CLLocation(latitude: 43.414390231912478, longitude: 39.950388503984989),
+            CLLocation(latitude: 43.414417909921923, longitude: 39.95070036288903),
+            CLLocation(latitude: 43.414609511933413, longitude: 39.950707851600782),
+            CLLocation(latitude: 43.414590480110249, longitude: 39.951024080506684),
+            CLLocation(latitude: 43.414930900526763, longitude: 39.951275248095982),
+        ]
+       
+        navigationItem.rightBarButtonItem = cancelButton
+
+        // Route overlay
+        mapView.map.addOverlay(route, level: .aboveRoads)
+        //route.locations.removeLast()
+        //routeRenderer.setNeedsDisplay()
     }
     
     // MARK: - Methods
@@ -83,7 +153,13 @@ final class MapViewController: UIViewController {
             
             let unitOverlays = level.units.compactMap { $0.overlay }
             mapView.map.addOverlays(unitOverlays)
+            
+            let openingOverlays = level.openings.compactMap { $0.overlay }
+            mapView.map.addOverlays(openingOverlays)
+            
+            mapView.map.addAnnotations(level.units)
         }
+        
     }
     
     private func setupMap() {
@@ -135,12 +211,33 @@ extension Feature {
 
 // MARK: - MKMapViewDelegate
 
+
+
 extension MapViewController: MKMapViewDelegate {
+    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        let renderer = MKPolygonRenderer(overlay: overlay)
-        renderer.strokeColor = UIColor(named: "LevelStroke")
-        renderer.lineWidth = 2.0
-        return renderer
+        
+        
+        switch overlay {
+        case is Route:
+            return routeRenderer
+        case is MKPolyline:
+            let renderer = MKPolylineRenderer(overlay: overlay)
+            renderer.strokeColor = UIColor(named: "WalkwayFill")
+            renderer.lineWidth = 4.0
+            return renderer
+        case is MKPolygon:
+            let renderer = MKPolygonRenderer(overlay: overlay)
+            renderer.strokeColor = UIColor(named: "LevelStroke")
+            renderer.lineWidth = 2.0
+            return renderer
+        default:
+            fatalError()
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
     }
 }
 
