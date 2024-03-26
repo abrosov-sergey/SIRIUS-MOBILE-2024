@@ -1,7 +1,11 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sirius_map/src/app/data/repositories/route_repository.dart';
 import 'package:flutter_sirius_map/src/app/data/servises/points_servise.dart';
 import 'package:flutter_sirius_map/src/app/domain/place_point.dart';
 import 'package:latlong2/latlong.dart';
+
+final routeImplementationProvider =
+    Provider((_) => RouteImplementation(pointsServise: pointsServiseProvider));
 
 class RouteImplementation implements RouteRepository {
   final PointsServise _pointsServise;
