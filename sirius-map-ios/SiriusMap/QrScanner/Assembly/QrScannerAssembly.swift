@@ -31,7 +31,7 @@ final class QrScannerAssembly {
     
     // MARK: - Configure dependencies
     
-    private func configureDependencies() {
+    func configureDependencies() {
         controller?.mainView = view
         controller?.model = model
         
