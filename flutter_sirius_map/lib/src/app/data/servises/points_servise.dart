@@ -16,6 +16,7 @@ class PointsServise {
 
   Map<int, LatLng>? _pointsById;
 
+  // Получение точек с подгрузкой, если не обходимо
   Future<Map<int, LatLng>> get _getPointsById async {
     if (_pointsById == null) {
       await _loadPoints();
@@ -23,9 +24,9 @@ class PointsServise {
     return _pointsById!;
   }
 
-  static const _path = 'flutter_sirius_map\\assets\\points\\positions.geojson';
+  static const _pointsPath = 'flutter_sirius_map\\assets\\points\\positions.geojson';
   Future<void> _loadPoints() async {
-    final json = (await File(_path).readAsString());
+    final json = await File(_pointsPath).readAsString();
     final info = jsonDecode(json)['features'];
 
     _pointsById = <int, LatLng>{};
@@ -69,10 +70,10 @@ class PointsServise {
     return ans;
   }
 
-  final String _graphPath = 'flutter_sirius_map\\assets\\points\\Graph.txt';
 
   Map<int, Map<int, double>>? _graph;
 
+  // Получение графа с подгрузкой, если не обходимо
   Future<Map<int, Map<int, double>>> get _getGraph async {
     if (_graph == null) {
       await _loadGraph();
@@ -80,10 +81,13 @@ class PointsServise {
     return _graph!;
   }
 
+  final String _graphPath = 'flutter_sirius_map\\assets\\points\\Graph.txt';
   Future<void> _loadGraph() async {
+    // для графа сразу нужны расстояния между точками
     final points = await _getPointsById;
 
     List<String> lines = await File(_graphPath).readAsLines();
+
     _graph = <int, Map<int, double>>{};
     for (var line in lines) {
       final lineParsed = line.split(' :').map((e) => int.parse(e)).toList();
@@ -93,7 +97,9 @@ class PointsServise {
         if (points[v] == null || points[u] == null) {
           continue;
         }
+
         final dist = _dist(points[v]!, points[u]!);
+        
         _graph![v] ??= <int, double>{};
         _graph![v]![u] = dist;
 
