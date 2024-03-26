@@ -24,7 +24,8 @@ class PointsServise {
     return _pointsById!;
   }
 
-  static const _pointsPath = 'flutter_sirius_map\\assets\\points\\positions.geojson';
+  static const _pointsPath =
+      'flutter_sirius_map\\assets\\points\\positions.geojson';
   Future<void> _loadPoints() async {
     final json = await File(_pointsPath).readAsString();
     final info = jsonDecode(json)['features'];
@@ -70,7 +71,6 @@ class PointsServise {
     return ans;
   }
 
-
   Map<int, Map<int, double>>? _graph;
 
   // Получение графа с подгрузкой, если не обходимо
@@ -99,7 +99,7 @@ class PointsServise {
         }
 
         final dist = _dist(points[v]!, points[u]!);
-        
+
         _graph![v] ??= <int, double>{};
         _graph![v]![u] = dist;
 
