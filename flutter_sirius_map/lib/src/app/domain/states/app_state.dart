@@ -38,7 +38,7 @@ sealed class RouteBuilderAppState extends AppState {
 class RouteBuilderLoading extends RouteBuilderAppState {}
 
 class RouteBuilderError extends RouteBuilderAppState {
-  final String? error;
+  final Object? error;
   final StackTrace? stackTrace;
   const RouteBuilderError({this.error, this.stackTrace});
 }
