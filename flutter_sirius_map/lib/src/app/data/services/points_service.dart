@@ -25,7 +25,7 @@ class PointsService {
   }
 
   static const _pointsPath =
-      'flutter_sirius_map\\assets\\points\\positions.geojson';
+      r'flutter_sirius_map\assets\points\positions.geojson';
   Future<void> _loadPoints() async {
     final json = await File(_pointsPath).readAsString();
     final info = jsonDecode(json)['features'];
@@ -55,6 +55,7 @@ class PointsService {
         pow(l1.longitude - l2.longitude, 2));
   }
 
+  //если отсутсвуют какие-либо точки, выкинет ошибку
   Future<PlacePoint> getClosest(LatLng ll) async {
     final points = await _getPointsById;
 
@@ -81,7 +82,7 @@ class PointsService {
     return _graph!;
   }
 
-  final String _graphPath = 'flutter_sirius_map\\assets\\points\\Graph.txt';
+  final String _graphPath = r'flutter_sirius_map\assets\points\Graph.txt';
   Future<void> _loadGraph() async {
     // для графа сразу нужны расстояния между точками
     final points = await _getPointsById;
