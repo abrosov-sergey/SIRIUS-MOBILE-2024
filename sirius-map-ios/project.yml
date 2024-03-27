@@ -21,6 +21,10 @@ configs:
 # Packages
 ############
 
+packages:
+  Swift-collections:
+    url: https://github.com/apple/swift-collections.git
+    from: 1.1.0
 
 ############
 # Settings
