@@ -45,4 +45,7 @@ targets:
         SWIFT_VERSION: 5.2
         SWIFT_OPTIMIZATION_LEVEL: "-Onone"
         TARGETED_DEVICE_FAMILY: 1
+    preBuildScripts:
+      - name: Run SwiftFormat Script
+        script: "sh Scripts/swiftformat.sh"
 
