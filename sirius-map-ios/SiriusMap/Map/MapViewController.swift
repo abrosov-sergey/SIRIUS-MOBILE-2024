@@ -150,11 +150,6 @@ extension MapViewController: UIGestureRecognizerDelegate {
             let touchLocation = gestureReconizer.location(in: mapView)
             let locationCoordinate = mapView.map.convert(touchLocation, toCoordinateFrom: mapView.map)
             print("Tapped at lat: \(locationCoordinate.latitude) long: \(locationCoordinate.longitude)")
-            return
-        }
-        
-        if gestureReconizer.state != UIGestureRecognizer.State.began {
-            return
         }
     }
 }
