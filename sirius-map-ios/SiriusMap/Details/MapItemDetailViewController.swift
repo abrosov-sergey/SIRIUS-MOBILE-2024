@@ -8,8 +8,8 @@
 import UIKit
 
 protocol MapItemDetailDelegate: AnyObject {
-    func onHereButtonTouched()
-    func onFromHereButtonTouched()
+    func fromButtonTapped()
+    func toButtonTapped()
 }
 
 final class MapItemDetailViewController: UIViewController {
@@ -80,12 +80,12 @@ final class MapItemDetailViewController: UIViewController {
         
         fromHereButton.addTarget(
             self,
-            action: #selector(onFromHereButtonTouched),
+            action: #selector(toButtonTapped),
             for: .touchUpInside
         )
         hereButton.addTarget(
             self,
-            action: #selector(onHereButtonTouched),
+            action: #selector(fromButtonTapped),
             for: .touchUpInside
         )
         
@@ -121,11 +121,11 @@ final class MapItemDetailViewController: UIViewController {
     }
     
     
-    @objc func onFromHereButtonTouched() {
-        delegate?.onFromHereButtonTouched()
+    @objc private func fromButtonTapped() {
+        delegate?.toButtonTapped()
     }
     
-    @objc func onHereButtonTouched() {
-        delegate?.onHereButtonTouched()
+    @objc private func toButtonTapped() {
+        delegate?.fromButtonTapped()
     }
 }

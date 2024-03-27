@@ -72,7 +72,7 @@ extension SearchNavigationController: SearchTableViewControllerDelegate {
 
             pushViewController(viewController, animated: true)
         } else {
-            let routeViewController = RouteViewController()
+            let routeViewController = RouteViewController(from: "Туалет", to: "Выход")
             routeViewController.title = "Маршрут"
             pushViewController(routeViewController, animated: true)
         }
@@ -82,14 +82,14 @@ extension SearchNavigationController: SearchTableViewControllerDelegate {
 
 
 extension SearchNavigationController: MapItemDetailDelegate {
-    func onHereButtonTouched() {
+    func fromButtonTapped() {
         
         viewController = makeSearchViewController()
         viewController.title = "Откуда"
         pushViewController(viewController, animated: true)
     }
     
-    func onFromHereButtonTouched() {
+    func toButtonTapped() {
         viewController = makeSearchViewController()
         viewController.title = "Куда"
         pushViewController(viewController, animated: true)

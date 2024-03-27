@@ -11,7 +11,21 @@ import SwiftUI
 
 final class RouteViewController: UIViewController {
     
-    private let hostingController = UIHostingController(rootView: RouteView(from: "Туалет", to: "Вход"))
+    let from: String
+    let to: String
+    
+    init(from: String, to: String) {
+        self.from = from
+        self.to = to
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private lazy var hostingController = UIHostingController(rootView: RouteView(from: from, to: to))
     
     
     override func viewDidLoad() {
