@@ -29,13 +29,8 @@ extension RootNavigationController: MapViewControlelrDelegate {
             view: QrScannerView(),
             controller: QrScannerController()
         )
-        
         qrScannerModule.configureDependencies()
         
-        guard let controller = qrScannerModule.controller else {
-            return
-        }
-        
-        present(controller, animated: true)
+        present(qrScannerModule.controller, animated: true)
     }
 }

@@ -16,11 +16,11 @@ protocol MapViewControlelrDelegate: AnyObject {
 fileprivate enum Icons: String  {
     case qrScannerIcon = "QrScannerIcon"
     
-    var size: (width: Double, height: Double) {
+    var size: CGSize {
         get {
             switch self {
             case .qrScannerIcon:
-                return (width: 56.0, height: 56.0)
+                return CGSize(width: 56.0, height: 56.0)
             }
         }
     }

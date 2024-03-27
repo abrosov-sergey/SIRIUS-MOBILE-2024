@@ -13,16 +13,16 @@ final class QrScannerAssembly {
     
     // MARK: - Properties
     
-    var model: QrScannerModel?
-    var view: QrScannerView?
-    var controller: QrScannerController?
+    let model: QrScannerModel
+    let view: QrScannerView
+    let controller: QrScannerController
     
     // MARK: - Initializer
     
     init(
-        model: QrScannerModel?,
-        view: QrScannerView?,
-        controller: QrScannerController?
+        model: QrScannerModel,
+        view: QrScannerView,
+        controller: QrScannerController
     ) {
         self.model = model
         self.view = view
@@ -32,10 +32,10 @@ final class QrScannerAssembly {
     // MARK: - Configure dependencies
     
     func configureDependencies() {
-        controller?.mainView = view
-        controller?.model = model
+        controller.mainView = view
+        controller.model = model
         
-        view?.output = controller
-        model?.output = controller
+        view.output = controller
+        model.output = controller
     }
 }

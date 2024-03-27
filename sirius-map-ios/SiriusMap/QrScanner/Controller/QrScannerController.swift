@@ -51,7 +51,7 @@ final class QrScannerController: UIViewController {
         if (captureSession.canAddInput(videoInput)) {
             captureSession.addInput(videoInput)
         } else {
-            failed()
+            failed(message: "Your device does not support scanning a code from an item. Please use a device with a camera.")
             return
         }
         
@@ -63,7 +63,7 @@ final class QrScannerController: UIViewController {
             metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             metadataOutput.metadataObjectTypes = [.qr]
         } else {
-            failed()
+            failed(message: "Scanned failed.")
             return
         }
         
@@ -126,10 +126,10 @@ extension QrScannerController: AVCaptureMetadataOutputObjectsDelegate {
 }
 
 private extension QrScannerController {
-    func failed() {
+    func failed(message: String) {
         let ac = UIAlertController(
             title: "Scanning not supported",
-            message: "Your device does not support scanning a code from an item. Please use a device with a camera.",
+            message: message,
             preferredStyle: .alert
         )
         
