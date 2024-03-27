@@ -10,21 +10,7 @@ import UIKit
 
 protocol MapViewControllerDelegate: AnyObject {
     func didTapSearchButton()
-    func onSearchButtonClicked()
-    func qrScannerButtonPressed()
-}
-
-fileprivate enum Icons: String  {
-    case qrScannerIcon = "QrScannerIcon"
-    
-    var size: CGSize {
-        get {
-            switch self {
-            case .qrScannerIcon:
-                return CGSize(width: 56.0, height: 56.0)
-            }
-        }
-    }
+    func didTapQRScannerButton()
 }
 
 // MARK: - MapViewController
@@ -92,6 +78,8 @@ final class MapViewController: UIViewController {
     }
     
     func deselectMapItem() {
+        
+        // Тут креш при выборе второй точки
         guard let annotation = selectedItemAnnotaion else { fatalError() }
     
         mapView.map.removeAnnotation(annotation)
@@ -112,14 +100,6 @@ final class MapViewController: UIViewController {
     
     weak var delegate: MapViewControllerDelegate?
     
-    private lazy var qrScannerButton: UIButton = {
-        var button = UIButton(frame: .zero)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: Icons.qrScannerIcon.rawValue), for: .normal)
-        return button
-    }()
-    
-    weak var delegate: MapViewControllerDelegate?
     //private var route: Route?
     //private var routeOverlay: RouteOverlay?// = RouteOverlay(path: route?.path)
     //private var routeRenderer: RouteRenderer?//(route: routeOverlay)
@@ -130,6 +110,9 @@ final class MapViewController: UIViewController {
         view = mapView
         mapView.onSearchButtonTap = { [weak self] in
             self?.delegate?.didTapSearchButton()
+        }
+        mapView.onQRScannerButtonTap = { [weak self] in
+            self?.delegate?.didTapQRScannerButton()
         }
     }
     
@@ -192,7 +175,6 @@ final class MapViewController: UIViewController {
     
     private func setupMapView() {
         mapView.map.delegate = self
-        setupLongPress()
         
         var level: Level?
         do {
@@ -208,42 +190,6 @@ final class MapViewController: UIViewController {
             let overlays = [levelOverlay] + unitOverlays + openingOverlays
             mapView.setupMap(with: overlays, and: level.units)
         }
-    }
-    
-    private func setupLongPress() {
-        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongPress(gestureReconizer:)))
-        longPressGestureRecognizer.minimumPressDuration = 0.5
-        longPressGestureRecognizer.delaysTouchesBegan = true
-        longPressGestureRecognizer.delegate = self
-        mapView.addGestureRecognizer(longPressGestureRecognizer)
-    }
-    
-    private func setupButtons() {
-        [searchButton, qrScannerButton].forEach {
-            view.addSubview($0)
-        }
-        
-        searchButton.addTarget(self, action: #selector(onSearchButtonClicked), for: .touchUpInside)
-        NSLayoutConstraint.activate([
-            searchButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -24.0),
-            searchButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -18.0)
-        ])
-        
-        qrScannerButton.addTarget(self, action: #selector(qrScannerButtonPressed), for: .touchUpInside)
-        NSLayoutConstraint.activate([
-            qrScannerButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            qrScannerButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -18.0),
-            qrScannerButton.widthAnchor.constraint(equalToConstant: Icons.qrScannerIcon.size.width),
-            qrScannerButton.heightAnchor.constraint(equalToConstant: Icons.qrScannerIcon.size.height)
-        ])
-    }
-    
-    @objc private func onSearchButtonClicked() {
-        delegate?.onSearchButtonClicked()
-    }
-    
-    @objc private func qrScannerButtonPressed() {
-        delegate?.qrScannerButtonPressed()
     }
 }
 
@@ -264,13 +210,13 @@ extension MapViewController: MKMapViewDelegate {
 //            return markerAnnotaionView
 //        }
         
-        let markerAnnotaionView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: nil)
 //        if annotation is RouteStartAnnotation {
 //            markerAnnotaionView.markerTintColor = .systemGreen
 //            markerAnnotaionView.setSelected(true, animated: true)
 //            return markerAnnotaionView
         //} else
         if annotation is SelectedAnnotation {//|| annotation is RouteEndAnnotation {
+            let markerAnnotaionView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: nil)
             markerAnnotaionView.setSelected(true, animated: true)
             return markerAnnotaionView
         }
@@ -301,12 +247,3 @@ extension MapViewController: MKMapViewDelegate {
     }
 }
 
-extension MapViewController: UIGestureRecognizerDelegate {
-    @objc private func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
-        if gestureReconizer.state != UIGestureRecognizer.State.ended {
-            let touchLocation = gestureReconizer.location(in: mapView)
-            let locationCoordinate = mapView.map.convert(touchLocation, toCoordinateFrom: mapView.map)
-            print("Tapped at lat: \(locationCoordinate.latitude) long: \(locationCoordinate.longitude)")
-        }
-    }
-}

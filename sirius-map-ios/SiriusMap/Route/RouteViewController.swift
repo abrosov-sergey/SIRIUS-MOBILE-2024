@@ -11,6 +11,8 @@ import SwiftUI
 
 final class RouteViewController: UIViewController {
     
+    private let sheetHeight: CGFloat = 200.0
+    
     let from: String
     let to: String
     
@@ -27,7 +29,6 @@ final class RouteViewController: UIViewController {
     
     private lazy var hostingController = UIHostingController(rootView: RouteView(from: from, to: to))
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -38,7 +39,7 @@ final class RouteViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let sheet = sheetPresentationController {
-            let fraction = UISheetPresentationController.Detent.custom { _ in 200 }
+            let fraction = UISheetPresentationController.Detent.custom { _ in self.sheetHeight }
             sheet.detents = [fraction]
             
             sheet.animateChanges {

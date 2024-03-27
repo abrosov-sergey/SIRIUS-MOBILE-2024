@@ -72,12 +72,6 @@ final class SearchNavigationController: UINavigationController {
     }
 }
 
-extension SearchNavigationController: MapItemDetailDelegate {
-    func didDisappear() {
-        searchDelegate?.mapItemViewControllerDidDisappear()
-    }
-}
-
 // MARK: - SearchViewControllerDelegate
 
 extension SearchNavigationController: SearchTableViewControllerDelegate {
@@ -108,5 +102,9 @@ extension SearchNavigationController: MapItemDetailDelegate {
         viewController = makeSearchViewController()
         viewController.title = "Куда"
         pushViewController(viewController, animated: true)
+    }
+    
+    func didDisappear() {
+        searchDelegate?.mapItemViewControllerDidDisappear()
     }
 }

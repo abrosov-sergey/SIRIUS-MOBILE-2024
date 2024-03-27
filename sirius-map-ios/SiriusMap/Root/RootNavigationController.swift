@@ -14,11 +14,13 @@ final class RootNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mapViewController.delegate = self
+        navigationBar.isHidden = true
         setViewControllers([mapViewController], animated: false)
     }
 }
 
 extension RootNavigationController: MapViewControllerDelegate {
+    
     func didTapSearchButton() {
         let searchNavigationController = SearchNavigationController()
         searchNavigationController.searchDelegate = self
@@ -26,7 +28,7 @@ extension RootNavigationController: MapViewControllerDelegate {
         present(searchNavigationController, animated: true)
     }
     
-    func qrScannerButtonPressed() {
+    func didTapQRScannerButton() {
         let qrScannerModule = QrScannerAssembly(
             model: QrScannerModel(),
             view: QrScannerView(),
