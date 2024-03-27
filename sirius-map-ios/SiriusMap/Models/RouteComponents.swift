@@ -48,6 +48,14 @@ public struct Graph {
     let edges: [Int : [Int]]
 }
 
+struct PointDistance: Comparable {
+    static func < (lhs: PointDistance, rhs: PointDistance) -> Bool {
+        return lhs.distance < rhs.distance
+    }
+    let distance: Double
+    let index: Int
+}
+
 // MARK: - Extensions
 
 public extension Coordinate {
