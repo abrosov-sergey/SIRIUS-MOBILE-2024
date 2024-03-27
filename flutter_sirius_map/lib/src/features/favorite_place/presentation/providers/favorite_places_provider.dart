@@ -14,8 +14,8 @@ final favoritePlacesProvider = StateNotifierProvider.autoDispose<
 class FavoritePlacesProvider extends StateNotifier<FavoritePlacesState> {
   FavoritePlacesProvider(this._fpRepo)
       : super(
-          const FavoritePlacesState(
-            favoritePlaces: [],
+          FavoritePlacesState(
+            favoritePlaces: _fpRepo.getAllPlaces(),
             isEditMode: false,
           ),
         );
@@ -35,14 +35,14 @@ class FavoritePlacesProvider extends StateNotifier<FavoritePlacesState> {
     state = state.copyWith(favoritePlaces: currentList);
   }
 
-  Future<void> deletePlace(String id) async {
+  Future<void> deletePlace(int id) async {
     List<FavoritePlaceInstance> currentList = state.favoritePlaces.toList();
     await _fpRepo.deletePlace(id);
 
     int temp = -1;
 
     for (int i = 0; i < currentList.length; i++) {
-      if (currentList[i].id == id) {
+      if (currentList[i].placeId == id) {
         temp = i;
       }
     }
@@ -57,7 +57,7 @@ class FavoritePlacesProvider extends StateNotifier<FavoritePlacesState> {
   }
 
   Future<void> fetchFavPlaces() async {
-    final favPlaces = await _fpRepo.getAllPlaces();
+    final favPlaces = _fpRepo.getAllPlaces();
     state = state.copyWith(favoritePlaces: favPlaces);
   }
 }

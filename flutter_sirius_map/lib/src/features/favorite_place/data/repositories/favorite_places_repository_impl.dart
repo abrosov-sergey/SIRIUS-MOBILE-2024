@@ -1,34 +1,56 @@
+import 'dart:convert';
+
 import 'package:flutter_sirius_map/src/features/favorite_place/data/repositories/favorite_places_repository.dart';
 import 'package:flutter_sirius_map/src/features/favorite_place/domain/models/favorite_place.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+const _favPlacesKey = "fav_places";
 
 class FavoritePlacesRepositoryImpl implements FavoritePlacesRepository {
+  final SharedPreferences _localStorage;
+
+  FavoritePlacesRepositoryImpl(this._localStorage);
+
   @override
-  Future<bool> addPlace(FavoritePlaceInstance place) {
-    return Future(() => true);
-    // TODO: implement addPlace
+  Future<void> addPlace(FavoritePlaceInstance place) async {
+    List<FavoritePlaceInstance> favPlaces = getAllPlaces().toList();
+
+    favPlaces.add(place);
+
+    _localStorage.setString(_favPlacesKey, jsonEncode(favPlaces));
   }
 
   @override
-  Future<List<FavoritePlaceInstance>> getAllPlaces() {
-    return Future(() => const [
-          FavoritePlaceInstance(id: '1', name: 'a', placeId: 3),
-          FavoritePlaceInstance(id: '2', name: 'b', placeId: 3),
-          FavoritePlaceInstance(id: '3', name: 'c', placeId: 3),
-          FavoritePlaceInstance(id: '4', name: 'd', placeId: 3),
-          FavoritePlaceInstance(id: '5', name: 'e', placeId: 3)
-        ]);
-    // TODO: implement getAllPlaces
+  List<FavoritePlaceInstance> getAllPlaces() {
+    final favPlacesString = _localStorage.getString(_favPlacesKey);
+    List<FavoritePlaceInstance> result = [];
+    if (favPlacesString == null) {
+      return [];
+    }
+
+    for (var elem in jsonDecode(favPlacesString)) {
+      result.add(FavoritePlaceInstance.fromJson(elem));
+    }
+
+    return result;
   }
 
   @override
-  Future<bool> updatePlace(FavoritePlaceInstance place) {
-    return Future(() => true);
-    // TODO: implement updatePlace
-  }
+  Future<void> deletePlace(int id) async {
+    List<FavoritePlaceInstance> favPlaces = getAllPlaces().toList();
+    int temp = -1;
 
-  @override
-  Future<bool> deletePlace(String id) {
-    return Future(() => true);
-    // TODO: implement deletePlace
+    for (int i = 0; i < favPlaces.length; i++) {
+      if (favPlaces[i].placeId == id) {
+        temp = i;
+        break;
+      }
+    }
+
+    if (temp != -1) {
+      favPlaces.removeAt(temp);
+    }
+
+    _localStorage.setString(_favPlacesKey, jsonEncode(favPlaces));
   }
 }

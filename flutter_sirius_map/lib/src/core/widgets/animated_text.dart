@@ -9,6 +9,7 @@ class AnimatedTextWrapper extends StatelessWidget {
     return AnimatedSwitcher(
       duration: kThemeChangeDuration,
       child: text,
+      layoutBuilder: (c, pr) => c ?? pr.first,
     );
   }
 }
