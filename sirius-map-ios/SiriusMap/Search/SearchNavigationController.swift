@@ -14,12 +14,15 @@ extension String {
 
 final class SearchNavigationController: UINavigationController {
     
+    private lazy var viewController = makeSearchViewController()
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let viewController = makeSearchViewController()
+        
+        viewController.title = "Поиск"
         addCancelButton(to: viewController)
         setViewControllers([viewController], animated: false)
     }
@@ -29,7 +32,6 @@ final class SearchNavigationController: UINavigationController {
     private func makeSearchViewController() -> UIViewController {
         let searchViewController = SearchTableViewController(items: MapItem.sampleData.map { $0.name })
         searchViewController.delegate = self
-        searchViewController.title = .title
         return searchViewController
     }
     
@@ -44,6 +46,7 @@ final class SearchNavigationController: UINavigationController {
     
     private func makeMapDetailViewController(title: String) -> UIViewController {
         let mapItemDetail = MapItemDetailViewController(name: title)
+        mapItemDetail.delegate = self
         mapItemDetail.navigationItem.setHidesBackButton(true, animated: true)
         mapItemDetail.navigationItem.rightBarButtonItem = .init(
             barButtonSystemItem: .close,
@@ -62,23 +65,33 @@ final class SearchNavigationController: UINavigationController {
 
 extension SearchNavigationController: SearchTableViewControllerDelegate {
     func searchTableViewController(didSelectRowAt indexPath: IndexPath) {
-        let title = MapItem.sampleData[indexPath.row].name
-        let viewController = makeMapDetailViewController(title: title)
-        setSheetPresentation(multiplier: 0.15)
+        
+        if viewController.title == "Поиск" {
+            let title = MapItem.sampleData[indexPath.row].name
+            let viewController = makeMapDetailViewController(title: title)
+
+            pushViewController(viewController, animated: true)
+        } else {
+            let routeViewController = RouteViewController(from: "Туалет", to: "Выход")
+            routeViewController.title = "Маршрут"
+            pushViewController(routeViewController, animated: true)
+        }
+        
+    }
+}
+
+
+extension SearchNavigationController: MapItemDetailDelegate {
+    func fromButtonTapped() {
+        
+        viewController = makeSearchViewController()
+        viewController.title = "Откуда"
         pushViewController(viewController, animated: true)
     }
     
-    private func setSheetPresentation(multiplier: Double) {
-        if let sheet = sheetPresentationController {
-            let fraction = UISheetPresentationController.Detent.custom { context in
-                (self.view.window?.frame.height ?? 0.0) * multiplier
-                
-            }
-            sheet.detents = [fraction]
-            
-            sheet.animateChanges {
-                sheet.selectedDetentIdentifier = sheet.selectedDetentIdentifier ?? .medium
-            }
-        }
+    func toButtonTapped() {
+        viewController = makeSearchViewController()
+        viewController.title = "Куда"
+        pushViewController(viewController, animated: true)
     }
 }
