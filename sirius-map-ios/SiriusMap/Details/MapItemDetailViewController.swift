@@ -10,6 +10,7 @@ import UIKit
 protocol MapItemDetailDelegate: AnyObject {
     func fromButtonTapped()
     func toButtonTapped()
+    func didDisappear()
 }
 
 final class MapItemDetailViewController: UIViewController {
@@ -72,6 +73,11 @@ final class MapItemDetailViewController: UIViewController {
                 sheet.selectedDetentIdentifier = sheet.selectedDetentIdentifier ?? .medium
             }
         }
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        delegate?.didDisappear()
     }
     
     private func setup() {

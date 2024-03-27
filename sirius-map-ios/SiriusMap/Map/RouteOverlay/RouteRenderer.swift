@@ -17,12 +17,12 @@ import MapKit
 
 class RouteRenderer: MKOverlayRenderer {
     
-    private let route: Route
+    private let routeOverlay: RouteOverlay
     
     /// This overlay renderer subclass works with the data a `BreadcrumbPath` provides.
-    init(route: Route) {
-        self.route = route
-        super.init(overlay: route)
+    init(routeOverlay: RouteOverlay) {
+        self.routeOverlay = routeOverlay
+        super.init(overlay: routeOverlay)
     }
     
     /**
@@ -32,7 +32,10 @@ class RouteRenderer: MKOverlayRenderer {
      */
     // - Tag: renderer_can_draw
     override func canDraw(_ mapRect: MKMapRect, zoomScale: MKZoomScale) -> Bool {
-        return true//route.pathBounds.intersects(mapRect)
+        #if false
+        route.pathBounds.intersects(mapRect)
+        #endif
+        return true
     }
  
     /**
@@ -53,7 +56,7 @@ class RouteRenderer: MKOverlayRenderer {
          and the `locations` property of the `BreadcrumbPath` updates frequently,
          `locations` needs to guard against data races. See the comments in `BreadcrumbPath` for details.
          */
-        let points = route.locations.map { MKMapPoint($0.coordinate) }
+        let points = routeOverlay.locations.map { MKMapPoint(CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude)) }
         if let path = pathForPoints(points, mapRect: clipRect, zoomScale: zoomScale) {
             context.addPath(path)
             context.setStrokeColor(UIColor.systemBlue.withAlphaComponent(0.5).cgColor)

@@ -8,7 +8,8 @@
 import MapKit
 import UIKit
 
-protocol MapViewControlelrDelegate: AnyObject {
+protocol MapViewControllerDelegate: AnyObject {
+    func didTapSearchButton()
     func onSearchButtonClicked()
     func qrScannerButtonPressed()
 }
@@ -29,16 +30,87 @@ fileprivate enum Icons: String  {
 // MARK: - MapViewController
 
 final class MapViewController: UIViewController {
+
+//    private func updateUI() {
+//        if let routeStart, let routeEnd {
+//            buildRoute(start: routeStart, end: routeEnd)
+//        }
+//        
+//        //guard let routeStart, let routeEnd else { fatalError() }
+//    }
     
     // MARK: - Properties
+//    var routeStart: MapItem?
+//    var routeEnd: MapItem?
     
+    private var selectedItemAnnotaion: SelectedAnnotation?
+    private var selectedMapItem: MapItem?
+    private var routeStartAnnotation: RouteStartAnnotation?
+    private var routeEndAnnotation: RouteEndAnnotation?
+    
+//    func setRouteStart() {
+//        mapView.map.isScrollEnabled = true
+//        mapView.map.isZoomEnabled = true
+//        routeStart = selectedMapItem
+//        
+////        if let routeStart, let routeEnd {
+////            ///buildRoute()
+////        }
+//    }
+    
+//    func setRouteEnd() {
+//        mapView.map.isScrollEnabled = true
+//        mapView.map.isZoomEnabled = true
+//        routeEnd = selectedMapItem
+//        if let routeStart, let routeEnd {
+//            //buildRoute()
+//        }
+//    }
+    
+    func select(_ mapItem: MapItem) {
+        
+        selectedMapItem = mapItem
+        
+        mapView.map.isScrollEnabled = false
+        mapView.map.isZoomEnabled = false
+        
+        let coordinate = CLLocationCoordinate2D(
+            latitude: mapItem.coordinate.latitude,
+            longitude: mapItem.coordinate.longitude
+        )
+        
+        selectedItemAnnotaion = SelectedAnnotation(coordinate: coordinate)
+        mapView.map.addAnnotation(selectedItemAnnotaion!)
+        
+        mapView.map.setRegion(
+            MKCoordinateRegion(
+                center: coordinate,
+                span: MKCoordinateSpan(latitudeDelta: 0.0025, longitudeDelta: 0.0025)
+            ),
+            animated: true
+        )
+    }
+    
+    func deselectMapItem() {
+        guard let annotation = selectedItemAnnotaion else { fatalError() }
+    
+        mapView.map.removeAnnotation(annotation)
+        selectedItemAnnotaion = nil
+        mapView.map.isScrollEnabled = true
+        mapView.map.isZoomEnabled = true
+    }
+    
+    private class SelectedAnnotation: NSObject, MKAnnotation {
+        let coordinate: CLLocationCoordinate2D
+        
+        init(coordinate: CLLocationCoordinate2D) {
+            self.coordinate = coordinate
+        }
+    }
+        
     private lazy var mapView = MapView()
     
-    private lazy var searchButton: UIButton = {
-        let button = ButtonWithIcon(type: .search)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
+    weak var delegate: MapViewControllerDelegate?
     
     private lazy var qrScannerButton: UIButton = {
         var button = UIButton(frame: .zero)
@@ -47,93 +119,80 @@ final class MapViewController: UIViewController {
         return button
     }()
     
-    weak var delegate: MapViewControlelrDelegate?
+    weak var delegate: MapViewControllerDelegate?
+    //private var route: Route?
+    //private var routeOverlay: RouteOverlay?// = RouteOverlay(path: route?.path)
+    //private var routeRenderer: RouteRenderer?//(route: routeOverlay)
     
     // MARK: - Life Cycle
     
     override func loadView() {
         view = mapView
+        mapView.onSearchButtonTap = { [weak self] in
+            self?.delegate?.didTapSearchButton()
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupMap()
         
-        addOverlays()
-        
-        mapView.map.delegate = self
-        setupButtons()
-        
-        mapView.map.addAnnotation(routeEnd)
-        navigationItem.rightBarButtonItem = buildRouteButton
+        setupMapView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupAnnotations()
+        mapView.setupAnnotations()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
+//    private func selectAnnotation(_ annotation: MKAnnotation) {
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+//            self.mapView.map.view(for: annotation)?.setSelected(true, animated: true)
+//        }
+//    }
     
-    private func setupAnnotations() {
-        mapView.map.pointOfInterestFilter = .excludingAll
-
-        for annotation in mapView.map.annotations {
-            mapView.map.view(for: annotation)?.alpha = 0
-        }
-    }
+//    private func activateRoute(routeOverlay: RouteOverlay) {
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+//            guard
+//                let startView = self.mapView.map.view(for: routeOverlay.routeStartAnnotation),
+//                let endView = self.mapView.map.view(for: routeOverlay.routeEndAnnotation)
+//            else {
+//                return
+//            }
+//            startView.setSelected(true, animated: true)
+//            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+//                endView.setSelected(true, animated: true)
+//            }
+//        }
+//    }
     
-    @objc
-    private func clearRoute() {
-        for annotation in mapView.map.annotations {
-            if annotation is RouteEndAnnotation {
-                mapView.map.view(for: annotation)?.setSelected(false, animated: true)
-                UIView.animate(withDuration: 0.5) {
-                    self.mapView.map.view(for: annotation)?.alpha = 0
-                }
-                
-            }
-        }
-        route.locations = []
-        mapView.map.removeOverlay(route)
-        
-        //mapView.map.removeAnnotation
-        navigationItem.rightBarButtonItem = buildRouteButton
-    }
-    
-    @objc
-    private func buildRoute() {
-        
-        mapView.map.view(for: routeEnd)?.setSelected(true, animated: true)
-        
-        
-        for annotation in mapView.map.annotations {
-            if annotation is RouteEndAnnotation {
-                mapView.map.view(for: annotation)?.alpha = 1
-                mapView.map.view(for: annotation)?.setSelected(true, animated: true)
-            }
-        }
-        route.locations = [
-            CLLocation(latitude: 43.414390231912478, longitude: 39.950388503984989),
-            CLLocation(latitude: 43.414417909921923, longitude: 39.95070036288903),
-            CLLocation(latitude: 43.414609511933413, longitude: 39.950707851600782),
-            CLLocation(latitude: 43.414590480110249, longitude: 39.951024080506684),
-            CLLocation(latitude: 43.414930900526763, longitude: 39.951275248095982),
-        ]
-       
-        navigationItem.rightBarButtonItem = cancelButton
-
-        // Route overlay
-        mapView.map.addOverlay(route, level: .aboveRoads)
-        //route.locations.removeLast()
-        //routeRenderer.setNeedsDisplay()
-    }
+//    @objc
+//    func clearRoute() {
+//        if let routeOverlay {
+//            mapView.map.removeOverlay(routeOverlay)
+//            mapView.map.removeAnnotation(routeOverlay.routeEndAnnotation)
+//            mapView.map.removeAnnotation(routeOverlay.routeStartAnnotation)
+//        }
+//        routeOverlay = nil
+//        routeRenderer = nil
+//        routeEnd = nil
+//        routeStart = nil
+//    }
+//    
+//    private func buildRoute(start: MapItem, end: MapItem) {
+//        let route = MockPathBuilder().route(start: start, end: end)
+//        let overlay = RouteOverlay(path: route.path)
+//        routeOverlay = overlay
+//        routeRenderer = RouteRenderer(routeOverlay: overlay)
+//        mapView.map.addOverlay(overlay, level: .aboveRoads)
+//        mapView.map.addAnnotations([overlay.routeEndAnnotation, overlay.routeStartAnnotation])
+//    }
     
     // MARK: - Methods
     
-    private func addOverlays() {
+    private func setupMapView() {
+        mapView.map.delegate = self
+        setupLongPress()
         
         var level: Level?
         do {
@@ -143,30 +202,15 @@ final class MapViewController: UIViewController {
         }
         
         if let level, let levelOverlay = level.overlay {
-            mapView.map.setVisibleMapRect(
-                levelOverlay.boundingMapRect,
-                edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
-                animated: true
-            )
-            
-            mapView.map.addOverlay(levelOverlay)
-            
             let unitOverlays = level.units.compactMap { $0.overlay }
-            mapView.map.addOverlays(unitOverlays)
-            
             let openingOverlays = level.openings.compactMap { $0.overlay }
-            mapView.map.addOverlays(openingOverlays)
             
-            mapView.map.addAnnotations(level.units)
+            let overlays = [levelOverlay] + unitOverlays + openingOverlays
+            mapView.setupMap(with: overlays, and: level.units)
         }
-        
     }
     
-    private func setupMap() {
-        addOverlays()
-        
-        mapView.map.delegate = self
-        
+    private func setupLongPress() {
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongPress(gestureReconizer:)))
         longPressGestureRecognizer.minimumPressDuration = 0.5
         longPressGestureRecognizer.delaysTouchesBegan = true
@@ -211,16 +255,32 @@ extension Feature {
 
 // MARK: - MKMapViewDelegate
 
-
-
 extension MapViewController: MKMapViewDelegate {
     
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//        if annotation is RouteStartAnnotation {
+//            let markerAnnotaionView = MKMarkerAnnotationView(annotation: routeOverlay!.routeStartAnnotation, reuseIdentifier: nil)
+//            markerAnnotaionView.markerTintColor = .systemGreen
+//            return markerAnnotaionView
+//        }
+        
+        let markerAnnotaionView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: nil)
+//        if annotation is RouteStartAnnotation {
+//            markerAnnotaionView.markerTintColor = .systemGreen
+//            markerAnnotaionView.setSelected(true, animated: true)
+//            return markerAnnotaionView
+        //} else
+        if annotation is SelectedAnnotation {//|| annotation is RouteEndAnnotation {
+            markerAnnotaionView.setSelected(true, animated: true)
+            return markerAnnotaionView
+        }
+        return nil
+    }
+    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        
-        
         switch overlay {
-        case is Route:
-            return routeRenderer
+//        case is RouteOverlay:
+//            return routeRenderer!
         case is MKPolyline:
             let renderer = MKPolylineRenderer(overlay: overlay)
             renderer.strokeColor = UIColor(named: "WalkwayFill")

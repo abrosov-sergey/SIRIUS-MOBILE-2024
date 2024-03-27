@@ -9,18 +9,21 @@ import UIKit
 
 final class RootNavigationController: UINavigationController {
     
+    private let mapViewController = MapViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let mapViewController = MapViewController()
         mapViewController.delegate = self
         setViewControllers([mapViewController], animated: false)
     }
 }
 
-extension RootNavigationController: MapViewControlelrDelegate {
-    func onSearchButtonClicked() {
-        let searchNavigationViewCotroller = SearchNavigationController()
-        present(searchNavigationViewCotroller, animated: true)
+extension RootNavigationController: MapViewControllerDelegate {
+    func didTapSearchButton() {
+        let searchNavigationController = SearchNavigationController()
+        searchNavigationController.searchDelegate = self
+        //mapViewController.clearRoute()
+        present(searchNavigationController, animated: true)
     }
     
     func qrScannerButtonPressed() {
@@ -33,4 +36,30 @@ extension RootNavigationController: MapViewControlelrDelegate {
         
         present(qrScannerModule.controller, animated: true)
     }
+}
+
+extension RootNavigationController: SearchNavigationControllerDelegate {
+    
+//    func didSelectRouteStart() {
+//        //mapViewController.setRouteStart()
+//        //searchNavigationViewCotroller.dismiss(animated: true)
+//    }
+//    
+//    func didSelectRouteEnd() {
+//        //mapViewController.setRouteEnd()
+//        //searchNavigationViewCotroller.dismiss(animated: true)
+//    }
+    
+    func searchNavigationController(didSelectMapItem mapItem: MapItem) {
+        mapViewController.select(mapItem)
+    }
+    
+    func mapItemViewControllerDidDisappear() {
+        mapViewController.deselectMapItem()
+    }
+    
+//    func
+//    func didTapCloseDetail() {
+//        mapViewController.unselect()
+//    }
 }

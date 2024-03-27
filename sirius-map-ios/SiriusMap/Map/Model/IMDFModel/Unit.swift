@@ -7,9 +7,7 @@
 
 import MapKit
 
-final class Unit: Feature{
-    //var coordinate = CLLocationCoordinate2D(latitude: 43.41456934283174, longitude: 39.951161916378858)
-    
+final class Unit: Feature {
     var title: String? = "Финтех ЦИТ"
 }
 
