@@ -112,7 +112,7 @@ final class MapViewController: UIViewController {
         qrScannerButton.addTarget(self, action: #selector(qrScannerButtonPressed), for: .touchUpInside)
         NSLayoutConstraint.activate([
             qrScannerButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            qrScannerButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -18.0),
+            qrScannerButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 18.0),
             qrScannerButton.widthAnchor.constraint(equalToConstant: Icons.qrScannerIcon.size.width),
             qrScannerButton.heightAnchor.constraint(equalToConstant: Icons.qrScannerIcon.size.height)
         ])
