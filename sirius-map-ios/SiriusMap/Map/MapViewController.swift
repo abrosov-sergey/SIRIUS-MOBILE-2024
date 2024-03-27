@@ -10,15 +10,40 @@ import UIKit
 
 protocol MapViewControlelrDelegate: AnyObject {
     func onSearchButtonClicked()
+    func qrScannerButtonPressed()
 }
 
+fileprivate enum Icons: String  {
+    case qrScannerIcon = "QrScannerIcon"
+    
+    var size: CGSize {
+        get {
+            switch self {
+            case .qrScannerIcon:
+                return CGSize(width: 56.0, height: 56.0)
+            }
+        }
+    }
+}
+
+// MARK: - MapViewController
+
 final class MapViewController: UIViewController {
+    
+    // MARK: - Properties
     
     private lazy var mapView = MapView()
     
     private lazy var searchButton: UIButton = {
         let button = ButtonWithIcon(type: .search)
         button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var qrScannerButton: UIButton = {
+        var button = UIButton(frame: .zero)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: Icons.qrScannerIcon.rawValue), for: .normal)
         return button
     }()
     
@@ -63,16 +88,31 @@ final class MapViewController: UIViewController {
     }
     
     private func setupButtons() {
+        [searchButton, qrScannerButton].forEach {
+            view.addSubview($0)
+        }
+        
         searchButton.addTarget(self, action: #selector(onSearchButtonClicked), for: .touchUpInside)
-        view.addSubview(searchButton)
         NSLayoutConstraint.activate([
             searchButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -24.0),
             searchButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -18.0)
+        ])
+        
+        qrScannerButton.addTarget(self, action: #selector(qrScannerButtonPressed), for: .touchUpInside)
+        NSLayoutConstraint.activate([
+            qrScannerButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            qrScannerButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -18.0),
+            qrScannerButton.widthAnchor.constraint(equalToConstant: Icons.qrScannerIcon.size.width),
+            qrScannerButton.heightAnchor.constraint(equalToConstant: Icons.qrScannerIcon.size.height)
         ])
     }
     
     @objc private func onSearchButtonClicked() {
         delegate?.onSearchButtonClicked()
+    }
+    
+    @objc private func qrScannerButtonPressed() {
+        delegate?.qrScannerButtonPressed()
     }
 }
 

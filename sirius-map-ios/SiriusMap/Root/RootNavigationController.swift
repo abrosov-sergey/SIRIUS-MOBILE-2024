@@ -22,4 +22,15 @@ extension RootNavigationController: MapViewControlelrDelegate {
         let searchNavigationViewCotroller = SearchNavigationController()
         present(searchNavigationViewCotroller, animated: true)
     }
+    
+    func qrScannerButtonPressed() {
+        let qrScannerModule = QrScannerAssembly(
+            model: QrScannerModel(),
+            view: QrScannerView(),
+            controller: QrScannerController()
+        )
+        qrScannerModule.configureDependencies()
+        
+        present(qrScannerModule.controller, animated: true)
+    }
 }

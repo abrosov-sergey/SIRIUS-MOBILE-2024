@@ -27,15 +27,14 @@ final class ButtonWithIcon: UIButton {
         
         let config = UIImage.SymbolConfiguration(
             pointSize: 56
-        )
-            .applying(
-                UIImage.SymbolConfiguration(
-                    paletteColors: [
-                        .darkGray,
-                        .white
-                    ]
-                )
+        ).applying(
+            UIImage.SymbolConfiguration(
+                paletteColors: [
+                    .darkGray,
+                    .white
+                ]
             )
+        )
         
         let buttonImage = UIImage(systemName: type.rawValue, withConfiguration: config)
         
