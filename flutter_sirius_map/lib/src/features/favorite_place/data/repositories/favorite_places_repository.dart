@@ -5,7 +5,7 @@ abstract class FavoritePlacesRepository {
 
   Future<bool> addPlace(FavoritePlaceInstance place);
 
-  Future<bool> deletePlace(FavoritePlaceInstance place);
+  Future<bool> deletePlace(String id);
 
   Future<bool> updatePlace(FavoritePlaceInstance place);
 }
