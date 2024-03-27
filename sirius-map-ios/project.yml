@@ -47,5 +47,5 @@ targets:
         TARGETED_DEVICE_FAMILY: 1
     preBuildScripts:
       - name: Run SwiftFormat Script
-        script: "sh Scripts/swiftdata.sh"
+        script: "sh Scripts/swiftformat.sh"
 
