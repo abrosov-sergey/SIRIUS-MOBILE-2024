@@ -7,15 +7,25 @@
 
 import UIKit
 
-extension String {
-    static let title = "Куда"
+private extension String {
+    static let routeStartTitle = "Куда"
+    static let routeEndTitle = "Откуда"
     static let cancel = "Отменить"
+}
+
+protocol SearchNavigationControllerDelegate: AnyObject {
+    func searchNavigationController(didSelectMapItem mapItem: MapItem)
+    func mapItemViewControllerDidDisappear()
+//    func didSelectRouteStart()
+//    func didSelectRouteEnd()
 }
 
 final class SearchNavigationController: UINavigationController {
     
     private lazy var viewController = makeSearchViewController()
     
+    weak var searchDelegate: SearchNavigationControllerDelegate?
+        
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -30,7 +40,7 @@ final class SearchNavigationController: UINavigationController {
     // MARK: - Methods
     
     private func makeSearchViewController() -> UIViewController {
-        let searchViewController = SearchTableViewController(items: MapItem.sampleData.map { $0.name })
+        let searchViewController = SearchTableViewController(items: MapItem.sampleData.map { $0.title ?? String($0.id) })
         searchViewController.delegate = self
         return searchViewController
     }
@@ -53,6 +63,7 @@ final class SearchNavigationController: UINavigationController {
             target: self,
             action: #selector(onCloseButtonTapped)
         )
+        mapItemDetail.delegate = self
         return mapItemDetail
     }
     
@@ -67,23 +78,21 @@ extension SearchNavigationController: SearchTableViewControllerDelegate {
     func searchTableViewController(didSelectRowAt indexPath: IndexPath) {
         
         if viewController.title == "Поиск" {
-            let title = MapItem.sampleData[indexPath.row].name
-            let viewController = makeMapDetailViewController(title: title)
-
+            let mapItem = MapItem.sampleData[indexPath.row]
+            let viewController = makeMapDetailViewController(title: mapItem.title ?? String(mapItem.id))
             pushViewController(viewController, animated: true)
+            searchDelegate?.searchNavigationController(didSelectMapItem: mapItem)
         } else {
             let routeViewController = RouteViewController(from: "Туалет", to: "Выход")
             routeViewController.title = "Маршрут"
             pushViewController(routeViewController, animated: true)
         }
-        
     }
 }
 
 
 extension SearchNavigationController: MapItemDetailDelegate {
     func fromButtonTapped() {
-        
         viewController = makeSearchViewController()
         viewController.title = "Откуда"
         pushViewController(viewController, animated: true)
@@ -93,5 +102,9 @@ extension SearchNavigationController: MapItemDetailDelegate {
         viewController = makeSearchViewController()
         viewController.title = "Куда"
         pushViewController(viewController, animated: true)
+    }
+    
+    func didDisappear() {
+        searchDelegate?.mapItemViewControllerDidDisappear()
     }
 }

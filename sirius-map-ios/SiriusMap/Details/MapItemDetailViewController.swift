@@ -10,9 +10,12 @@ import UIKit
 protocol MapItemDetailDelegate: AnyObject {
     func fromButtonTapped()
     func toButtonTapped()
+    func didDisappear()
 }
 
 final class MapItemDetailViewController: UIViewController {
+    
+    private let sheetHeight: CGFloat = 130.0
     
     weak var delegate: MapItemDetailDelegate?
     
@@ -64,14 +67,26 @@ final class MapItemDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Для того, чтобы нельзя было закрыть sheet по нажатию на карту
+        isModalInPresentation = true
+        
         if let sheet = sheetPresentationController {
-            let fraction = UISheetPresentationController.Detent.custom { _ in 130 }
+            let fraction = UISheetPresentationController.Detent.custom { _ in self.sheetHeight }
             sheet.detents = [fraction]
+            
+            // Оставляем карту активной
+            sheet.largestUndimmedDetentIdentifier = fraction.identifier
             
             sheet.animateChanges {
                 sheet.selectedDetentIdentifier = sheet.selectedDetentIdentifier ?? .medium
             }
         }
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        delegate?.didDisappear()
     }
     
     private func setup() {

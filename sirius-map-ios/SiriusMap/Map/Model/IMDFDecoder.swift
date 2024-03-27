@@ -36,6 +36,7 @@ struct IMDFDecoder {
         enum File {
             case level
             case unit
+            case opening
             
             var filename: String {
                 "\(self).geojson"
@@ -53,6 +54,7 @@ struct IMDFDecoder {
         
         let levels = try decodeFeatures(type: Level.self, from: .level, in: archive)
         let units = try decodeFeatures(type: Unit.self, from: .unit, in: archive)
+        let openings = try decodeFeatures(type: Opening.self, from: .opening, in: archive)
         
         guard levels.count == 1 else {
             throw IMDFError.invalidData
@@ -60,6 +62,7 @@ struct IMDFDecoder {
                 
         let level = levels[0]
         level.units = units
+        level.openings = openings
         return level
     }
     
