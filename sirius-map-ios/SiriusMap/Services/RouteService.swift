@@ -7,28 +7,17 @@
 
 import Foundation
 import MapKit
-import Collections
+//import Collections
 
 let url = Bundle.main.url(forResource: "anchor_formatted_for_egor", withExtension: "json")!
 let data = try! Data(contentsOf: url)
 let mapItems = try! JSONDecoder().decode([Anchor].self, from: data).map { $0.mapItem }
 
-enum Constants {
-    static let longDistance : Double = 1000000.0
-    static let R : Double  = 6371000.0
-}
-
-enum Speeds : Float {
-    case Fast = 7.0
-    case Medium = 5.0
-    case Slow = 4.0
-};
- 
 typealias Neighbours = [(indx : Int, dist : Double)]
 typealias Edges = Dictionary<Int, Neighbours>
 
 protocol PathFinderProtocol {
-    init(graph : Graph)
+    init(graph: Graph)
     func item(for coordinate: Coordinate) -> MapItem
     func route(start: MapItem, end: MapItem) -> Route
 }
@@ -41,12 +30,12 @@ struct PointDistance: Comparable {
     let index: Int
 }
 
-struct PathFinder : PathFinderProtocol{
+struct PathFinder: PathFinderProtocol {
     
-    private var edges : Edges = [:]
-    private var ItemsbyIndex : Dictionary<Int, MapItem> = [:]
+    private var edges: Edges = [:]
+    private var ItemsbyIndex: Dictionary<Int, MapItem> = [:]
     
-    init(graph : Graph) {
+    init(graph: Graph) {
         for item in graph.mapItems {
             ItemsbyIndex[item.id] = item
         }
@@ -60,7 +49,7 @@ struct PathFinder : PathFinderProtocol{
         }
     }
     
-    private func distance_of_edge(_ cords1 : Coordinate, _ cords2 : Coordinate) -> Double {
+    private func distance_of_edge(_ cords1: Coordinate, _ cords2: Coordinate) -> Double {
         
         let lat1 = cords1.latitude;
         let lat2 = cords2.latitude;
@@ -72,10 +61,8 @@ struct PathFinder : PathFinderProtocol{
         
         let dphi = (lat2-lat1) * Double.pi/180;
         let dlam = (lon2-lon1) * Double.pi/180;
-
-        let a = sin(dphi / 2) * sin(dphi / 2) +
-                  cos(phi1) * cos(phi2) *
-                  sin(dlam / 2) * sin(dlam / 2);
+        
+        let a = sin(dphi / 2) * sin(dphi / 2) + cos(phi1) * cos(phi2) * sin(dlam / 2) * sin(dlam / 2)
         let c = 2 * atan2(sqrt(a), sqrt(1 - a));
         let d = Constants.R * c;
         return d;

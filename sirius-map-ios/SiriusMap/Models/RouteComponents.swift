@@ -10,7 +10,7 @@ import MapKit
 
 // MARK: - Components
 
-struct Anchor: Decodable {
+public struct Anchor: Decodable {
     let id: Int
     let coordinates: [Double]
     let title: String?
@@ -27,30 +27,30 @@ struct Anchor: Decodable {
     }
 }
 
-struct MapItem {
+public struct MapItem {
     let id: Int
     let title: String?
     let coordinate: Coordinate
 }
 
-struct Coordinate {
+public struct Coordinate {
     let latitude: Double
     let longitude: Double
 }
 
-struct Route {
+public struct Route {
     let path: [MapItem]
     let eta: Double
 }
 
-struct Graph {
+public struct Graph {
     let mapItems: [MapItem]
     let edges: [Int : [Int]]
 }
 
 // MARK: - Extensions
 
-extension Coordinate {
+public extension Coordinate {
     var clCoordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
