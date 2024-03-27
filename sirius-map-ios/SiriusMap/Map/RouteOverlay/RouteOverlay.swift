@@ -7,22 +7,6 @@
 
 import MapKit
 
-struct Route {
-    let eta: Double
-    let path: [MapItem]
-}
-
-struct Coordinate {
-    let latitude: Double
-    let longitude: Double
-}
-
-extension Coordinate {
-    var clCoordinate: CLLocationCoordinate2D {
-        CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-    }
-}
-
 final class RouteOverlay: NSObject, MKOverlay {
     let coordinate: CLLocationCoordinate2D = .init(latitude: 0, longitude: 0)
     let boundingMapRect: MKMapRect = .world

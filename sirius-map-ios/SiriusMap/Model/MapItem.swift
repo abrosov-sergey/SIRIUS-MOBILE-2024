@@ -5,12 +5,6 @@
 //  Created by Egor on 21.03.2024.
 //
 
-struct MapItem {
-    let title: String?
-    let coordinate: Coordinate
-    let id: Int
-}
-
 #if DEBUG
     extension MapItem {
         static let sampleData = [
