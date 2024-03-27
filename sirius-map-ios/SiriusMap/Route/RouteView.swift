@@ -9,7 +9,11 @@ import SwiftUI
 
 struct RouteView: View {
     
-    @State private var listItems = ["Сюда", "Отсюда"]
+    @State private var listItems: [String]
+    
+    init(from: String, to: String) {
+        listItems = [from, to]
+    }
     
     var body: some View {
         VStack {
@@ -24,27 +28,6 @@ struct RouteView: View {
                 .onMove { from, to in
                     listItems.move(fromOffsets: from, toOffset: to)
                 }
-                Section {
-                    HStack {
-                        VStack {
-                            Text("5 минут")
-                                .font(.title)
-                            Text("400 метров")
-                                .foregroundStyle(.gray)
-                        }
-                        Spacer()
-                        Button {
-                            
-                        } label: {
-                            Text("GO")
-                                .foregroundStyle(.white)
-                                .padding(20)
-                                .background(RoundedRectangle(cornerRadius: 10))
-                                .foregroundStyle(.green)
-                        }
-                    }
-                    .padding()
-                }
             }
             .toolbar {
                 EditButton()
@@ -54,5 +37,5 @@ struct RouteView: View {
 }
 
 #Preview {
-    RouteView()
+    RouteView(from: "Туалет", to: "Вход")
 }

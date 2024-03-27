@@ -11,7 +11,7 @@ import SwiftUI
 
 final class RouteViewController: UIViewController {
     
-    private let hostingController = UIHostingController(rootView: RouteView())
+    private let hostingController = UIHostingController(rootView: RouteView(from: "Туалет", to: "Вход"))
     
     
     override func viewDidLoad() {
@@ -24,7 +24,7 @@ final class RouteViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let sheet = sheetPresentationController {
-            let fraction = UISheetPresentationController.Detent.custom { _ in 360 }
+            let fraction = UISheetPresentationController.Detent.custom { _ in 200 }
             sheet.detents = [fraction]
             
             sheet.animateChanges {

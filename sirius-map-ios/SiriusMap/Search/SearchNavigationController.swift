@@ -14,12 +14,15 @@ extension String {
 
 final class SearchNavigationController: UINavigationController {
     
+    private lazy var viewController = makeSearchViewController()
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let viewController = makeSearchViewController()
+        
+        viewController.title = "Поиск"
         addCancelButton(to: viewController)
         setViewControllers([viewController], animated: false)
     }
@@ -29,7 +32,6 @@ final class SearchNavigationController: UINavigationController {
     private func makeSearchViewController() -> UIViewController {
         let searchViewController = SearchTableViewController(items: MapItem.sampleData.map { $0.name })
         searchViewController.delegate = self
-        searchViewController.title = .title
         return searchViewController
     }
     
@@ -63,23 +65,33 @@ final class SearchNavigationController: UINavigationController {
 
 extension SearchNavigationController: SearchTableViewControllerDelegate {
     func searchTableViewController(didSelectRowAt indexPath: IndexPath) {
-        let title = MapItem.sampleData[indexPath.row].name
-        let viewController = makeMapDetailViewController(title: title)
-        pushViewController(viewController, animated: true)
+        
+        if viewController.title == "Поиск" {
+            let title = MapItem.sampleData[indexPath.row].name
+            let viewController = makeMapDetailViewController(title: title)
+
+            pushViewController(viewController, animated: true)
+        } else {
+            let routeViewController = RouteViewController()
+            routeViewController.title = "Маршрут"
+            pushViewController(routeViewController, animated: true)
+        }
+        
     }
 }
 
 
 extension SearchNavigationController: MapItemDetailDelegate {
     func onHereButtonTouched() {
-        let routeViewController = RouteViewController()
-        routeViewController.title = "Маршрут"
-        pushViewController(routeViewController, animated: true)
+        
+        viewController = makeSearchViewController()
+        viewController.title = "Откуда"
+        pushViewController(viewController, animated: true)
     }
     
     func onFromHereButtonTouched() {
-        let routeViewController = RouteViewController()
-        routeViewController.title = "Маршрут"
-        pushViewController(routeViewController, animated: true)
+        viewController = makeSearchViewController()
+        viewController.title = "Куда"
+        pushViewController(viewController, animated: true)
     }
 }
