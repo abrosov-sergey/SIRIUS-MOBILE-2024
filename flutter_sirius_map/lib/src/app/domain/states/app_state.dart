@@ -12,6 +12,10 @@ class BaseAppState extends AppState {
   const BaseAppState();
 }
 
+class SearchAppState extends AppState{
+  
+}
+
 // выбрать первую точку
 class ChoiceAppState extends AppState {
   final PlacePoint? start;
