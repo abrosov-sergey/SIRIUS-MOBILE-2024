@@ -7,7 +7,7 @@
 
 import Foundation
 import MapKit
-//import Collections
+import Collections
 
 let url = Bundle.main.url(forResource: "anchor_formatted_for_egor", withExtension: "json")!
 let data = try! Data(contentsOf: url)
