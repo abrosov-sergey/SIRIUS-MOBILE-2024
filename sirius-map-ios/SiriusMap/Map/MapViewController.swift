@@ -57,8 +57,7 @@ final class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addOverlays()
-        mapView.map.delegate = self
+        setupMap()
         setupButtons()
     }
     
@@ -85,6 +84,18 @@ final class MapViewController: UIViewController {
             let unitOverlays = level.units.compactMap { $0.overlay }
             mapView.map.addOverlays(unitOverlays)
         }
+    }
+    
+    private func setupMap() {
+        addOverlays()
+        
+        mapView.map.delegate = self
+        
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongPress(gestureReconizer:)))
+        longPressGestureRecognizer.minimumPressDuration = 0.5
+        longPressGestureRecognizer.delaysTouchesBegan = true
+        longPressGestureRecognizer.delegate = self
+        mapView.addGestureRecognizer(longPressGestureRecognizer)
     }
     
     private func setupButtons() {
@@ -130,5 +141,15 @@ extension MapViewController: MKMapViewDelegate {
         renderer.strokeColor = UIColor(named: "LevelStroke")
         renderer.lineWidth = 2.0
         return renderer
+    }
+}
+
+extension MapViewController: UIGestureRecognizerDelegate {
+    @objc private func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
+        if gestureReconizer.state != UIGestureRecognizer.State.ended {
+            let touchLocation = gestureReconizer.location(in: mapView)
+            let locationCoordinate = mapView.map.convert(touchLocation, toCoordinateFrom: mapView.map)
+            print("Tapped at lat: \(locationCoordinate.latitude) long: \(locationCoordinate.longitude)")
+        }
     }
 }
