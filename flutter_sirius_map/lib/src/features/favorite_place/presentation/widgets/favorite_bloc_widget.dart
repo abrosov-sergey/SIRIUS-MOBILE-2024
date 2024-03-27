@@ -87,7 +87,7 @@ class _FavoriteBlocWidgetState extends ConsumerState<FavoriteBlocWidget> {
                 SliverList.builder(
                   itemCount: favPlaces.length,
                   itemBuilder: (context, index) => FavoriteItem(
-                    key: ValueKey(index.hashCode),
+                    key: ValueKey(favPlaces[index].id.hashCode),
                     id: favPlaces[index].id,
                     text: favPlaces[index].name,
                     iconData: Icons.location_on,
