@@ -20,52 +20,50 @@ protocol IMDFDecodable {
 }
 
 struct IMDFDecoder {
-    
     private struct IMDFArchive {
-        
         let baseDirectory: URL
-        
+
         init(directory: URL) {
             baseDirectory = directory
         }
-        
+
         func fileURL(for file: File) -> URL {
             baseDirectory.appending(component: file.filename)
         }
-        
+
         enum File {
             case level
             case unit
             case opening
-            
+
             var filename: String {
                 "\(self).geojson"
             }
         }
     }
-    
+
     private let geoJSONDecoder = MKGeoJSONDecoder()
-    
+
     func decode() throws -> Level {
         guard let imdfDirectory = Bundle.main.url(forResource: "IMDFData", withExtension: nil) else {
             throw IMDFError.invalidURL
         }
         let archive = IMDFArchive(directory: imdfDirectory)
-        
+
         let levels = try decodeFeatures(type: Level.self, from: .level, in: archive)
         let units = try decodeFeatures(type: Unit.self, from: .unit, in: archive)
         let openings = try decodeFeatures(type: Opening.self, from: .opening, in: archive)
-        
+
         guard levels.count == 1 else {
             throw IMDFError.invalidData
         }
-                
+
         let level = levels[0]
         level.units = units
         level.openings = openings
         return level
     }
-    
+
     private func decodeFeatures<T: IMDFDecodable>(
         type: T.Type,
         from file: IMDFArchive.File,

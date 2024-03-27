@@ -9,15 +9,11 @@ import UIKit
 
 // MARK: - View Input
 
-protocol QrScannerViewInput {
-    
-}
+protocol QrScannerViewInput {}
 
 // MARK: - Controller Output
 
-protocol QrScannerViewOutput: AnyObject {
-    
-}
+protocol QrScannerViewOutput: AnyObject {}
 
 // MARK: - RouteBuildingView
 
@@ -27,6 +23,4 @@ final class QrScannerView: UIView {
 
 // MARK: - View Input
 
-extension QrScannerView: QrScannerViewInput {
-    
-}
+extension QrScannerView: QrScannerViewInput {}
