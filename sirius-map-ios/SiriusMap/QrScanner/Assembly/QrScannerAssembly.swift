@@ -13,9 +13,9 @@ final class QrScannerAssembly {
     
     // MARK: - Properties
     
-    private var model: QrScannerModel?
-    private var view: QrScannerView?
-    private var controller: QrScannerController?
+    var model: QrScannerModel?
+    var view: QrScannerView?
+    var controller: QrScannerController?
     
     // MARK: - Initializer
     
