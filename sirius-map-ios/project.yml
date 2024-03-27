@@ -46,6 +46,6 @@ targets:
         SWIFT_OPTIMIZATION_LEVEL: "-Onone"
         TARGETED_DEVICE_FAMILY: 1
     preBuildScripts:
-      - name: RunSwiftFormatScript
+      - name: Run SwiftFormat Script
         script: "sh Scripts/swiftdata.sh"
 
