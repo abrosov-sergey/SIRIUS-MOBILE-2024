@@ -10,10 +10,13 @@ import UIKit
 
 private enum Icons: String {
     case qrScannerIcon = "QrScannerIcon"
+    case searchIcon = "SearchIcon"
 
     var size: CGSize {
         switch self {
         case .qrScannerIcon:
+            return CGSize(width: 56.0, height: 56.0)
+        case .searchIcon:
             return CGSize(width: 56.0, height: 56.0)
         }
     }
@@ -26,8 +29,9 @@ final class MapView: UIView {
     var onQRScannerButtonTap: (() -> Void)?
 
     private lazy var searchButton: UIButton = {
-        let button = ButtonWithIcon(type: .search)
+        var button = UIButton(frame: .zero)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: Icons.searchIcon.rawValue), for: .normal)
         return button
     }()
 
@@ -84,8 +88,10 @@ final class MapView: UIView {
 
         searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
         NSLayoutConstraint.activate([
-            searchButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -24.0),
+            searchButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             searchButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -18.0),
+            searchButton.widthAnchor.constraint(equalToConstant: Icons.searchIcon.size.width),
+            searchButton.heightAnchor.constraint(equalToConstant: Icons.searchIcon.size.height),
         ])
 
         qrScannerButton.addTarget(self, action: #selector(qrScannerButtonTapped), for: .touchUpInside)
