@@ -97,8 +97,5 @@ class AppStateNotifier extends _$AppStateNotifier {
     state = const BaseAppState();
   }
 
-  /// отображение мест из списка
-  void toSearch(){
-    state = SearchAppState();
-  }
+
 }

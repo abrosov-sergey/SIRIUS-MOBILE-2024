@@ -2,5 +2,6 @@ import 'package:flutter_sirius_map/src/features/search/domain/entities/point_sea
 
 abstract class PointSearchedRepositoryInterface {
 
-  Future<List<PointSearched>> getPoints();
+  List<PointSearched> getPoints();
+  Future<void> loadPoints();
 }

@@ -3,22 +3,55 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sirius_map/src/features/menu/presentation/widgets/build_route_button.dart';
-import 'package:flutter_sirius_map/src/features/search/data/providers/point_searched_repository.dart';
-import 'package:flutter_sirius_map/src/features/search/domain/providers/providers.dart';
+import 'package:flutter_sirius_map/src/features/search/domain/providers/serach_provider.dart';
 import 'package:flutter_sirius_map/src/utils/context.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+
+
+
 class SearchField extends ConsumerWidget{
-
-
   SearchField();
-
   final TextEditingController _controller1 = TextEditingController();
-  
+
+  @override
+  Widget build(context,ref){
+    final searchNotifier = ref.watch(searchStateNotifierProvider.notifier);
+    return TypeAheadField(
+      controller:  _controller1,
+      itemBuilder: itemBuilder,
+      onSelected: onSelected,
+      suggestionsCallback: suggestionsCallback,
+      builder: (context, controller, focusNode) {
+        return TextField(
+          controller: _controller1,
+          );
+        },  
+      )
+  } 
+
+}
+
+
+
+
+
+
+
+
+
+/*
+class SearchField extends ConsumerWidget{
+  SearchField();
+  final TextEditingController _controller1 = TextEditingController();
+
+
 
 
   @override
-  Widget build(context, WidgetRef ref){
+  Widget build(context, ref){
+    final searchNotifier = ref.watch(searchStateNotifierProvider.notifier);
     return Padding(
       padding:  EdgeInsets.symmetric(horizontal: 18.w),
       child: SizedBox(
@@ -33,7 +66,7 @@ class SearchField extends ConsumerWidget{
                 ),
                 controller: _controller1,
                 onChanged: (String value){
-                  ref.watch(nameProvider.notifier).state =_controller1.text;
+                 searchNotifier.updateName(value);
                 },
                
                 placeholder: context.localization.search,
@@ -64,4 +97,4 @@ class SearchField extends ConsumerWidget{
         )),
     );
   }
-}
+}*/
