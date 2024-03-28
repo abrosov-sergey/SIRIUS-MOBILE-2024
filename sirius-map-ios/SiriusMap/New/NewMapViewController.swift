@@ -137,4 +137,15 @@ extension NewMapViewController: MKMapViewDelegate {
             fatalError()
         }
     }
+
+    func mapView(_: MKMapView, didSelect annotation: MKAnnotation) {
+        if annotation is Occupant {
+            let coordinate = Coordinate(
+                latitude: annotation.coordinate.latitude,
+                longitude: annotation.coordinate.longitude
+            )
+            map.view(for: annotation)?.isSelected = false
+            delegate?.mapViewControler(self, didSelect: RouteService.shared.getClosetItem(for: coordinate))
+        }
+    }
 }

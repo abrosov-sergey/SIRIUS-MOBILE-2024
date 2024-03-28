@@ -114,8 +114,12 @@ extension RouteService: PathFinderProtocol {
         var validPath: [MapItem] = [RouteService.itemsByIndex[curr]!]
 
         while s != curr {
-            curr = from[curr]!
-            validPath.append(RouteService.itemsByIndex[curr]!)
+            if from[curr] != nil {
+                curr = from[curr]!
+                validPath.append(RouteService.itemsByIndex[curr]!)
+            } else {
+                break
+            }
         }
         validPath.reverse()
         return Route(path: validPath, eta: get_distance(f))

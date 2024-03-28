@@ -30,6 +30,9 @@ final class SheetNavigationController: UINavigationController {
 
         routeViewController = RouteViewController(endRouteItem: mapItem)
         routeViewController?.delegate = self
+        if viewControllers.first is SearchTableViewController {
+            setViewControllers([routeViewController!], animated: true)
+        }
     }
 
     func setRouteStart(_ mapItem: MapItem) {
@@ -40,6 +43,7 @@ final class SheetNavigationController: UINavigationController {
 
     private lazy var searchTableViewController: SearchTableViewController = {
         let search = SearchTableViewController(items: RouteService.mapItems)
+        search.title = "Куда"
         search.delegate = self
         return search
     }()

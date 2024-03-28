@@ -54,7 +54,6 @@ final class SearchTableViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        title = "Куда"
         if let sheet = sheetPresentationController {
             let fraction = UISheetPresentationController.Detent.custom { _ in self.sheetHeight }
             sheet.largestUndimmedDetentIdentifier = fraction.identifier
