@@ -44,7 +44,7 @@ class SearchStateNotifier extends _$SearchStateNotifier {
       final curState = state as LoadedPoint;
       pointSearched.clear();
       for (PointSearched point in curState.points) {
-        if (point.name.toLowerCase().contains(pointName)){
+        if (point.name.toLowerCase().contains(pointName)) {
           pointSearched.add(point);
         }
       }
