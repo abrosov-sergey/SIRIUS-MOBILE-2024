@@ -1,9 +1,21 @@
 # Mobile SiriusMapIOS Source Code Compilation Guide
 
+SiriusMapIOS - Application for building a route inside Sirius University. Inside the application, the functionality of scanning Qr codes is implemented, 
+which allows you to determine the user’s position. There is also the ability to manually select start and end points.
+
+![](Screenshots/LaunchScreenScreenshot.png)
+![](Screenshots/MapScreenScreenshot.png)
+
 ## Get the Code
 
 ```
 git clone https://github.com/abrosov-sergey/SIRIUS-MOBILE-2024.git
+```
+
+## Installing SwiftFormat
+
+```
+brew install swiftformat
 ```
 
 ## Installing XcodeGen
@@ -19,7 +31,6 @@ In the terminal, go to the project folder and call the following command:
 ```
 xcodegen generate
 ```
-
 
 # Mobile Flutter SiriusMap Source Code Compilation Guide
 
