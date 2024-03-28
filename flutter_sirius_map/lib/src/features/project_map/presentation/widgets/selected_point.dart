@@ -12,8 +12,6 @@ class SelectedPoint extends StatelessWidget {
     required this.deletePoint,
   });
 
-  String get text => 'id: ${placePoint.id}';
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -29,7 +27,7 @@ class SelectedPoint extends StatelessWidget {
           ),
         ),
         child: Text(
-          text,
+          placePoint.name,
           style: context.themeExtendTextStyles.bodyStyle,
         ),
       ),

@@ -29,7 +29,7 @@ class PointsService {
       final distNew = dist(ll, entry.value.pos);
       if (distOld == null || distOld > distNew) {
         if (distNew <= _maxPointsDist) {
-          ans = PlacePoint(id: entry.key, pos: entry.value.pos);
+          ans = entry.value;
         }
       }
     }
