@@ -6,7 +6,7 @@ abstract class RouteRepository {
 
   PlacePoint? getClosestPoint(LatLng point);
 
-  List<PlacePoint> getRoute(PlacePoint start, PlacePoint finish);
+  List<PlacePoint>? getRoute(PlacePoint start, PlacePoint finish);
 
   PlacePoint? getPointById(int id);
 }

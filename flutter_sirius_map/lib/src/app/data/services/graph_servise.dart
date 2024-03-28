@@ -15,7 +15,7 @@ class GraphServise {
         _pointsService = pointsService;
 
   /// получение маршрута с помощью дейкстры
-  List<PlacePoint> getRoute(PlacePoint start, PlacePoint finish) {
+  List<PlacePoint>? getRoute(PlacePoint start, PlacePoint finish) {
     final graph = _graphLoader.graph;
 
     List<int> tempRoute;
@@ -27,7 +27,7 @@ class GraphServise {
       if (kDebugMode) {
         print('error while dijkstra: $e');
       }
-      return [];
+      return null;
     }
     List<PlacePoint> resRoute = [];
 
@@ -36,6 +36,6 @@ class GraphServise {
         .map((id) => _pointsService.getById(id)!)
         .toList();
 
-    return resRoute;
+    return resRoute.isEmpty ? null : resRoute;
   }
 }
