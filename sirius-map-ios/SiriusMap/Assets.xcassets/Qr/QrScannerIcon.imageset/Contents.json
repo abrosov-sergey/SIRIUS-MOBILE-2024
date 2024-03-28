@@ -6,12 +6,10 @@
       "scale" : "1x"
     },
     {
-      "filename" : "qr-code-scan-icon 1.svg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "qr-code-scan-icon 2.svg",
       "idiom" : "universal",
       "scale" : "3x"
     }

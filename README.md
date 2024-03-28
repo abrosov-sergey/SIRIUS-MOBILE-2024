@@ -25,7 +25,7 @@ brew install xcodegen
 
 ## Usage
 
-In the terminal, go to the project folder and call the following command:
+In the terminal, go to the project folder (sirius-map-ios) and call the following command:
 
 ```
 xcodegen generate
