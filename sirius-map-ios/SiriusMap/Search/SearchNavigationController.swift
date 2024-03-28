@@ -73,10 +73,8 @@ final class SearchNavigationController: UINavigationController {
 // MARK: - SearchViewControllerDelegate
 
 extension SearchNavigationController: SearchTableViewControllerDelegate {
-    func searchTableViewController(didSelect mapItem: MapItem) {
-        
-    }
-    
+    func searchTableViewController(didSelect _: MapItem) {}
+
     func searchTableViewController(didSelectRowAt indexPath: IndexPath) {
         if viewController.title == "Поиск" {
             let mapItem = MapItem.sampleData[indexPath.row]

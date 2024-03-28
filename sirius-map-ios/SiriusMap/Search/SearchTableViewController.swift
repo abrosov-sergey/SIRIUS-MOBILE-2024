@@ -16,7 +16,6 @@ protocol SearchTableViewControllerDelegate: AnyObject {
 }
 
 final class SearchTableViewController: UITableViewController {
-    
     // MARK: - Properties
 
     weak var delegate: SearchTableViewControllerDelegate?
