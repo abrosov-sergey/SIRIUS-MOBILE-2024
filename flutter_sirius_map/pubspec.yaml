@@ -53,6 +53,7 @@ dependencies:
   dijkstra: ^0.0.4
   shared_preferences: ^2.2.2
   json_annotation: ^4.8.1
+  mobile_scanner: ^4.0.1
 
 
 dev_dependencies:

@@ -35,8 +35,7 @@ class BaseAppStateWidget extends ConsumerWidget {
           ),
         ),
         FavoriteBlocWidget(
-          onFavoriteChoice: (id) =>
-              notifier.onSetChoiceAppState(placePointId: id),
+          onFavoriteChoice: (id) => notifier.onFinishPointChoice(id),
         ),
       ],
     );

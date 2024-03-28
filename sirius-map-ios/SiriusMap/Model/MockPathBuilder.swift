@@ -7,6 +7,6 @@
 
 struct MockPathBuilder: PathBuilderProtocol {
     func route(start _: MapItem, end _: MapItem) -> Route {
-        Route(eta: 3.0, path: MapItem.sampleData.reversed())
+        Route(path: MapItem.sampleData.reversed(), eta: 3.0)
     }
 }

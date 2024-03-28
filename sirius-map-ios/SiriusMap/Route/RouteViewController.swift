@@ -9,15 +9,31 @@ import Foundation
 import SwiftUI
 import UIKit
 
+protocol RouteViewControllerDelegate: AnyObject {
+    func onTapStartCell()
+    func onTapEndCell()
+    func onChangeRoute()
+}
+
 final class RouteViewController: UIViewController {
+    func setRouteStart(_: MapItem) {}
+
+    func setRouteEnd(_: MapItem) {}
+
+    weak var delegate: RouteViewControllerDelegate?
+
+    private lazy var actions: RouteView.Actions = .init(
+        onTapStartCell: delegate?.onTapStartCell ?? {},
+        onTapEndCell: delegate?.onTapEndCell ?? {},
+        onChangeRoute: delegate?.onChangeRoute ?? {}
+    )
+
     private let sheetHeight: CGFloat = 200.0
 
-    let from: String
-    let to: String
+    private let endRouteItem: MapItem
 
-    init(from: String, to: String) {
-        self.from = from
-        self.to = to
+    init(endRouteItem: MapItem) {
+        self.endRouteItem = endRouteItem
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -27,7 +43,12 @@ final class RouteViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private lazy var hostingController = UIHostingController(rootView: RouteView(from: from, to: to))
+    private lazy var hostingController = UIHostingController(
+        rootView: RouteView(
+            endRouteItem,
+            actions: actions
+        )
+    )
 
     override func viewDidLoad() {
         super.viewDidLoad()
