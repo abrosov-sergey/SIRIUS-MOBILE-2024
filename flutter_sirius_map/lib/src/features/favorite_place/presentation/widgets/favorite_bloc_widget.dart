@@ -11,7 +11,11 @@ import 'package:flutter_sirius_map/src/core/utils/context.dart';
 import 'package:flutter_sirius_map/src/core/utils/sliver_utils.dart';
 
 class FavoriteBlocWidget extends ConsumerWidget {
-  const FavoriteBlocWidget({super.key});
+  final void Function(int) onFavoriteChoice;
+  const FavoriteBlocWidget({
+    required this.onFavoriteChoice,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -81,7 +85,7 @@ class FavoriteBlocWidget extends ConsumerWidget {
                     text: favPlaces[index].name,
                     iconData: Icons.location_on,
                     showDeleteButton: isEditMode,
-                    onTap: _tapFavoritePlace,
+                    onTap: () => onFavoriteChoice(index),
                   ),
                 ),
               ],
@@ -92,10 +96,6 @@ class FavoriteBlocWidget extends ConsumerWidget {
     );
   }
 }
-
-VoidCallback _tapFavoritePlace = () {
-  // TODO: Обработать клик на favoritePlace
-};
 
 Future<void> _tapAdd(WidgetRef ref) async {
   ref.read(favoritePlacesProvider.notifier).addNewPlace(

@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "qr-code-scan-icon.svg",
+      "filename" : "splash-bg.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "splash-bg@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "splash-bg@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

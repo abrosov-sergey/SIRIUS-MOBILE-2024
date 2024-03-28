@@ -29,6 +29,10 @@ class ChoiceAppState extends AppState {
         start: start ?? this.start,
         finish: finish ?? this.finish,
       );
+
+  ChoiceAppState withStartNull() => ChoiceAppState(finish: finish);
+
+  ChoiceAppState withFinishNull() => ChoiceAppState(start: start);
 }
 
 sealed class RouteBuilderAppState extends AppState {

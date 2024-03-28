@@ -80,7 +80,7 @@ extension SearchNavigationController: SearchTableViewControllerDelegate {
             pushViewController(viewController, animated: true)
             searchDelegate?.searchNavigationController(didSelectMapItem: mapItem)
         } else {
-            let routeViewController = RouteViewController(from: "Туалет", to: "Выход")
+            let routeViewController = RouteViewController(endRouteItem: MapItem.sampleData[0])
             routeViewController.title = "Маршрут"
             pushViewController(routeViewController, animated: true)
         }
