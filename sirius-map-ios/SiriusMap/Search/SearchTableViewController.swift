@@ -64,7 +64,7 @@ final class SearchTableViewController: UITableViewController {
 
     func updateTable(for searchString: String) {
         filteredItems = items.filter { item -> Bool in
-            String(item.id).localizedCaseInsensitiveContains(searchString)
+            String(item.title).localizedCaseInsensitiveContains(searchString)
         }
     }
 
@@ -91,7 +91,7 @@ final class SearchTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: .reuseIdentifier, for: indexPath)
 
         var content = cell.defaultContentConfiguration()
-        content.text = String(filteredItems[indexPath.row].id)
+        content.text = filteredItems[indexPath.row].title
 
         cell.contentConfiguration = content
         return cell
@@ -101,6 +101,6 @@ final class SearchTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        delegate?.searchTableViewController(didSelect: items[indexPath.row])
+        delegate?.searchTableViewController(didSelect: filteredItems[indexPath.row])
     }
 }

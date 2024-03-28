@@ -28,6 +28,31 @@ final class NewMapViewController: UIViewController {
         super.viewDidLoad()
         map.delegate = self
         view.addSubview(map)
+        setupMap()
+    }
+
+    private func setupMap() {
+        var level: Level?
+        do {
+            level = try IMDFDecoder().decode()
+        } catch {
+            print(error)
+        }
+
+        if let level, let levelOverlay = level.overlay {
+            let unitOverlays = level.units.compactMap { $0.overlay }
+            let openingOverlays = level.openings.compactMap { $0.overlay }
+
+            let overlays = [levelOverlay] + unitOverlays + openingOverlays
+            guard let levelOverlay = overlays.first else { fatalError() }
+
+            map.setVisibleMapRect(
+                levelOverlay.boundingMapRect,
+                edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
+                animated: true
+            )
+            map.addOverlays(overlays)
+        }
     }
 }
 
@@ -67,7 +92,7 @@ extension NewMapViewController: MapViewControllerInterface {
     }
 
     func drawRoute(start: MapItem, end: MapItem) {
-        let route = MockPathBuilder().route(start: start, end: end)
+        let route = RouteService.shared.getRoute(start: start, end: end)
         let overlay = RouteOverlay(path: route.path)
         routeRenderer = RouteRenderer(routeOverlay: overlay)
         map.addOverlay(overlay, level: .aboveRoads)

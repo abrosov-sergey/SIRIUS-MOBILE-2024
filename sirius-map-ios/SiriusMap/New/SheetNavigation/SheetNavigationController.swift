@@ -39,7 +39,7 @@ final class SheetNavigationController: UINavigationController {
     weak var sheetDelegate: SheetNavigationControllerDelegate?
 
     private lazy var searchTableViewController: SearchTableViewController = {
-        let search = SearchTableViewController(items: MapItem.sampleData)
+        let search = SearchTableViewController(items: RouteService.mapItems)
         search.delegate = self
         return search
     }()
