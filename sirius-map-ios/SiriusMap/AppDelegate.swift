@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.splashPresenter?.dismiss { [weak self] in
                 self?.splashPresenter = nil
+                
                 self?.window?.rootViewController = RootNavigationController()
                 self?.window?.makeKeyAndVisible()
             }

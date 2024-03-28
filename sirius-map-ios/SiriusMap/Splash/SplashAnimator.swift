@@ -43,16 +43,16 @@ final class SplashAnimator: SplashAnimatorDescription {
     func animateAppearance() {
         foregroundSplashWindow.isHidden = false
 
-//        foregroundSplashViewController.textImageView.transform = CGAffineTransform(translationX: 0, y: 20)
-//        UIView.animate(withDuration: 0.3, animations: {
-//            self.foregroundSplashViewController.logoImageView.transform = CGAffineTransform(scaleX: 88 / 72, y: 88 / 72)
-        ////            self.foregroundSplashViewController.textImageView.transform = .identity
-//        })
+        foregroundSplashViewController.textImageView.transform = CGAffineTransform(translationX: 0, y: 20)
+        UIView.animate(withDuration: 0.3, animations: {
+            self.foregroundSplashViewController.logoImageView.transform = CGAffineTransform(scaleX: 88 / 72, y: 88 / 72)
+            self.foregroundSplashViewController.textImageView.transform = .identity
+        })
 
-//        foregroundSplashViewController.textImageView.alpha = 0
-//        UIView.animate(withDuration: 0.15, animations: {
-//            self.foregroundSplashViewController.textImageView.alpha = 1
-//        })
+        foregroundSplashViewController.textImageView.alpha = 0
+        UIView.animate(withDuration: 0.15, animations: {
+            self.foregroundSplashViewController.textImageView.alpha = 1
+        })
     }
 
     // MARK: - Disappearance
@@ -73,10 +73,10 @@ final class SplashAnimator: SplashAnimatorDescription {
         mainWindow.layer.mask = mask
 
         // Fading logo image
-//        let maskBackgroundView = UIImageView(image: SplashViewController.logoImageBig)
-//        maskBackgroundView.frame = mask.frame
-//        mainWindow.addSubview(maskBackgroundView)
-//        mainWindow.bringSubviewToFront(maskBackgroundView)
+        let maskBackgroundView = UIImageView(image: SplashViewController.logoImageBig)
+        maskBackgroundView.frame = mask.frame
+        mainWindow.addSubview(maskBackgroundView)
+        mainWindow.bringSubviewToFront(maskBackgroundView)
 
         CATransaction.setCompletionBlock {
             mainWindow.layer.mask = nil
@@ -90,20 +90,20 @@ final class SplashAnimator: SplashAnimatorDescription {
             mainWindow.transform = .identity
         })
 
-//        for layer in [mask, maskBackgroundView.layer] {
-//            addScalingAnimation(to: layer, duration: 0.6)
-//            addRotationAnimation(to: layer, duration: 0.6)
-//        }
-//
-//        UIView.animate(withDuration: 0.1, delay: 0.1, options: [], animations: {
-//            maskBackgroundView.alpha = 0
-//        }) { _ in
-//            maskBackgroundView.removeFromSuperview()
-//        }
+        for layer in [mask, maskBackgroundView.layer] {
+            addScalingAnimation(to: layer, duration: 0.6)
+            addRotationAnimation(to: layer, duration: 0.6)
+        }
 
-//        UIView.animate(withDuration: 0.3) {
-//            self.backgroundSplashViewController.textImageView.alpha = 0
-//        }
+        UIView.animate(withDuration: 0.1, delay: 0.1, options: [], animations: {
+            maskBackgroundView.alpha = 0
+        }) { _ in
+            maskBackgroundView.removeFromSuperview()
+        }
+
+        UIView.animate(withDuration: 0.3) {
+            self.backgroundSplashViewController.textImageView.alpha = 0
+        }
 
         CATransaction.commit()
     }

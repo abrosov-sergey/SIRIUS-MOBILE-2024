@@ -13,6 +13,8 @@ final class SplashViewController: UIViewController {
     var backgroundImage = UIImageView(image: UIImage(named: "SplashBackground"))
     var logoImageView = UIImageView(image: UIImage(named: "SiriusMapIcon"))
 
+    var textImageView = UIImageView(image: nil)
+
     var logoIsHidden: Bool = false
     var textImage: UIImage?
 
@@ -25,6 +27,7 @@ final class SplashViewController: UIViewController {
 
         for item in [backgroundImage, logoImageView] {
             view.addSubview(item)
+            item.translatesAutoresizingMaskIntoConstraints = false
         }
 
         NSLayoutConstraint.activate([
@@ -37,8 +40,13 @@ final class SplashViewController: UIViewController {
         NSLayoutConstraint.activate([
             logoImageView.widthAnchor.constraint(equalToConstant: 240.0),
             logoImageView.heightAnchor.constraint(equalToConstant: 128.0),
-            logoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 362.0),
-            logoImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 76.0),
+            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
+    }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        print(view.bounds)
     }
 }
