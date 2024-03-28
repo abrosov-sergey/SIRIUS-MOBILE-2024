@@ -7,6 +7,20 @@
 
 import SwiftUI
 
+class ItemsArray: ObservableObject {
+    @Published var array: [ListItem] = []
+}
+
+enum ListItemType: String {
+    case start = "location.fill"
+    case end = "figure.walk.motion"
+}
+
+struct ListItem {
+    var type: ListItemType
+    var title: String?
+}
+
 struct RouteView: View {
     struct Actions {
         var onTapStartCell: () -> Void
@@ -20,24 +34,14 @@ struct RouteView: View {
         )
     }
     
-    private enum ListItemType: String {
-        case start = "location.fill"
-        case end = "figure.walk.motion"
-    }
-
-    private struct ListItem {
-        var type: ListItemType
-        var title: String?
-    }
-
-    @State private var listItems: [ListItem]
+    @ObservedObject var listItems = ItemsArray()
 
     private let actions: Actions
 
     init(_ endPoint: MapItem, actions: Actions) {
         self.actions = actions
 
-        listItems = [
+        listItems.array = [
             ListItem(
                 type: .start,
                 title: nil
@@ -52,7 +56,7 @@ struct RouteView: View {
     var body: some View {
         VStack {
             List {
-                ForEach(listItems, id: \.type.hashValue) { item in
+                ForEach(listItems.array, id: \.type.hashValue) { item in
 
                     Button {
                         switch item.type {
@@ -73,37 +77,62 @@ struct RouteView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
                 .onMove { from, to in
-                    listItems = swapListItems(listItems)
+                    listItems.array = swapListItems(listItems.array)
                     actions.onChangeRoute()
                 }
             }
             .toolbar {
                 EditButton()
             }.environment(\.editMode, .constant(.active))
+            Spacer()
         }
-    }
-    
-    private func swapListItems(_ list: [ListItem]) -> [ListItem] {
-        guard list.count == 2 else { return list }
-        return [
-            ListItem(
-                type: list[0].type,
-                title: list[1].title
-            ),
-            ListItem(
-                type: list[1].type,
-                title: list[0].title
-            )
-        ]
     }
 
     func setRouteStart(_ start: MapItem) {
-        listItems[0].title = start.title
+        guard listItems.array.count == 2 else { return }
+        
+        let newItems = [
+            ListItem(
+                type: .start,
+                title: start.title
+            ),
+            ListItem(
+                type: .end,
+                title: listItems.array[1].title
+            )
+        ]
+        
+        listItems.array = newItems
     }
 
     func setRouteEnd(_ end: MapItem) {
-        listItems[0].title = end.title
+        guard listItems.array.count == 2 else { return }
+        
+        listItems.array = [
+            ListItem(
+                type: .start,
+                title: listItems.array[0].title
+            ),
+            ListItem(
+                type: .end,
+                title: end.title
+            )
+        ]
     }
+}
+
+private func swapListItems(_ list: [ListItem]) -> [ListItem] {
+    guard list.count == 2 else { return list }
+    return [
+        ListItem(
+            type: list[0].type,
+            title: list[1].title
+        ),
+        ListItem(
+            type: list[1].type,
+            title: list[0].title
+        )
+    ]
 }
 
 #Preview {
