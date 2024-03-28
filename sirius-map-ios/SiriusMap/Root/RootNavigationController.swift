@@ -41,7 +41,7 @@ protocol MapViewControllerInterface {
 
 final class RootNavigationController: UINavigationController {
     private let useNewMap = true
-    
+
     init(routeService: Routing) {
         self.routeService = routeService
         super.init(nibName: nil, bundle: nil)
@@ -51,7 +51,7 @@ final class RootNavigationController: UINavigationController {
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private var routeService: Routing
 
     private lazy var mapViewController: MapViewControllerInterface & UIViewController = {
