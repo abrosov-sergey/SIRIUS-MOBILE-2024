@@ -2,27 +2,29 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_sirius_map/src/app/domain/place_point.dart';
 import 'package:latlong2/latlong.dart';
 
 class PointsLoader {
   /// точки, храним оптимизированно для обращения по индексу
-  late Map<int, LatLng> pointsById;
+  late Map<int, PlacePoint> pointsById;
 
   /// подгрузка и декодинг координат точек
-  static const _pointsPath = 'assets/points/positions.geojson';
+  static const _pointsPath = 'assets/points/anchor.geojson';
   Future<void> init() async {
     final json = await rootBundle.loadString(_pointsPath);
-    final info = jsonDecode(json)['features'];
+    final info = jsonDecode(json);
 
-    pointsById = <int, LatLng>{};
+    pointsById = <int, PlacePoint>{};
 
     for (final line in info) {
-      int id = line['properties']['id'];
-      double lat = line['geometry']['coordinates'][0][1];
-      double lng = line['geometry']['coordinates'][0][0];
+      int id = line['id'];
+      double lat = line['coordinates'][1];
+      double lng = line['coordinates'][0];
+      String? name = line['title'];
       final ll = LatLng(lat, lng);
 
-      pointsById[id] = ll;
+      pointsById[id] = PlacePoint(id: id, pos: ll, name: name);
     }
   }
 }

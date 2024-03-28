@@ -14,7 +14,7 @@ class ChoiceAppStateWidget extends ConsumerWidget {
 
   String? _getPointText(PlacePoint? placePoint) {
     if (placePoint == null) return null;
-    return placePoint.id.toString();
+    return placePoint.name;
   }
 
   @override

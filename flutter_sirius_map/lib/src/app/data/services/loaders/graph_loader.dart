@@ -20,8 +20,12 @@ class GraphLoader {
 
     graph = <int, Map<int, double>>{};
     for (var line in lines) {
-      final lineParsed =
-          line.split(RegExp(':? ')).map((e) => int.parse(e)).toList();
+      final lineParsed = line
+          .replaceAll(RegExp(r':|,|\[|\]'), '')
+          .split(' ')
+          .where((element) => element.isNotEmpty)
+          .map((e) => int.parse(e))
+          .toList();
       final v = lineParsed[0];
       for (int i = 1; i < lineParsed.length; i++) {
         final u = lineParsed[i];
@@ -29,7 +33,7 @@ class GraphLoader {
           continue;
         }
 
-        final pointsDist = dist(points[v]!, points[u]!);
+        final pointsDist = dist(points[v]!.pos, points[u]!.pos);
 
         graph[v] ??= <int, double>{};
         graph[v]![u] = pointsDist;
