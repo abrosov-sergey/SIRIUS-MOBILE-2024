@@ -38,7 +38,7 @@ final class SearchNavigationController: UINavigationController {
     // MARK: - Methods
 
     private func makeSearchViewController() -> UIViewController {
-        let searchViewController = SearchTableViewController(items: MapItem.sampleData.map { $0.title ?? String($0.id) })
+        let searchViewController = SearchTableViewController(items: MapItem.sampleData)
         searchViewController.delegate = self
         return searchViewController
     }
@@ -73,6 +73,10 @@ final class SearchNavigationController: UINavigationController {
 // MARK: - SearchViewControllerDelegate
 
 extension SearchNavigationController: SearchTableViewControllerDelegate {
+    func searchTableViewController(didSelect mapItem: MapItem) {
+        
+    }
+    
     func searchTableViewController(didSelectRowAt indexPath: IndexPath) {
         if viewController.title == "Поиск" {
             let mapItem = MapItem.sampleData[indexPath.row]

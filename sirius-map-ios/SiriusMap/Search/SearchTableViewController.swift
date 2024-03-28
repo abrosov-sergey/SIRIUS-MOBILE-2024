@@ -12,16 +12,17 @@ private extension String {
 }
 
 protocol SearchTableViewControllerDelegate: AnyObject {
-    func searchTableViewController(didSelectRowAt indexPath: IndexPath)
+    func searchTableViewController(didSelect mapItem: MapItem)
 }
 
 final class SearchTableViewController: UITableViewController {
+    
     // MARK: - Properties
 
     weak var delegate: SearchTableViewControllerDelegate?
 
-    private let items: [String]
-    private var filteredItems: [String] = [] {
+    private let items: [MapItem]
+    private var filteredItems: [MapItem] = [] {
         didSet {
             tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
         }
@@ -29,7 +30,7 @@ final class SearchTableViewController: UITableViewController {
 
     // MARK: - Initializers
 
-    init(items: [String]) {
+    init(items: [MapItem]) {
         self.items = items
         super.init(style: .plain)
         filteredItems = items
@@ -53,7 +54,7 @@ final class SearchTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let sheet = sheetPresentationController {
-            sheet.detents = [.large()]
+            sheet.detents = [.medium(), .large()]
             sheet.animateChanges {
                 sheet.selectedDetentIdentifier = sheet.selectedDetentIdentifier ?? .medium
             }
@@ -64,7 +65,7 @@ final class SearchTableViewController: UITableViewController {
 
     func updateTable(for searchString: String) {
         filteredItems = items.filter { item -> Bool in
-            item.localizedCaseInsensitiveContains(searchString)
+            String(item.id).localizedCaseInsensitiveContains(searchString)
         }
     }
 
@@ -91,7 +92,7 @@ final class SearchTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: .reuseIdentifier, for: indexPath)
 
         var content = cell.defaultContentConfiguration()
-        content.text = filteredItems[indexPath.row]
+        content.text = String(filteredItems[indexPath.row].id)
 
         cell.contentConfiguration = content
         return cell
@@ -101,6 +102,6 @@ final class SearchTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        delegate?.searchTableViewController(didSelectRowAt: indexPath)
+        delegate?.searchTableViewController(didSelect: items[indexPath.row])
     }
 }
