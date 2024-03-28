@@ -27,7 +27,7 @@ class RouteRepositoryImpl implements RouteRepository {
   }
 
   @override
-  PlacePoint getClosestPoint(LatLng ll) {
+  PlacePoint? getClosestPoint(LatLng ll) {
     return _pointsService.getClosest(ll);
   }
 

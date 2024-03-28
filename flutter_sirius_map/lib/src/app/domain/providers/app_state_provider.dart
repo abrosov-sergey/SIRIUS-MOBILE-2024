@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_sirius_map/src/app/data/implementations/route_repository_imp.dart';
 import 'package:flutter_sirius_map/src/app/data/repositories/route_repository.dart';
 import 'package:flutter_sirius_map/src/app/domain/states/app_state.dart';
@@ -49,19 +50,41 @@ class AppStateNotifier extends _$AppStateNotifier {
     }
   }
 
-  /// убрать точку старта
-  void onStartPointCancel() {
+  /// убрать точку
+  void onPointCancel(int id) {
+    if (kDebugMode) {
+      print('onPointCancel - appStateProvider');
+    }
     if (state is ChoiceAppState) {
       final currState = state as ChoiceAppState;
-      state = currState.copyWith(start: null);
+      if (currState.start != null && currState.start!.id == id) {
+        onStartPointCancel();
+      }
+      if (currState.finish != null && currState.finish!.id == id) {
+        onFinishPointCancel();
+      }
+    }
+  }
+
+  /// убрать точку старта
+  void onStartPointCancel() {
+    if (kDebugMode) {
+      print('onStartPointCancel - appStateProvider');
+    }
+    if (state is ChoiceAppState) {
+      final currState = state as ChoiceAppState;
+      state = currState.withStartNull();
     }
   }
 
   /// убрать точку финиша
   void onFinishPointCancel() {
+    if (kDebugMode) {
+      print('onFinishPointCancel - appStateProvider');
+    }
     if (state is ChoiceAppState) {
       final currState = state as ChoiceAppState;
-      state = currState.copyWith(finish: null);
+      state = currState.withFinishNull();
     }
   }
 
