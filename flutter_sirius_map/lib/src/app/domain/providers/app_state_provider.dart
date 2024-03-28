@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_sirius_map/src/app/data/implementations/route_repository_imp.dart';
 import 'package:flutter_sirius_map/src/app/data/repositories/route_repository.dart';
+import 'package:flutter_sirius_map/src/app/domain/place_point.dart';
 import 'package:flutter_sirius_map/src/app/domain/states/app_state.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -36,6 +37,15 @@ class AppStateNotifier extends _$AppStateNotifier {
         // иначе если нет второй, то ее
         state = currState.copyWith(finish: placePoint);
       }
+    }
+  }
+
+  void onSetChoiceAppState({int? placePointId}) {
+    if (state is BaseAppState) {
+      PlacePoint? placePoint = placePointId != null
+          ? _routeRepository.getPointById(placePointId)
+          : null;
+      state = ChoiceAppState(start: placePoint);
     }
   }
 

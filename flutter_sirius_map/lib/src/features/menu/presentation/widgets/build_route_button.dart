@@ -3,7 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_sirius_map/src/core/utils/context.dart';
 
 class BuildRouteButton extends StatefulWidget {
-  const BuildRouteButton({super.key});
+  final void Function() callBack;
+  const BuildRouteButton({
+    super.key,
+    required this.callBack,
+  });
 
   @override
   State<BuildRouteButton> createState() => _BuildRouteButtonState();
@@ -31,6 +35,7 @@ class _BuildRouteButtonState extends State<BuildRouteButton> {
         });
       },
       onTap: () {
+        widget.callBack();
         HapticFeedback.lightImpact();
       },
       child: AnimatedContainer(

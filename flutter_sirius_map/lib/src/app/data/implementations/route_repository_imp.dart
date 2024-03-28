@@ -35,4 +35,9 @@ class RouteRepositoryImpl implements RouteRepository {
   List<PlacePoint> getRoute(PlacePoint start, PlacePoint finish) {
     return _graphService.getRoute(start, finish);
   }
+
+  @override
+  PlacePoint? getPointById(int id) {
+    return _pointsService.getById(id);
+  }
 }
