@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:flutter_sirius_map/src/app/domain/providers/app_state_provider.dart';
+import 'package:flutter_sirius_map/src/app/domain/providers/app_state_provider.dart';
 import 'package:flutter_sirius_map/src/core/utils/context.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
@@ -57,8 +57,9 @@ void _onDetect(BarcodeCapture capture, BuildContext context, WidgetRef ref) {
       final placeId = Uri.parse(url).queryParameters['placeId'];
       if (placeId != null) {
         Navigator.of(context).pop();
-
-        // ref.read(appStateNotifierProvider.notifier).on;
+        ref
+            .read(appStateNotifierProvider.notifier)
+            .onSetChoiceAppState(placePointId: int.parse(placeId));
       }
     }
   }
