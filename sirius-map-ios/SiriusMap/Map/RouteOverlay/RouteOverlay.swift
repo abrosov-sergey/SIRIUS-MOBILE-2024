@@ -28,8 +28,8 @@ final class RouteOverlay: NSObject, MKOverlay {
     let boundingMapRect: MKMapRect = .world
 
     init(path: [MapItem]) {
-        guard  let routeStart = path.first,
-               let routeEnd = path.last
+        guard let routeStart = path.first,
+              let routeEnd = path.last
         else {
             fatalError("Empty path")
         }
