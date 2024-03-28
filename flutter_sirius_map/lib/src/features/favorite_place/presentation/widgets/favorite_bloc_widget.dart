@@ -1,10 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_sirius_map/src/app/domain/providers/app_state_provider.dart';
+import 'package:flutter_sirius_map/src/app/domain/states/app_state.dart';
 import 'package:flutter_sirius_map/src/core/widgets/animated_text.dart';
-import 'package:flutter_sirius_map/src/features/favorite_place/domain/models/favorite_place.dart';
 import 'package:flutter_sirius_map/src/features/favorite_place/presentation/providers/favorite_places_provider.dart';
 import 'package:flutter_sirius_map/src/features/favorite_place/presentation/widgets/favorite_item.dart';
 import 'package:flutter_sirius_map/src/core/utils/context.dart';
@@ -75,7 +74,7 @@ class FavoriteBlocWidget extends ConsumerWidget {
                   showDeleteButton: false,
                   text: context.localization.add,
                   iconData: Icons.add,
-                  onTap: () => _tapAdd(ref),
+                  onTap: () => _tapAdd(ref, context),
                 ).sliver,
                 SliverList.builder(
                   itemCount: favPlaces.length,
@@ -85,7 +84,7 @@ class FavoriteBlocWidget extends ConsumerWidget {
                     text: favPlaces[index].name,
                     iconData: Icons.location_on,
                     showDeleteButton: isEditMode,
-                    onTap: () => onFavoriteChoice(index),
+                    onTap: () => onFavoriteChoice(favPlaces[index].placeId),
                   ),
                 ),
               ],
@@ -97,11 +96,17 @@ class FavoriteBlocWidget extends ConsumerWidget {
   }
 }
 
-Future<void> _tapAdd(WidgetRef ref) async {
-  ref.read(favoritePlacesProvider.notifier).addNewPlace(
-        FavoritePlaceInstance(
-          placeId: Random().nextInt(100),
-          name: "AAAAAAAAA",
-        ),
-      );
+Future<void> _tapAdd(WidgetRef ref, BuildContext context) async {
+  final state = ref.read(appStateNotifierProvider);
+  if (state is! BaseAppState) return;
+  final placePoint = state.point;
+  if (placePoint == null) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(context.localization.addFavoriteMistake),
+      ),
+    );
+  } else {
+    ref.read(favoritePlacesProvider.notifier).addNewPlace(placePoint);
+  }
 }

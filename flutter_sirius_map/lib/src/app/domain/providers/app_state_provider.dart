@@ -43,21 +43,28 @@ class AppStateNotifier extends _$AppStateNotifier {
 
     // начинаем выбор маршрута если в базовом состоянии
     if (state is BaseAppState) {
-      state = ChoiceAppState(start: placePoint);
+      state = BaseAppState(point: placePoint);
     } else if (state is ChoiceAppState) {
       updateChoiceState(placePoint, override: false);
     }
   }
 
-  /// переход в состояние ChoiceAppState с возможностью выбора начальной точки
-  void onSetChoiceAppState({int? placePointId}) {
+  /// добавляем точку по ID
+  void addPointById({int? placePointId}) {
     PlacePoint? placePoint = placePointId != null
         ? _routeRepository.getPointById(placePointId)
         : null;
     if (state is BaseAppState) {
-      state = ChoiceAppState(start: placePoint);
+      state = BaseAppState(point: placePoint);
     } else if (state is ChoiceAppState) {
       updateChoiceState(placePoint);
+    }
+  }
+
+  /// переходим в ChoiceAppState
+  void setChoiceAppState() {
+    if (state is BaseAppState) {
+      state = ChoiceAppState(start: (state as BaseAppState).point);
     }
   }
 
@@ -102,6 +109,9 @@ class AppStateNotifier extends _$AppStateNotifier {
   void onPointCancel(int id) {
     if (kDebugMode) {
       print('onPointCancel - appStateProvider');
+    }
+    if (state is BaseAppState) {
+      state = const BaseAppState();
     }
     if (state is ChoiceAppState) {
       final currState = state as ChoiceAppState;

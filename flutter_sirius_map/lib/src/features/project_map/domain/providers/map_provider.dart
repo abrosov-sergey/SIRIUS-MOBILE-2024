@@ -25,6 +25,9 @@ class MapNotifier extends _$MapNotifier {
     if (appState is RouteAppState) {
       return MapStateRoute((appState).route.map((e) => e.pos).toList());
     }
+    if (appState is BaseAppState) {
+      return MapStatePoints(start: appState.point);
+    }
     return const MapStatePoints();
   }
 

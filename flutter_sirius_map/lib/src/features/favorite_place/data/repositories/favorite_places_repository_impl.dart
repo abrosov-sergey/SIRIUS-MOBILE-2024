@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_sirius_map/src/features/favorite_place/data/repositories/favorite_places_repository.dart';
 import 'package:flutter_sirius_map/src/features/favorite_place/domain/models/favorite_place.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,16 +14,19 @@ class FavoritePlacesRepositoryImpl implements FavoritePlacesRepository {
 
   @override
   Future<void> addPlace(FavoritePlaceInstance place) async {
-    List<FavoritePlaceInstance> favPlaces = getAllPlaces().toList();
+    Set<FavoritePlaceInstance> favPlaces = getAllPlaces().toSet();
 
     favPlaces.add(place);
 
-    _localStorage.setString(_favPlacesKey, jsonEncode(favPlaces));
+    _localStorage.setString(_favPlacesKey, jsonEncode(favPlaces.toList()));
   }
 
   @override
   List<FavoritePlaceInstance> getAllPlaces() {
     final favPlacesString = _localStorage.getString(_favPlacesKey);
+    if (kDebugMode) {
+      print(favPlacesString);
+    }
     List<FavoritePlaceInstance> result = [];
     if (favPlacesString == null) {
       return [];

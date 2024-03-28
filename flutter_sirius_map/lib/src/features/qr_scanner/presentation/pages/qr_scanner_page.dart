@@ -84,7 +84,7 @@ void _onDetect(BarcodeCapture capture, BuildContext context, WidgetRef ref) {
         Navigator.of(context).pop();
         ref
             .read(appStateNotifierProvider.notifier)
-            .onSetChoiceAppState(placePointId: int.parse(placeId));
+            .addPointById(placePointId: int.parse(placeId));
       }
     }
   }

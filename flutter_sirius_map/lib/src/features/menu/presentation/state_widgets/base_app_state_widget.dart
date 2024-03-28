@@ -29,13 +29,13 @@ class BaseAppStateWidget extends ConsumerWidget {
               ),
               SizedBox(width: 10.w),
               BuildRouteButton(
-                callBack: () => notifier.onSetChoiceAppState(),
+                callBack: () => notifier.setChoiceAppState(),
               ),
             ],
           ),
         ),
         FavoriteBlocWidget(
-          onFavoriteChoice: (id) => notifier.onFinishPointChoice(id),
+          onFavoriteChoice: (id) => notifier.addPointById(placePointId: id),
         ),
       ],
     );
