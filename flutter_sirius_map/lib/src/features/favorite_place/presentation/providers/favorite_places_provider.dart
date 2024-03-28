@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_sirius_map/src/app/domain/place_point.dart';
 import 'package:flutter_sirius_map/src/features/favorite_place/data/repositories/favorite_places_repository.dart';
 import 'package:flutter_sirius_map/src/features/favorite_place/domain/models/favorite_place.dart';
 import 'package:flutter_sirius_map/src/features/favorite_place/domain/providers/favorite_places_repository_provider.dart';
@@ -27,12 +28,14 @@ class FavoritePlacesProvider extends StateNotifier<FavoritePlacesState> {
     state = state.copyWith(isEditMode: !currentModeState);
   }
 
-  Future<void> addNewPlace(FavoritePlaceInstance favPlace) async {
-    List<FavoritePlaceInstance> currentList = state.favoritePlaces.toList();
+  Future<void> addNewPlace(PlacePoint placePoint) async {
+    final favPlace = FavoritePlaceInstance(
+      name: placePoint.name,
+      placeId: placePoint.id,
+    );
     await _fpRepo.addPlace(favPlace);
-    currentList.add(favPlace);
 
-    state = state.copyWith(favoritePlaces: currentList);
+    state = state.copyWith(favoritePlaces: _fpRepo.getAllPlaces());
   }
 
   Future<void> deletePlace(int id) async {

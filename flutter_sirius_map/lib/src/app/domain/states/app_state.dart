@@ -9,7 +9,8 @@ class InitAppState extends AppState {
 }
 
 class BaseAppState extends AppState {
-  const BaseAppState();
+  final PlacePoint? point;
+  const BaseAppState({this.point});
 }
 
 // выбрать первую точку
