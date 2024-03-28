@@ -36,7 +36,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="SiriusMapIcon" width="1024" height="1024"/>
+        <image name="SiriusMapIcon" width="166.66667175292969" height="166.66667175292969"/>
         <image name="SplashBackground" width="360" height="640"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
