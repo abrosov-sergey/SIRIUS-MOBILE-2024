@@ -12,14 +12,6 @@ import 'package:latlong2/latlong.dart';
 class ProjectMap extends ConsumerWidget {
   const ProjectMap({super.key});
 
-  // ignore: unused_element
-  get _marshrut => const [
-        LatLng(43.41482521465457, 39.951312004328557),
-        LatLng(43.414671691690607, 39.951024080506684),
-        LatLng(43.416017675651091, 39.953505467745707),
-        LatLng(43.412741314440822, 39.949842052848332),
-      ];
-
   final _maxPoint = const LatLng(43.412678630221023, 39.949135833185039);
 
   final _minPoint = const LatLng(43.41601767565109, 39.953505467745707);
