@@ -21,7 +21,7 @@ class BaseAppStateWidget extends ConsumerWidget {
           child: Row(
             children: [
               Expanded(
-                  child: SearchField(),
+                child: SearchField(),
               ),
               SizedBox(width: 10.w),
               BuildRouteButton(

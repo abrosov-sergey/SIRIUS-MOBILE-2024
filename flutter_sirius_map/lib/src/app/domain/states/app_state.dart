@@ -1,6 +1,5 @@
 import 'package:flutter_sirius_map/src/app/domain/place_point.dart';
 
-
 sealed class AppState {
   const AppState();
 }
@@ -12,7 +11,6 @@ class InitAppState extends AppState {
 class BaseAppState extends AppState {
   const BaseAppState();
 }
-
 
 // выбрать первую точку
 class ChoiceAppState extends AppState {

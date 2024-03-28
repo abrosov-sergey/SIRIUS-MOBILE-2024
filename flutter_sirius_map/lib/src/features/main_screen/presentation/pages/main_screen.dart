@@ -32,8 +32,7 @@ class MainScreen extends StatelessWidget {
                     ),
                     SettingButton.text(
                       text: context.localization.language,
-                      onTap: 
-                        ref.read(localeProvider.notifier).changeLocale,
+                      onTap: ref.read(localeProvider.notifier).changeLocale,
                     ),
                   ],
                 );

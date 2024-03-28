@@ -129,6 +129,4 @@ class AppStateNotifier extends _$AppStateNotifier {
   void setBaseState() {
     state = const BaseAppState();
   }
-
-
 }
