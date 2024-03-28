@@ -47,11 +47,6 @@ class RouteBuilderError extends RouteBuilderAppState {
   const RouteBuilderError({this.error, this.stackTrace});
 }
 
-class RouteBuilderLoaded extends RouteBuilderAppState {
-  final List<PlacePoint> route;
-  const RouteBuilderLoaded({required this.route});
-}
-
 class RouteAppState extends AppState {
   final List<PlacePoint> route;
   const RouteAppState({required this.route});

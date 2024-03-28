@@ -50,7 +50,6 @@ dependencies:
   dio_cache_interceptor_db_store: ^5.1.0
   sqlite3_flutter_libs: ^0.5.15
   riverpod_annotation: ^2.3.5
-  dijkstra: ^0.0.4
   shared_preferences: ^2.2.2
   json_annotation: ^4.8.1
   mobile_scanner: ^4.0.1

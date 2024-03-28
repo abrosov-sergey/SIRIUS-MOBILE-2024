@@ -7,7 +7,6 @@ import 'package:flutter_sirius_map/src/app/domain/states/app_state.dart';
 import 'package:flutter_sirius_map/src/features/menu/presentation/state_widgets/base_app_state_widget.dart';
 import 'package:flutter_sirius_map/src/features/menu/presentation/state_widgets/choice_app_state_widget.dart';
 import 'package:flutter_sirius_map/src/features/menu/presentation/state_widgets/route_app_state_wdget.dart';
-import 'package:flutter_sirius_map/src/features/menu/presentation/state_widgets/route_builder_loaded_widget.dart';
 
 class StateChooser extends ConsumerWidget {
   const StateChooser({super.key});
@@ -19,10 +18,9 @@ class StateChooser extends ConsumerWidget {
     return switch (appState) {
       InitAppState() => const CircularProgressIndicator(),
       BaseAppState() => BaseAppStateWidget(),
-      ChoiceAppState() => ChoiceAppStateWidget(appState: appState),
+      ChoiceAppState() => ChoiceAppStateWidget(),
       RouteBuilderLoading() => const CircularProgressIndicator(),
       RouteBuilderError() => Text(appState.error.toString()),
-      RouteBuilderLoaded() => RouteBuilderLoadedWidget(),
       RouteAppState() => RouteAppStateWidget(),
     };
   }
