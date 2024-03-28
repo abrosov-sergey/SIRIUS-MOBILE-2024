@@ -52,14 +52,16 @@ dependencies:
   sqlite3_flutter_libs: ^0.5.15
   riverpod_annotation: ^2.3.5
   google_fonts: ^6.2.1
-  dijkstra: ^0.0.4
   shared_preferences: ^2.2.2
   json_annotation: ^4.8.1
+  mobile_scanner: ^4.0.1
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  flutter_native_splash: ^2.4.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -67,10 +69,10 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
+  build_runner: ^2.4.8
   theme_tailor: ^1.1.2
   riverpod_generator: ^2.4.0
   json_serializable: ^6.7.1
-  build_runner: ^2.4.8
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -122,3 +124,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_native_splash:
+  color: "#F7F7F6"
+  image: assets/icons/icon.png

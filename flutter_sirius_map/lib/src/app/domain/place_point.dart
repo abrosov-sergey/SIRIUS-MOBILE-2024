@@ -2,7 +2,13 @@ import 'package:latlong2/latlong.dart';
 
 class PlacePoint {
   final LatLng pos;
-  final String? name;
+  final String? _name;
   final int id;
-  const PlacePoint({required this.id, required this.pos, this.name});
+  const PlacePoint({
+    name,
+    required this.id,
+    required this.pos,
+  }) : _name = name;
+
+  String get name => _name ?? 'ID: $id';
 }

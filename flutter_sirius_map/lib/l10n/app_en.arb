@@ -4,5 +4,9 @@
     "language" : "EN",
     "edit" : "Edit",
     "cancel" : "Cancel",
-    "add" : "Add"
+    "add" : "Add",
+    "buildRoute": "Build route",
+    "scan_qr_instruction" : "Scan nearest QRcode to determine your location",
+    "scan_qr": "QR scanner",
+    "endRoute": "Я не потерялся"
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sirius_map/src/app/domain/place_point.dart';
+import 'package:flutter_sirius_map/src/core/utils/context.dart';
 import 'package:flutter_sirius_map/src/features/project_map/domain/models/map_state.dart';
 import 'package:flutter_sirius_map/src/features/project_map/domain/providers/map_provider.dart';
 import 'package:flutter_sirius_map/src/features/project_map/presentation/widgets/background_map.dart';
@@ -61,39 +62,80 @@ class ProjectMap extends ConsumerWidget {
                   const LatLng(43.412678630221023, 39.949135833185039)))
         ]),
         // отрисовка маршрута
-        if (mapState is MapStateRoute)
+        if (mapState is MapStateRoute) ...[
           PolylineLayer(
             polylines: [
               Polyline(
                 points: mapState.route,
-                gradientColors: [Colors.blue, Colors.purple, Colors.pink],
+                gradientColors: [
+                  Colors.blue,
+                  context.themeExtendColors.iconColor,
+                  Colors.purple,
+                ],
+                colorsStop: [0.05, 0.5, 0.95],
                 strokeWidth: 10,
               ),
             ],
           ),
+          MyMarkerLayer(markers: [
+            _routeMarker(
+              mapState.route.first,
+              Colors.blue,
+              true,
+            ),
+            _routeMarker(
+              mapState.route.last,
+              Colors.purple,
+              false,
+            ),
+          ]),
+        ],
         if (mapState is MapStatePoints)
           MyMarkerLayer(markers: [
             if (mapState.start != null)
-              _marker(
+              _defaulMarker(
                 mapState.start!,
                 mapNotifier.onPointCancel,
+                context,
               ),
             if (mapState.finish != null)
-              _marker(
+              _defaulMarker(
                 mapState.finish!,
                 mapNotifier.onPointCancel,
+                context,
               ),
           ]),
       ],
     );
   }
 
-  Marker _marker(PlacePoint placePoint, void Function(int) deletePoint) {
+  Marker _routeMarker(LatLng pos, Color color, bool start) {
+    return Marker(
+      point: pos,
+      child: SelectedPoint(
+        deletePoint: () {},
+        color: color,
+        child: Icon(
+          start ? Icons.run_circle_outlined : Icons.flag,
+          color: color,
+        ),
+      ),
+    );
+  }
+
+  Marker _defaulMarker(
+    PlacePoint placePoint,
+    void Function(int) deletePoint,
+    BuildContext context,
+  ) {
     return Marker(
       point: placePoint.pos,
       child: SelectedPoint(
-        placePoint: placePoint,
-        deletePoint: deletePoint,
+        child: Text(
+          placePoint.name,
+          style: context.themeExtendTextStyles.bodyStyle,
+        ),
+        deletePoint: () => deletePoint(placePoint.id),
       ),
     );
   }

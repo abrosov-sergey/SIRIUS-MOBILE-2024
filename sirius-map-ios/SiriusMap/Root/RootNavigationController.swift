@@ -149,12 +149,12 @@ extension RootNavigationController: SheetNavigationControllerDelegate {
         if routeService.hasEnd {
             routeService.routeStart = mapItem
 
-            sheetNavigationController.setRouteEnd(mapItem)
+            sheetNavigationController.setRouteStart(mapItem)
             mapViewController.setRouteStart(mapItem)
         } else {
             routeService.routeEnd = mapItem
 
-            sheetNavigationController.setRouteStart(mapItem)
+            sheetNavigationController.setRouteEnd(mapItem)
             mapViewController.setRouteEnd(mapItem)
         }
         mapViewController.drawRoute(start: routeService.routeStart!, end: routeService.routeEnd!)

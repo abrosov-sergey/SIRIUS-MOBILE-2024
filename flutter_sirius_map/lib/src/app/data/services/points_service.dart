@@ -13,10 +13,7 @@ class PointsService {
   /// получение точки по ее id, если не нашлась - null
   PlacePoint? getById(int id) {
     final points = _pointsLoader.pointsById;
-    if (containsId(id)) {
-      return PlacePoint(id: id, pos: points[id]!);
-    }
-    return null;
+    return points[id];
   }
 
   final _maxPointsDist = 0.001;
@@ -29,10 +26,10 @@ class PointsService {
     PlacePoint? ans;
     for (final entry in points.entries) {
       final distOld = ans == null ? null : dist(ll, ans.pos);
-      final distNew = dist(ll, entry.value);
+      final distNew = dist(ll, entry.value.pos);
       if (distOld == null || distOld > distNew) {
         if (distNew <= _maxPointsDist) {
-          ans = PlacePoint(id: entry.key, pos: entry.value);
+          ans = entry.value;
         }
       }
     }

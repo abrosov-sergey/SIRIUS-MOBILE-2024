@@ -1,5 +1,5 @@
-import 'package:dijkstra/dijkstra.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_sirius_map/src/app/data/services/dijkstra.dart';
 import 'package:flutter_sirius_map/src/app/data/services/loaders/graph_loader.dart';
 import 'package:flutter_sirius_map/src/app/data/services/points_service.dart';
 import 'package:flutter_sirius_map/src/app/domain/place_point.dart';
@@ -15,17 +15,19 @@ class GraphServise {
         _pointsService = pointsService;
 
   /// получение маршрута с помощью дейкстры
-  List<PlacePoint> getRoute(PlacePoint start, PlacePoint finish) {
+  List<PlacePoint>? getRoute(PlacePoint start, PlacePoint finish) {
     final graph = _graphLoader.graph;
 
     List<int> tempRoute;
     try {
-      tempRoute = Dijkstra.findPathFromGraph(graph, start, finish) as List<int>;
+      tempRoute = Dijkstra.findPathFromGraph(graph, start.id, finish.id)
+          .map((e) => e as int)
+          .toList();
     } catch (e) {
       if (kDebugMode) {
         print('error while dijkstra: $e');
       }
-      return [];
+      return null;
     }
     List<PlacePoint> resRoute = [];
 
@@ -34,6 +36,6 @@ class GraphServise {
         .map((id) => _pointsService.getById(id)!)
         .toList();
 
-    return resRoute;
+    return resRoute.isEmpty ? null : resRoute;
   }
 }

@@ -21,6 +21,7 @@ final class MapViewController: UIViewController, MapViewControllerInterface {
     func setRouteEnd(_: MapItem) {}
 
     func drawRoute(start _: MapItem, end _: MapItem) {}
+    func drawRoute() {}
 
 //    private func updateUI() {
 //        if let routeStart, let routeEnd {

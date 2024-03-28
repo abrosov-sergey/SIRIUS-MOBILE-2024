@@ -6,7 +6,7 @@ import 'package:flutter_sirius_map/src/features/menu/presentation/providers/scro
 
 import 'package:flutter_sirius_map/src/core/utils/context.dart';
 import 'package:flutter_sirius_map/src/core/utils/sliver_utils.dart';
-import 'package:flutter_sirius_map/src/features/menu/presentation/widgets/state_chooser.dart';
+import 'package:flutter_sirius_map/src/features/menu/presentation/state_widgets/state_chooser.dart';
 
 class MenuBottomSheet extends ConsumerWidget {
   const MenuBottomSheet({super.key});

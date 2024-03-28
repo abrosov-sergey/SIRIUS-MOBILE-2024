@@ -16,11 +16,16 @@ protocol RouteViewControllerDelegate: AnyObject {
 }
 
 final class RouteViewController: UIViewController {
-    func setRouteStart(_: MapItem) {}
-
-    func setRouteEnd(_: MapItem) {}
-
     weak var delegate: RouteViewControllerDelegate?
+
+    private lazy var routeView = RouteView(
+        endRouteItem,
+        actions: actions
+    )
+
+    private lazy var hostingController = UIHostingController(
+        rootView: routeView
+    )
 
     private lazy var actions: RouteView.Actions = .init(
         onTapStartCell: delegate?.onTapStartCell ?? {},
@@ -28,7 +33,7 @@ final class RouteViewController: UIViewController {
         onChangeRoute: delegate?.onChangeRoute ?? {}
     )
 
-    private let sheetHeight: CGFloat = 200.0
+    private let sheetHeight: CGFloat = 180.0
 
     private let endRouteItem: MapItem
 
@@ -43,16 +48,11 @@ final class RouteViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private lazy var hostingController = UIHostingController(
-        rootView: RouteView(
-            endRouteItem,
-            actions: actions
-        )
-    )
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+
+        title = "Маршрут"
 
         setup()
     }
@@ -63,26 +63,33 @@ final class RouteViewController: UIViewController {
             let fraction = UISheetPresentationController.Detent.custom { _ in self.sheetHeight }
             sheet.detents = [fraction]
 
+            sheet.largestUndimmedDetentIdentifier = fraction.identifier
+
             sheet.animateChanges {
                 sheet.selectedDetentIdentifier = sheet.selectedDetentIdentifier ?? .medium
             }
         }
     }
 
-    private func setup() {
-        guard let routeView = hostingController.view else { return }
-        routeView.translatesAutoresizingMaskIntoConstraints = false
+    func setRouteStart(_ item: MapItem) {
+        routeView.setRouteStart(item)
+    }
 
-        addChild(hostingController)
-        view.addSubview(routeView)
+    func setRouteEnd(_ item: MapItem) {
+        routeView.setRouteEnd(item)
+    }
+
+    private func setup() {
+        guard let routeUiView = hostingController.view else { return }
+        routeUiView.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(routeUiView)
 
         NSLayoutConstraint.activate([
-            routeView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            routeView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            routeView.topAnchor.constraint(equalTo: view.topAnchor),
-            routeView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            routeUiView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            routeUiView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            routeUiView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            routeUiView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
-
-        hostingController.didMove(toParent: self)
     }
 }
