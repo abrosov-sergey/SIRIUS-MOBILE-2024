@@ -27,6 +27,8 @@ final class SearchTableViewController: UITableViewController {
         }
     }
 
+    private let sheetHeight: CGFloat = 82.0
+
     // MARK: - Initializers
 
     init(items: [MapItem]) {
@@ -52,8 +54,11 @@ final class SearchTableViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        title = "Куда"
         if let sheet = sheetPresentationController {
-            sheet.detents = [.medium(), .large()]
+            let fraction = UISheetPresentationController.Detent.custom { _ in self.sheetHeight }
+            sheet.largestUndimmedDetentIdentifier = fraction.identifier
+            sheet.detents = [fraction, .large()]
             sheet.animateChanges {
                 sheet.selectedDetentIdentifier = sheet.selectedDetentIdentifier ?? .medium
             }

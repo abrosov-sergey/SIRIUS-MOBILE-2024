@@ -33,7 +33,7 @@ final class RouteViewController: UIViewController {
         onChangeRoute: delegate?.onChangeRoute ?? {}
     )
 
-    private let sheetHeight: CGFloat = 200.0
+    private let sheetHeight: CGFloat = 180.0
 
     private let endRouteItem: MapItem
 
