@@ -87,7 +87,7 @@ extension RootNavigationController: NewMapViewControllerDelegate {
         /// 2) Выбрать MapItem на карте
     }
 
-    func mapViewControler(_: NewMapViewController, didSelect _: MapItem) {
+    func mapViewControler(_: NewMapViewController, didSelect mapItem: MapItem) {
         /// Определить:
         ///  - конец или начало маршрута?
         ///  - первый или второй MapItem
@@ -98,6 +98,29 @@ extension RootNavigationController: NewMapViewControllerDelegate {
         ///        1) добавляем в экран маршрута
         ///        2) рисуем маршрут
         ///
+        ///
+        ///
+        if routeService.isEmptyRoute {
+            routeService.routeEnd = mapItem
+
+            sheetNavigationController.setRouteEnd(mapItem)
+
+            mapViewController.setRouteEnd(mapItem)
+            return
+        }
+
+        if routeService.hasEnd {
+            routeService.routeStart = mapItem
+
+            sheetNavigationController.setRouteStart(mapItem)
+            mapViewController.setRouteStart(mapItem)
+        } else {
+            routeService.routeEnd = mapItem
+
+            sheetNavigationController.setRouteEnd(mapItem)
+            mapViewController.setRouteEnd(mapItem)
+        }
+        mapViewController.drawRoute(start: routeService.routeStart!, end: routeService.routeEnd!)
     }
 }
 

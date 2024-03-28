@@ -25,11 +25,13 @@ public final class RouteService {
 
     private static let url = Bundle.main.url(forResource: "anchor_formatted_for_egor", withExtension: "json")!
     private static let data = try! Data(contentsOf: RouteService.url)
-    private static let mapItems = try! JSONDecoder().decode([Anchor].self, from: RouteService.data).map { $0.mapItem }
+    static let mapItems = try! JSONDecoder().decode([Anchor].self, from: RouteService.data).map { $0.mapItem }
     private static var edges: RouteService.Edges = [:]
     private static var itemsByIndex: [Int: MapItem] = [:]
 
-    private init() {}
+    private init() {
+        setGraph(graph: Graph(mapItems: Self.mapItems))
+    }
 }
 
 extension RouteService: PathFinderProtocol {
@@ -87,7 +89,6 @@ extension RouteService: PathFinderProtocol {
         let f = end.id
 
         var closest = Heap<PointDistance>([PointDistance(distance: 0, index: s)])
-        var visited = Set<Int>([s])
         var distance: [Int: Double] = [s: 0.0]
         var from: [Int: Int] = [s: s]
 
@@ -95,18 +96,17 @@ extension RouteService: PathFinderProtocol {
             distance[index] ?? Constants.longDistance
         }
 
-        for _ in 0 ..< RouteService.itemsByIndex.count {
-            let starter: PointDistance = closest.popMax()!
-            print(starter.index)
-            visited.insert(starter.index)
+        while !closest.isEmpty {
+            let starter: PointDistance = closest.popMin()!
+            if starter.index == f {
+                break
+            }
+
             for vertex in RouteService.edges[starter.index] ?? [] {
-                if !visited.contains(vertex.indx) {
-                    print(vertex.dist)
-                    if get_distance(vertex.indx) > get_distance(starter.index) + vertex.dist {
-                        distance[vertex.indx] = get_distance(starter.index) + vertex.dist
-                        from[vertex.indx] = starter.index
-                        closest.insert(PointDistance(distance: get_distance(vertex.indx), index: vertex.indx))
-                    }
+                if get_distance(vertex.indx) > get_distance(starter.index) + vertex.dist {
+                    distance[vertex.indx] = get_distance(starter.index) + vertex.dist
+                    from[vertex.indx] = starter.index
+                    closest.insert(PointDistance(distance: get_distance(vertex.indx), index: vertex.indx))
                 }
             }
         }
@@ -114,8 +114,12 @@ extension RouteService: PathFinderProtocol {
         var validPath: [MapItem] = [RouteService.itemsByIndex[curr]!]
 
         while s != curr {
-            curr = from[curr]!
-            validPath.append(RouteService.itemsByIndex[curr]!)
+            if from[curr] != nil {
+                curr = from[curr]!
+                validPath.append(RouteService.itemsByIndex[curr]!)
+            } else {
+                break
+            }
         }
         validPath.reverse()
         return Route(path: validPath, eta: get_distance(f))

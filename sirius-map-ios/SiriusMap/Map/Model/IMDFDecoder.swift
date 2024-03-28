@@ -16,7 +16,7 @@ enum IMDFError: Error {
 }
 
 protocol IMDFDecodable {
-    init(feature: MKGeoJSONFeature) throws
+    init(feature: MKGeoJSONFeature, shouldParseProperties: Bool) throws
 }
 
 struct IMDFDecoder {
@@ -35,6 +35,7 @@ struct IMDFDecoder {
             case level
             case unit
             case opening
+            case occupant
 
             var filename: String {
                 "\(self).geojson"
@@ -54,6 +55,8 @@ struct IMDFDecoder {
         let units = try decodeFeatures(type: Unit.self, from: .unit, in: archive)
         let openings = try decodeFeatures(type: Opening.self, from: .opening, in: archive)
 
+        let occupants = try decodeOccupants(in: archive)
+
         guard levels.count == 1 else {
             throw IMDFError.invalidData
         }
@@ -61,13 +64,15 @@ struct IMDFDecoder {
         let level = levels[0]
         level.units = units
         level.openings = openings
+        level.occupants = occupants
         return level
     }
 
     private func decodeFeatures<T: IMDFDecodable>(
         type: T.Type,
         from file: IMDFArchive.File,
-        in archive: IMDFArchive
+        in archive: IMDFArchive,
+        shouldParseProperties: Bool = false
     ) throws -> [T] {
         let fileURL = archive.fileURL(for: file)
         let data = try Data(contentsOf: fileURL)
@@ -75,7 +80,24 @@ struct IMDFDecoder {
         guard let features = geoJSONFeatures as? [MKGeoJSONFeature] else {
             throw IMDFError.invalidType
         }
-        let imdfFeatures = try features.map { try type.init(feature: $0) }
+        let imdfFeatures = try features.map {
+            try type.init(feature: $0, shouldParseProperties: shouldParseProperties)
+        }
         return imdfFeatures
+    }
+
+    private func decodeOccupants(in archive: IMDFArchive) throws -> [Occupant] {
+        let occupants = try decodeFeatures(type: Occupant.self, from: .occupant, in: archive, shouldParseProperties: true)
+
+        for occupant in occupants {
+            guard let pointGeometry = occupant.geometry[0] as? MKPointAnnotation else {
+                fatalError()
+                // throw IMDFError.invalidData
+            }
+            occupant.coordinate = pointGeometry.coordinate
+            occupant.title = occupant.properties?.name
+        }
+
+        return occupants
     }
 }

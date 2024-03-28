@@ -50,3 +50,19 @@
 //    func item(for coordinate: Coordinate) -> MapItem
 //    func route(start: MapItem, end: MapItem) -> Route
 // }
+
+public struct MapItem {
+    var title: String {
+        _title ?? String(id)
+    }
+
+    let id: Int
+    let _title: String?
+    let coordinate: Coordinate
+
+    init(id: Int, title: String?, coordinate: Coordinate) {
+        self.id = id
+        _title = title
+        self.coordinate = coordinate
+    }
+}

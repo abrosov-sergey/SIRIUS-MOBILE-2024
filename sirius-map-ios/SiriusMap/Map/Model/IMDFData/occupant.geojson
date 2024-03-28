@@ -1,0 +1,798 @@
+{
+    "features": [
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000001",
+            "geometry": {
+                "coordinates": [
+                    39.95118698114793,
+                    43.41451715385813
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.95118698114793,
+                        43.41451715385813
+                    ],
+                    "type": "Point"
+                },
+                "name": "Кофейня"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000002",
+            "geometry": {
+                "coordinates": [
+                    39.95131081818528,
+                    43.414528533743535
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.95131081818528,
+                        43.414528533743535
+                    ],
+                    "type": "Point"
+                },
+                "name": "Альфа 5.12"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000003",
+            "geometry": {
+                "coordinates": [
+                    39.95130410412903,
+                    43.41438547217139
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.95130410412903,
+                        43.41438547217139
+                    ],
+                    "type": "Point"
+                },
+                "name": "Альфа 5.13"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000004",
+            "geometry": {
+                "coordinates": [
+                    39.95131511146948,
+                    43.41470145483654
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.95131511146948,
+                        43.41470145483654
+                    ],
+                    "type": "Point"
+                },
+                "name": "Альфа 5.11"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000005",
+            "geometry": {
+                "coordinates": [
+                    39.95131843029412,
+                    43.414836458855426
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.95131843029412,
+                        43.414836458855426
+                    ],
+                    "type": "Point"
+                },
+                "name": "Альфа 5.10"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000006",
+            "geometry": {
+                "coordinates": [
+                    39.95132008970644,
+                    43.41492204160438
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.95132008970644,
+                        43.41492204160438
+                    ],
+                    "type": "Point"
+                },
+                "name": "Альфа 5.9"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000007",
+            "geometry": {
+                "coordinates": [
+                    39.95127528557375,
+                    43.414931684723435
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.95127528557375,
+                        43.414931684723435
+                    ],
+                    "type": "Point"
+                },
+                "name": "Альфа 5.8"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000008",
+            "geometry": {
+                "coordinates": [
+                    39.951149170237294,
+                    43.414932287418324
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.951149170237294,
+                        43.414932287418324
+                    ],
+                    "type": "Point"
+                },
+                "name": "Альфа 5.7"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000009",
+            "geometry": {
+                "coordinates": [
+                    39.95103135196245,
+                    43.414920836214385
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.95103135196245,
+                        43.414920836214385
+                    ],
+                    "type": "Point"
+                },
+                "name": "Альфа 5.6"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000010",
+            "geometry": {
+                "coordinates": [
+                    39.95102886284397,
+                    43.41487985294043
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.95102886284397,
+                        43.41487985294043
+                    ],
+                    "type": "Point"
+                },
+                "name": "Альфа 5.5"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000011",
+            "geometry": {
+                "coordinates": [
+                    39.95102803313781,
+                    43.414821994153506
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.95102803313781,
+                        43.414821994153506
+                    ],
+                    "type": "Point"
+                },
+                "name": "Альфа 5.4"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000012",
+            "geometry": {
+                "coordinates": [
+                    39.95102637372549,
+                    43.414749067895414
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.95102637372549,
+                        43.414749067895414
+                    ],
+                    "type": "Point"
+                },
+                "name": "Альфа 5.3"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000013",
+            "geometry": {
+                "coordinates": [
+                    39.95102281751271,
+                    43.414527966194434
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.95102281751271,
+                        43.414527966194434
+                    ],
+                    "type": "Point"
+                },
+                "name": "Альфа 5.1"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000014",
+            "geometry": {
+                "coordinates": [
+                    39.95090601608885,
+                    43.414684358658825
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.95090601608885,
+                        43.414684358658825
+                    ],
+                    "type": "Point"
+                },
+                "name": "Санузел ЦИТ"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000015",
+            "geometry": {
+                "coordinates": [
+                    39.95044724064573,
+                    43.414596044750894
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.95044724064573,
+                        43.414596044750894
+                    ],
+                    "type": "Point"
+                },
+                "name": "Столовая Вега"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000016",
+            "geometry": {
+                "coordinates": [
+                    39.95115224240459,
+                    43.41435064522033
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.95115224240459,
+                        43.41435064522033
+                    ],
+                    "type": "Point"
+                },
+                "name": "Альфа 3.1"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000017",
+            "geometry": {
+                "coordinates": [
+                    39.951026647014245,
+                    43.414670131422476
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.951026647014245,
+                        43.414670131422476
+                    ],
+                    "type": "Point"
+                },
+                "name": "Альфа 5.2"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000018",
+            "geometry": {
+                "coordinates": [
+                    39.9511857687341,
+                    43.41490916124934
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.9511857687341,
+                        43.41490916124934
+                    ],
+                    "type": "Point"
+                },
+                "name": "Эскалаторы ЦИТ"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000019",
+            "geometry": {
+                "coordinates": [
+                    39.94977756822921,
+                    43.41372665312329
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.94977756822921,
+                        43.41372665312329
+                    ],
+                    "type": "Point"
+                },
+                "name": "Вход Дельта"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000020",
+            "geometry": {
+                "coordinates": [
+                    39.94960118961052,
+                    43.414602715066295
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.94960118961052,
+                        43.414602715066295
+                    ],
+                    "type": "Point"
+                },
+                "name": "Вход Сигма"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000021",
+            "geometry": {
+                "coordinates": [
+                    39.95006959042133,
+                    43.41470731884025
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.95006959042133,
+                        43.41470731884025
+                    ],
+                    "type": "Point"
+                },
+                "name": "Медпункт"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000022",
+            "geometry": {
+                "coordinates": [
+                    39.950640337374324,
+                    43.41435845797726
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.950640337374324,
+                        43.41435845797726
+                    ],
+                    "type": "Point"
+                },
+                "name": "Химичекская Зона"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000023",
+            "geometry": {
+                "coordinates": [
+                    39.95074311790525,
+                    43.41435458443914
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.95074311790525,
+                        43.41435458443914
+                    ],
+                    "type": "Point"
+                },
+                "name": "Альфа 3.2"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000024",
+            "geometry": {
+                "coordinates": [
+                    39.94987374659681,
+                    43.413684133267786
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.94987374659681,
+                        43.413684133267786
+                    ],
+                    "type": "Point"
+                },
+                "name": "Эскалаторы Дельта"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000025",
+            "geometry": {
+                "coordinates": [
+                    39.949735646569714,
+                    43.41469370507746
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.949735646569714,
+                        43.41469370507746
+                    ],
+                    "type": "Point"
+                },
+                "name": "Эскалаторы Сигма"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000026",
+            "geometry": {
+                "coordinates": [
+                    39.950099723937,
+                    43.41372227328762
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.950099723937,
+                        43.41372227328762
+                    ],
+                    "type": "Point"
+                },
+                "name": "Гардероб Дельта"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000027",
+            "geometry": {
+                "coordinates": [
+                    39.95044540781651,
+                    43.41368556308662
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.95044540781651,
+                        43.41368556308662
+                    ],
+                    "type": "Point"
+                },
+                "name": "Альфа 4.1"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000028",
+            "geometry": {
+                "coordinates": [
+                    39.95052701997932,
+                    43.413663890850465
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.95052701997932,
+                        43.413663890850465
+                    ],
+                    "type": "Point"
+                },
+                "name": "Альфа 4.2"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000029",
+            "geometry": {
+                "coordinates": [
+                    39.95065240247068,
+                    43.41368048148223
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.95065240247068,
+                        43.41368048148223
+                    ],
+                    "type": "Point"
+                },
+                "name": "Альфа 4.5"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000030",
+            "geometry": {
+                "coordinates": [
+                    39.950556850757934,
+                    43.413693009099134
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.950556850757934,
+                        43.413693009099134
+                    ],
+                    "type": "Point"
+                },
+                "name": "Альфа 4.3"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000031",
+            "geometry": {
+                "coordinates": [
+                    39.950656131318006,
+                    43.41371298556397
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.950656131318006,
+                        43.41371298556397
+                    ],
+                    "type": "Point"
+                },
+                "name": "Альфа 4.4"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000032",
+            "geometry": {
+                "coordinates": [
+                    39.95070740296875,
+                    43.41378273384713
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.95070740296875,
+                        43.41378273384713
+                    ],
+                    "type": "Point"
+                },
+                "name": "Альфа 4.6"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000033",
+            "geometry": {
+                "coordinates": [
+                    39.950867500937086,
+                    43.41389874270417
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.950867500937086,
+                        43.41389874270417
+                    ],
+                    "type": "Point"
+                },
+                "name": "Открытые коворкинги Альфа"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000081",
+            "geometry": {
+                "coordinates": [
+                    39.95016322183188,
+                    43.413500399604594
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.95016322183188,
+                        43.413500399604594
+                    ],
+                    "type": "Point"
+                },
+                "name": "Ресепшн"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000083",
+            "geometry": {
+                "coordinates": [
+                    39.94903913237792,
+                    43.413917809898145
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.94903913237792,
+                        43.413917809898145
+                    ],
+                    "type": "Point"
+                },
+                "name": "Вход на Территорию"
+            },
+            "type": "Feature"
+        },
+        {
+            "feature_type": "occupant",
+            "id": "00000000-0000-0000-0000-000000000084",
+            "geometry": {
+                "coordinates": [
+                    39.95022159504953,
+                    43.41417221247073
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "display_point": {
+                    "coordinates": [
+                        39.95022159504953,
+                        43.41417221247073
+                    ],
+                    "type": "Point"
+                },
+                "name": "Коворкинги Сигма"
+            },
+            "type": "Feature"
+        }
+    ],
+    "name": "Occupant",
+    "type": "FeatureCollection"
+}

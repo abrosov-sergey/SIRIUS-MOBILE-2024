@@ -35,6 +35,7 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
+  flutter_typeahead: ^5.2.0
   cupertino_icons: ^1.0.6
   theme_tailor_annotation: ^1.2.0
   flutter_riverpod: ^2.5.1
@@ -50,6 +51,7 @@ dependencies:
   dio_cache_interceptor_db_store: ^5.1.0
   sqlite3_flutter_libs: ^0.5.15
   riverpod_annotation: ^2.3.5
+  google_fonts: ^6.2.1
   shared_preferences: ^2.2.2
   json_annotation: ^4.8.1
   mobile_scanner: ^4.0.1
@@ -58,6 +60,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  flutter_native_splash: ^2.4.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -83,6 +87,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/points/anchor.geojson
     - assets/images/
     - assets/points/
   #   - images/a_dot_burr.jpeg
@@ -100,14 +105,14 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: AndadaPro
+    - family: PlayfairDisplay
       fonts:
-        - asset: assets/fonts/AndadaPro-Regular.ttf
-        - asset: assets/fonts/AndadaPro-Italic.ttf
+        - asset: assets/fonts/PlayfairDisplay-Regular.ttf
+        - asset: assets/fonts/PlayfairDisplay-Italic.ttf
           style: italic
-        - asset: assets/fonts/AndadaPro-Bold.ttf
+        - asset: assets/fonts/PlayfairDisplay-Bold.ttf
           weight: 700
-        - asset: assets/fonts/AndadaPro-SemiBold.ttf
+        - asset: assets/fonts/PlayfairDisplay-SemiBold.ttf
           weight: 600
         # - asset: fonts/Schyler-Italic.ttf
         #   style: italic
@@ -119,3 +124,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_native_splash:
+  color: "#F7F7F6"
+  image: assets/icons/icon.png

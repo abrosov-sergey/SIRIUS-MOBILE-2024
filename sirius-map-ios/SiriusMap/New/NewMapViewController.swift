@@ -28,6 +28,32 @@ final class NewMapViewController: UIViewController {
         super.viewDidLoad()
         map.delegate = self
         view.addSubview(map)
+        setupMap()
+    }
+
+    private func setupMap() {
+        var level: Level?
+        do {
+            level = try IMDFDecoder().decode()
+        } catch {
+            print(error)
+        }
+
+        if let level, let levelOverlay = level.overlay {
+            let unitOverlays = level.units.compactMap { $0.overlay }
+            let openingOverlays = level.openings.compactMap { $0.overlay }
+
+            let overlays = [levelOverlay] + unitOverlays + openingOverlays
+            map.addAnnotations(level.occupants)
+            guard let levelOverlay = overlays.first else { fatalError() }
+
+            map.setVisibleMapRect(
+                levelOverlay.boundingMapRect,
+                edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
+                animated: true
+            )
+            map.addOverlays(overlays)
+        }
     }
 }
 
@@ -67,7 +93,7 @@ extension NewMapViewController: MapViewControllerInterface {
     }
 
     func drawRoute(start: MapItem, end: MapItem) {
-        let route = MockPathBuilder().route(start: start, end: end)
+        let route = RouteService.shared.getRoute(start: start, end: end)
         let overlay = RouteOverlay(path: route.path)
         routeRenderer = RouteRenderer(routeOverlay: overlay)
         map.addOverlay(overlay, level: .aboveRoads)
@@ -84,6 +110,9 @@ extension NewMapViewController: MKMapViewDelegate {
             marker.markerTintColor = .systemGreen
         case is RouteStartAnnotation:
             break
+        case is Occupant:
+            return nil
+        // marker.glyphText = annotation.title!!
         default:
             fatalError()
         }
@@ -106,6 +135,17 @@ extension NewMapViewController: MKMapViewDelegate {
             return renderer
         default:
             fatalError()
+        }
+    }
+
+    func mapView(_: MKMapView, didSelect annotation: MKAnnotation) {
+        if annotation is Occupant {
+            let coordinate = Coordinate(
+                latitude: annotation.coordinate.latitude,
+                longitude: annotation.coordinate.longitude
+            )
+            map.view(for: annotation)?.isSelected = false
+            delegate?.mapViewControler(self, didSelect: RouteService.shared.getClosetItem(for: coordinate))
         }
     }
 }
