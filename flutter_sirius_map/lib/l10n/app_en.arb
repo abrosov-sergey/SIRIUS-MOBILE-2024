@@ -4,5 +4,7 @@
     "language" : "EN",
     "edit" : "Edit",
     "cancel" : "Cancel",
-    "add" : "Add"
+    "add" : "Add",
+    "scan_qr_instruction" : "Scan nearest QRcode to determine your location",
+    "scan_qr":"QR scanner"
 }
