@@ -8,4 +8,5 @@
 final class Level: Feature {
     var units: [Unit] = []
     var openings: [Opening] = []
+    var occupants: [Occupant] = []
 }
