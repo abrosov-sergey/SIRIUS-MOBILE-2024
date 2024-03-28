@@ -147,18 +147,11 @@ class AppStateNotifier extends _$AppStateNotifier {
             currState.start!,
             currState.finish!,
           );
-          state = RouteBuilderLoaded(route: route);
+          state = RouteAppState(route: route);
         } catch (error, stackTrace) {
           state = RouteBuilderError(error: error, stackTrace: stackTrace);
         }
       }
-    }
-  }
-
-  /// нажатие на кнопку 'начать маршрут'
-  void onStartRoute() {
-    if (state is RouteBuilderLoaded) {
-      state = RouteAppState(route: (state as RouteBuilderLoaded).route);
     }
   }
 

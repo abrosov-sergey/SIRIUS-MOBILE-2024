@@ -10,11 +10,7 @@ import 'package:flutter_sirius_map/src/features/menu/presentation/widgets/swap_i
 import 'package:flutter_sirius_map/src/features/menu/presentation/widgets/textfield_with_cancel.dart';
 
 class ChoiceAppStateWidget extends ConsumerWidget {
-  final ChoiceAppState appState;
-  const ChoiceAppStateWidget({
-    super.key,
-    required this.appState,
-  });
+  const ChoiceAppStateWidget({super.key});
 
   String? _getPointText(PlacePoint? placePoint) {
     if (placePoint == null) return null;
@@ -24,6 +20,7 @@ class ChoiceAppStateWidget extends ConsumerWidget {
   @override
   Widget build(context, ref) {
     final notifier = ref.watch(appStateNotifierProvider.notifier);
+    final appState = ref.watch(appStateNotifierProvider) as ChoiceAppState;
 
     return Column(
       children: [
