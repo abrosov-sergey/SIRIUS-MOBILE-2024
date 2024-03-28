@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sirius_map/src/features/menu/presentation/providers/scroll_controller_providrr.dart';
 import 'package:flutter_sirius_map/src/core/utils/context.dart';
 import 'package:flutter_sirius_map/src/core/utils/sliver_utils.dart';
-import 'package:flutter_sirius_map/src/features/menu/presentation/widgets/state_chooser.dart';
+import 'package:flutter_sirius_map/src/features/menu/presentation/state_widgets/state_chooser.dart';
 
 class MenuBottomSheet extends StatelessWidget {
   const MenuBottomSheet({super.key});
