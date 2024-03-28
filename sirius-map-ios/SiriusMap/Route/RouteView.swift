@@ -8,38 +8,36 @@
 import SwiftUI
 
 struct RouteView: View {
-
     struct Actions {
         var onTapStartCell: () -> Void
         var onTapEndCell: () -> Void
         var onChangeRoute: () -> Void
-        
+
         static let empty = Actions(
             onTapStartCell: { print("onTapStartCell") },
             onTapEndCell: { print("onTapEndCell") },
             onChangeRoute: { print("onChangeRoute") }
         )
     }
-    
+
     private enum ListItemType {
         case start
         case end
     }
-    
+
     private struct ListItem {
         let type: ListItemType
         var title: String?
         let iconName: String
     }
-    
+
     @State private var listItems: [ListItem]
-    
+
     private let actions: Actions
-    
+
     init(_ endPoint: MapItem, actions: Actions) {
-        
         self.actions = actions
-        
+
         listItems = [
             ListItem(
                 type: .start,
@@ -50,7 +48,7 @@ struct RouteView: View {
                 type: .end,
                 title: endPoint.title,
                 iconName: "figure.walk.motion"
-            )
+            ),
         ]
     }
 
@@ -58,7 +56,7 @@ struct RouteView: View {
         VStack {
             List {
                 ForEach(listItems, id: \.type.hashValue) { item in
-                    
+
                     Button {
                         switch item.type {
                         case .start:
@@ -87,23 +85,22 @@ struct RouteView: View {
             }.environment(\.editMode, .constant(.active))
         }
     }
-    
+
     func setRouteStart(_ start: MapItem) {
         listItems[0].title = start.title
     }
-    
+
     func setRouteEnd(_ end: MapItem) {
         listItems[0].title = end.title
     }
-    
 }
 
 #Preview {
     RouteView(
         MapItem(
+            id: 1,
             title: "Выход",
-            coordinate: Coordinate(latitude: 1.0, longitude: 1.0),
-            id: 1
+            coordinate: Coordinate(latitude: 1.0, longitude: 1.0)
         ), actions: .empty
     )
 }

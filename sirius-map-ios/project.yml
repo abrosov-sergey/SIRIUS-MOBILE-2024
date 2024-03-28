@@ -21,6 +21,10 @@ configs:
 # Packages
 ############
 
+packages:
+  Collections:
+    url: https://github.com/apple/swift-collections.git
+    from: 1.1.0
 
 ############
 # Settings
@@ -45,6 +49,8 @@ targets:
         SWIFT_VERSION: 5.2
         SWIFT_OPTIMIZATION_LEVEL: "-Onone"
         TARGETED_DEVICE_FAMILY: 1
+    dependencies:
+      - package: Collections
     preBuildScripts:
       - name: Run SwiftFormat Script
         script: "sh Scripts/swiftformat.sh"
