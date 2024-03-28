@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct RouteView: View {
-    
     @State private var listItems: [String]
-    
+
     init(from: String, to: String) {
         listItems = [from, to]
     }
-    
+
     var body: some View {
         VStack {
             List {

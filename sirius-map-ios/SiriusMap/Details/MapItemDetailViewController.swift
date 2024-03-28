@@ -14,11 +14,10 @@ protocol MapItemDetailDelegate: AnyObject {
 }
 
 final class MapItemDetailViewController: UIViewController {
-    
     private let sheetHeight: CGFloat = 130.0
-    
+
     weak var delegate: MapItemDetailDelegate?
-    
+
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.text = name
@@ -26,7 +25,7 @@ final class MapItemDetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = name
@@ -35,10 +34,10 @@ final class MapItemDetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     private let fromHereButton = ButtonWithText("Отсюда", style: .gray)
     private let hereButton = ButtonWithText("Сюда", style: .blue)
-    
+
     private let buttonStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
@@ -47,37 +46,38 @@ final class MapItemDetailViewController: UIViewController {
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
-    
+
     let name: String
-    
+
     init(name: String) {
         self.name = name
         super.init(nibName: nil, bundle: nil)
     }
-    
-    required init?(coder: NSCoder) {
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setup()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         // Для того, чтобы нельзя было закрыть sheet по нажатию на карту
         isModalInPresentation = true
-        
+
         if let sheet = sheetPresentationController {
             let fraction = UISheetPresentationController.Detent.custom { _ in self.sheetHeight }
             sheet.detents = [fraction]
-            
+
             // Оставляем карту активной
             sheet.largestUndimmedDetentIdentifier = fraction.identifier
-            
+
             sheet.animateChanges {
                 sheet.selectedDetentIdentifier = sheet.selectedDetentIdentifier ?? .medium
             }
@@ -88,11 +88,11 @@ final class MapItemDetailViewController: UIViewController {
         super.viewDidDisappear(animated)
         delegate?.didDisappear()
     }
-    
+
     private func setup() {
         view.addSubview(nameLabel)
         view.addSubview(descriptionLabel)
-        
+
         fromHereButton.addTarget(
             self,
             action: #selector(toButtonTapped),
@@ -103,43 +103,42 @@ final class MapItemDetailViewController: UIViewController {
             action: #selector(fromButtonTapped),
             for: .touchUpInside
         )
-        
+
         buttonStack.addArrangedSubview(fromHereButton)
         buttonStack.addArrangedSubview(hereButton)
-        
+
         view.addSubview(buttonStack)
-        
+
         NSLayoutConstraint.activate([
             nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -42),
-            nameLabel.leadingAnchor.constraint(equalTo: buttonStack.leadingAnchor)
+            nameLabel.leadingAnchor.constraint(equalTo: buttonStack.leadingAnchor),
         ])
-        
+
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 2.0),
-            descriptionLabel.leadingAnchor.constraint(equalTo: buttonStack.leadingAnchor)
+            descriptionLabel.leadingAnchor.constraint(equalTo: buttonStack.leadingAnchor),
         ])
-        
+
         NSLayoutConstraint.activate([
             hereButton.widthAnchor.constraint(equalToConstant: 130.0),
-            hereButton.heightAnchor.constraint(equalToConstant: 40.0)
+            hereButton.heightAnchor.constraint(equalToConstant: 40.0),
         ])
-        
+
         NSLayoutConstraint.activate([
             fromHereButton.widthAnchor.constraint(equalToConstant: 130.0),
-            fromHereButton.heightAnchor.constraint(equalToConstant: 40.0)
+            fromHereButton.heightAnchor.constraint(equalToConstant: 40.0),
         ])
-        
+
         NSLayoutConstraint.activate([
             buttonStack.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20.0),
-            buttonStack.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            buttonStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
-    
-    
+
     @objc private func fromButtonTapped() {
         delegate?.toButtonTapped()
     }
-    
+
     @objc private func toButtonTapped() {
         delegate?.fromButtonTapped()
     }

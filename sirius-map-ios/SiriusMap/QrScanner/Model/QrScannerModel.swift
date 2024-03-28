@@ -9,15 +9,11 @@ import Foundation
 
 // MARK: - Model Input
 
-protocol QrScannerModelInput {
-    
-}
+protocol QrScannerModelInput {}
 
 // MARK: - Controller Output
 
-protocol QrScannerModelOutput: AnyObject {
-    
-}
+protocol QrScannerModelOutput: AnyObject {}
 
 // MARK: - QrScannerModel
 
@@ -27,7 +23,4 @@ final class QrScannerModel {
 
 // MARK: - Model Input
 
-extension QrScannerModel: QrScannerModelInput {
-    
-}
-
+extension QrScannerModel: QrScannerModelInput {}

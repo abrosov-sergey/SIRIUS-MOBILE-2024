@@ -21,30 +21,28 @@ protocol SearchNavigationControllerDelegate: AnyObject {
 }
 
 final class SearchNavigationController: UINavigationController {
-    
     private lazy var viewController = makeSearchViewController()
-    
+
     weak var searchDelegate: SearchNavigationControllerDelegate?
-        
+
     // MARK: - Life Cycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+
         viewController.title = "Поиск"
         addCancelButton(to: viewController)
         setViewControllers([viewController], animated: false)
     }
-    
+
     // MARK: - Methods
-    
+
     private func makeSearchViewController() -> UIViewController {
         let searchViewController = SearchTableViewController(items: MapItem.sampleData.map { $0.title ?? String($0.id) })
         searchViewController.delegate = self
         return searchViewController
     }
-    
+
     private func addCancelButton(to viewController: UIViewController) {
         viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: .cancel,
@@ -53,7 +51,7 @@ final class SearchNavigationController: UINavigationController {
             }
         )
     }
-    
+
     private func makeMapDetailViewController(title: String) -> UIViewController {
         let mapItemDetail = MapItemDetailViewController(name: title)
         mapItemDetail.delegate = self
@@ -66,9 +64,9 @@ final class SearchNavigationController: UINavigationController {
         mapItemDetail.delegate = self
         return mapItemDetail
     }
-    
+
     @objc private func onCloseButtonTapped() {
-        self.popViewController(animated: true)
+        popViewController(animated: true)
     }
 }
 
@@ -76,7 +74,6 @@ final class SearchNavigationController: UINavigationController {
 
 extension SearchNavigationController: SearchTableViewControllerDelegate {
     func searchTableViewController(didSelectRowAt indexPath: IndexPath) {
-        
         if viewController.title == "Поиск" {
             let mapItem = MapItem.sampleData[indexPath.row]
             let viewController = makeMapDetailViewController(title: mapItem.title ?? String(mapItem.id))
@@ -90,20 +87,19 @@ extension SearchNavigationController: SearchTableViewControllerDelegate {
     }
 }
 
-
 extension SearchNavigationController: MapItemDetailDelegate {
     func fromButtonTapped() {
         viewController = makeSearchViewController()
         viewController.title = "Откуда"
         pushViewController(viewController, animated: true)
     }
-    
+
     func toButtonTapped() {
         viewController = makeSearchViewController()
         viewController.title = "Куда"
         pushViewController(viewController, animated: true)
     }
-    
+
     func didDisappear() {
         searchDelegate?.mapItemViewControllerDidDisappear()
     }

@@ -24,18 +24,16 @@ extension Coordinate {
 }
 
 final class RouteOverlay: NSObject, MKOverlay {
-    
-    let coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+    let coordinate: CLLocationCoordinate2D = .init(latitude: 0, longitude: 0)
     let boundingMapRect: MKMapRect = .world
-    
+
     init(path: [MapItem]) {
-        guard 
-            let routeStart = path.first,
-            let routeEnd = path.last
+        guard  let routeStart = path.first,
+               let routeEnd = path.last
         else {
             fatalError("Empty path")
         }
-        
+
         routeStartAnnotation = RouteStartAnnotation(
             coordinate: routeStart.coordinate.clCoordinate,
             title: routeStart.title
@@ -46,7 +44,7 @@ final class RouteOverlay: NSObject, MKOverlay {
         )
         locations = path.map { $0.coordinate.clCoordinate }
     }
-    
+
     let locations: [CLLocationCoordinate2D]
     let routeStartAnnotation: RouteStartAnnotation
     let routeEndAnnotation: RouteEndAnnotation
