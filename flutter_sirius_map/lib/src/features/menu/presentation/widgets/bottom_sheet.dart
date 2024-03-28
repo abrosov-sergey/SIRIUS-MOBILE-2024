@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_sirius_map/src/features/favorite_place/presentation/widgets/favorite_bloc_widget.dart';
 import 'package:flutter_sirius_map/src/features/menu/presentation/providers/scroll_controller_providrr.dart';
 import 'package:flutter_sirius_map/src/features/menu/presentation/widgets/build_route_button.dart';
-import 'package:flutter_sirius_map/src/utils/context.dart';
-import 'package:flutter_sirius_map/src/utils/sliver_utils.dart';
+import 'package:flutter_sirius_map/src/core/utils/context.dart';
+import 'package:flutter_sirius_map/src/core/utils/sliver_utils.dart';
 
 class MenuBottomSheet extends StatelessWidget {
   const MenuBottomSheet({super.key});
@@ -19,8 +20,8 @@ class MenuBottomSheet extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(30),
-              topRight: Radius.circular(30),
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
             ),
             color: context.themeExtendColors.primaryColor,
             boxShadow: [
@@ -47,6 +48,7 @@ class MenuBottomSheet extends StatelessWidget {
                       children: [BuildRouteButton()],
                     ),
                   ).sliver,
+                  const FavoriteBlocWidget().sliver,
                 ],
                 controller: scrollController,
               ),

@@ -16,8 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$FavoritePlaceInstance {
-  int get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  int get placeId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FavoritePlaceInstanceCopyWith<FavoritePlaceInstance> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $FavoritePlaceInstanceCopyWith<$Res> {
           $Res Function(FavoritePlaceInstance) then) =
       _$FavoritePlaceInstanceCopyWithImpl<$Res, FavoritePlaceInstance>;
   @useResult
-  $Res call({int id, String name});
+  $Res call({String id, String name, int placeId});
 }
 
 /// @nodoc
@@ -49,16 +50,21 @@ class _$FavoritePlaceInstanceCopyWithImpl<$Res,
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? placeId = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      placeId: null == placeId
+          ? _value.placeId
+          : placeId // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -72,7 +78,7 @@ abstract class _$$FavoritePlaceInstanceImplCopyWith<$Res>
       __$$FavoritePlaceInstanceImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name});
+  $Res call({String id, String name, int placeId});
 }
 
 /// @nodoc
@@ -89,16 +95,21 @@ class __$$FavoritePlaceInstanceImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? placeId = null,
   }) {
     return _then(_$FavoritePlaceInstanceImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      placeId: null == placeId
+          ? _value.placeId
+          : placeId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -106,16 +117,19 @@ class __$$FavoritePlaceInstanceImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FavoritePlaceInstanceImpl implements _FavoritePlaceInstance {
-  const _$FavoritePlaceInstanceImpl({required this.id, required this.name});
+  const _$FavoritePlaceInstanceImpl(
+      {required this.id, required this.name, required this.placeId});
 
   @override
-  final int id;
+  final String id;
   @override
   final String name;
+  @override
+  final int placeId;
 
   @override
   String toString() {
-    return 'FavoritePlaceInstance(id: $id, name: $name)';
+    return 'FavoritePlaceInstance(id: $id, name: $name, placeId: $placeId)';
   }
 
   @override
@@ -124,11 +138,12 @@ class _$FavoritePlaceInstanceImpl implements _FavoritePlaceInstance {
         (other.runtimeType == runtimeType &&
             other is _$FavoritePlaceInstanceImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.placeId, placeId) || other.placeId == placeId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name);
+  int get hashCode => Object.hash(runtimeType, id, name, placeId);
 
   @JsonKey(ignore: true)
   @override
@@ -140,13 +155,16 @@ class _$FavoritePlaceInstanceImpl implements _FavoritePlaceInstance {
 
 abstract class _FavoritePlaceInstance implements FavoritePlaceInstance {
   const factory _FavoritePlaceInstance(
-      {required final int id,
-      required final String name}) = _$FavoritePlaceInstanceImpl;
+      {required final String id,
+      required final String name,
+      required final int placeId}) = _$FavoritePlaceInstanceImpl;
 
   @override
-  int get id;
+  String get id;
   @override
   String get name;
+  @override
+  int get placeId;
   @override
   @JsonKey(ignore: true)
   _$$FavoritePlaceInstanceImplCopyWith<_$FavoritePlaceInstanceImpl>
