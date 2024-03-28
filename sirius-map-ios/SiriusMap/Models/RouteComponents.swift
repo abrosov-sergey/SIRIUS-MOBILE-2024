@@ -14,9 +14,9 @@ public struct Anchor: Decodable {
     let id: Int
     let coordinates: [Double]
     let title: String?
-    
+
     var mapItem: MapItem {
-        MapItem (
+        MapItem(
             id: id,
             title: title,
             coordinate: Coordinate(
@@ -45,13 +45,14 @@ public struct Route {
 
 public struct Graph {
     let mapItems: [MapItem]
-    let edges: [Int : [Int]]
+    let edges: [Int: [Int]]
 }
 
 struct PointDistance: Comparable {
     static func < (lhs: PointDistance, rhs: PointDistance) -> Bool {
-        return lhs.distance < rhs.distance
+        lhs.distance < rhs.distance
     }
+
     let distance: Double
     let index: Int
 }

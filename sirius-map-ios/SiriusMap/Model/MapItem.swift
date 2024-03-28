@@ -6,14 +6,14 @@
 //
 
 #if DEBUG
-extension MapItem {
-    static let sampleData = [
-        MapItem(id: 0, title: nil, coordinate: Coordinate(latitude: 43.414390231912478, longitude: 39.950388503984989)),
-        MapItem(id: 1, title: nil, coordinate: Coordinate(latitude: 43.414417909921923, longitude: 39.95070036288903)),
-        MapItem(id: 2, title: nil, coordinate: Coordinate(latitude: 43.414609511933413, longitude: 39.950707851600782)),
-        MapItem(id: 3, title: nil, coordinate: Coordinate(latitude: 43.414590480110249, longitude: 39.951024080506684)),
-        MapItem(id: 4, title: nil, coordinate: Coordinate(latitude: 43.414930900526763, longitude: 39.951275248095982))
-    ]
+    extension MapItem {
+        static let sampleData = [
+            MapItem(id: 0, title: nil, coordinate: Coordinate(latitude: 43.414390231912478, longitude: 39.950388503984989)),
+            MapItem(id: 1, title: nil, coordinate: Coordinate(latitude: 43.414417909921923, longitude: 39.95070036288903)),
+            MapItem(id: 2, title: nil, coordinate: Coordinate(latitude: 43.414609511933413, longitude: 39.950707851600782)),
+            MapItem(id: 3, title: nil, coordinate: Coordinate(latitude: 43.414590480110249, longitude: 39.951024080506684)),
+            MapItem(id: 4, title: nil, coordinate: Coordinate(latitude: 43.414930900526763, longitude: 39.951275248095982)),
+        ]
 //        "Вход", "Финтех ЦИТ", "Умный город", "Ресторан Вега", "Библиотека", "Туалет",
 //        "100", "101", "102", "103", "104", "105", "106", "107", "108", "109", "110"
 //    ].map(MapItem.init)
