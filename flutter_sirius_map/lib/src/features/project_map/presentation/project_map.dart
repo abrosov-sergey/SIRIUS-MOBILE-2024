@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_sirius_map/src/features/project_map/domain/models/map_state.dart';
 import 'package:flutter_sirius_map/src/features/project_map/domain/providers/map_provider.dart';
 import 'package:flutter_sirius_map/src/features/project_map/presentation/widgets/background_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -40,7 +41,7 @@ class ProjectMap extends ConsumerWidget {
   @override
   Widget build(context, ref) {
     final mapNotifier = ref.watch(mapNotifierProvider.notifier);
-    final route = ref.watch(mapNotifierProvider);
+    final mapState = ref.watch(mapNotifierProvider);
 
     return FlutterMap(
       mapController: MapController(),
@@ -51,6 +52,7 @@ class ProjectMap extends ConsumerWidget {
         initialCenter: _center,
         initialZoom: 17,
         onTap: (TapPosition tapPosition, LatLng point) {
+          // print('onMapTap - Widget');
           mapNotifier.onMapTap(point);
         },
       ),
@@ -65,15 +67,17 @@ class ProjectMap extends ConsumerWidget {
                   const LatLng(43.412678630221023, 39.949135833185039)))
         ]),
         // отрисовка маршрута
-        PolylineLayer(
-          polylines: [
-            Polyline(
-              points: route,
-              gradientColors: [Colors.blue, Colors.purple, Colors.pink],
-              strokeWidth: 10,
-            ),
-          ],
-        ),
+        if (mapState is MapStateRoute)
+          ...[PolylineLayer(
+            polylines: [
+              Polyline(
+                points: mapState.route,
+                gradientColors: [Colors.blue, Colors.purple, Colors.pink],
+                strokeWidth: 10,
+              ),
+            ],
+          ),]
+        
       ],
     );
   }

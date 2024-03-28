@@ -4,7 +4,7 @@ import 'package:latlong2/latlong.dart';
 abstract class RouteRepository {
   Future<void> init();
 
-  PlacePoint getClosestPoint(LatLng point);
+  PlacePoint? getClosestPoint(LatLng point);
 
   List<PlacePoint> getRoute(PlacePoint start, PlacePoint finish);
 }

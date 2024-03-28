@@ -19,21 +19,23 @@ class PointsService {
     return null;
   }
 
+  final _maxPointsDist = 0.001;
   /// возвращает ближайшую к данным координатам точку
   /// если отсутсвуют какие-либо точки, выкинет ошибку
-  PlacePoint getClosest(LatLng ll) {
+  PlacePoint? getClosest(LatLng ll) {
     final points = _pointsLoader.pointsById;
 
     PlacePoint? ans;
     for (final entry in points.entries) {
-      if (ans == null || dist(ll, ans.pos) > dist(ll, entry.value)) {
-        ans = PlacePoint(id: entry.key, pos: entry.value);
+      final distOld = ans == null ? null : dist(ll, ans.pos);
+      final distNew = dist(ll, entry.value);
+      if (distOld == null || distOld > distNew) {
+        if (distNew <= _maxPointsDist) {
+          ans = PlacePoint(id: entry.key, pos: entry.value);
+        }
       }
     }
-
-    if (ans == null) {
-      throw Exception('ans is null- probably no points found');
-    }
+    
     return ans;
   }
 }
