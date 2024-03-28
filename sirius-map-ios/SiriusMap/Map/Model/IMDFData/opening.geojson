@@ -1,0 +1,27 @@
+{
+  "type": "FeatureCollection",
+  "name": "opening",
+  "features": [
+    {
+      "type": "Feature",
+      "feature_type": "opening",
+      "id": "e59bb23d-8039-465d-93b5-64aaed6ec9ef",
+      "properties": {
+        "category": "pedestrian"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            39.95131195060421,
+            43.41450161451666
+          ],
+          [
+            39.95130993894775,
+            43.41447709767129
+          ]
+        ]
+      }
+    }
+  ]
+}

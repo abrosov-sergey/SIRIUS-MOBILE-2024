@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_sirius_map/src/utils/context.dart';
+import 'package:flutter_sirius_map/src/core/utils/context.dart';
+import 'package:flutter_sirius_map/src/core/widgets/animated_text.dart';
 
 class SettingButton extends StatelessWidget {
   const SettingButton.icon({
@@ -28,11 +29,14 @@ class SettingButton extends StatelessWidget {
         color: context.themeExtendColors.iconColor,
       );
     } else if (text != null) {
-      body = Text(
-        text!,
-        style: TextStyle(
-          color: context.themeExtendColors.iconColor,
-          fontSize: 16.w,
+      body = AnimatedTextWrapper(
+        text: Text(
+          key: ValueKey(text!.hashCode),
+          text!,
+          style: TextStyle(
+            color: context.themeExtendColors.iconColor,
+            fontSize: 16.w,
+          ),
         ),
       );
     }
@@ -43,7 +47,7 @@ class SettingButton extends StatelessWidget {
         onTap: onTap,
         child: Container(
           width: 50.w,
-          height: 50.h,
+          height: 50.w,
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(

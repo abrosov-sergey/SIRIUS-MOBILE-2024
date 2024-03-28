@@ -5,7 +5,7 @@ import 'package:flutter_sirius_map/src/features/project_map/presentation/project
 import 'package:flutter_sirius_map/src/features/settings/presentation/providers/locale_provider.dart';
 import 'package:flutter_sirius_map/src/features/settings/presentation/providers/theme_provider.dart';
 import 'package:flutter_sirius_map/src/features/settings/presentation/widgets/setting_button.dart';
-import 'package:flutter_sirius_map/src/utils/context.dart';
+import 'package:flutter_sirius_map/src/core/utils/context.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});

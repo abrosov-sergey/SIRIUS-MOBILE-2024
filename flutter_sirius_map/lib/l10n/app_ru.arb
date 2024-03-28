@@ -1,5 +1,8 @@
 {
     "search" : "Поиск",
     "favorites" : "Избранное",
-    "language" : "RU"
+    "language" : "RU",
+    "edit" : "Редактировать",
+    "cancel" : "Отмена",
+    "add" : "Добавить"
 }
