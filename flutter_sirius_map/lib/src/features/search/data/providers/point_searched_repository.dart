@@ -15,7 +15,7 @@ class PointSearchedRepositoryImpl implements PointSearchedRepositoryInterface {
 
   List<PointSearched> points = [];
 
-  static const _path = 'assets/points/name_to_id.json';
+  static const _path = 'assets/points/anchor.geojson';
 
   @override
   List<PointSearched> getPoints() {

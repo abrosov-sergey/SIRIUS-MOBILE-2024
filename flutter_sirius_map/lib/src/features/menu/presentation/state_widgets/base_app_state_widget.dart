@@ -20,7 +20,7 @@ class BaseAppStateWidget extends ConsumerWidget {
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Row(
             children: [
-              Expanded(
+              const Expanded(
                 child: SearchField(),
               ),
               SizedBox(width: 10.w),
