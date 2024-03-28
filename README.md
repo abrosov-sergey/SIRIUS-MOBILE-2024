@@ -3,7 +3,7 @@
 SiriusMapIOS - Application for building a route inside Sirius University. Inside the application, the functionality of scanning Qr codes is implemented, 
 which allows you to determine the user’s position. There is also the ability to manually select start and end points.
 
-![Launch Screen](https://i.ibb.co/PmKhq5F/Launch-Screen-Screenshot.png) ![Map Screen](https://i.ibb.co/TWG5GFh/Map-Screen-Screenshot.png)
+![Launch Screen](https://i.ibb.co/PmKhq5F/Launch-Screen-Screenshot.png = 256*256) ![Map Screen](https://i.ibb.co/TWG5GFh/Map-Screen-Screenshot.png)
 
 ## Get the Code
 
