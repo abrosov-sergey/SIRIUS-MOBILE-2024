@@ -10,6 +10,8 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SearchField extends ConsumerWidget {
+  const SearchField({super.key});
+
   @override
   Widget build(BuildContext context, ref) {
     final searchNotifier = ref.watch(searchStateNotifierProvider.notifier);
