@@ -19,16 +19,15 @@ struct RouteView: View {
             onChangeRoute: { print("onChangeRoute") }
         )
     }
-
-    private enum ListItemType {
-        case start
-        case end
+    
+    private enum ListItemType: String {
+        case start = "location.fill"
+        case end = "figure.walk.motion"
     }
 
     private struct ListItem {
-        let type: ListItemType
+        var type: ListItemType
         var title: String?
-        let iconName: String
     }
 
     @State private var listItems: [ListItem]
@@ -41,14 +40,12 @@ struct RouteView: View {
         listItems = [
             ListItem(
                 type: .start,
-                title: nil,
-                iconName: "location.fill"
+                title: nil
             ),
             ListItem(
                 type: .end,
-                title: endPoint.title,
-                iconName: "figure.walk.motion"
-            ),
+                title: endPoint.title
+            )
         ]
     }
 
@@ -66,7 +63,7 @@ struct RouteView: View {
                         }
                     } label: {
                         HStack {
-                            Image(systemName: item.iconName)
+                            Image(systemName: item.type.rawValue)
                                 .foregroundStyle(item.type == .start ? .blue : .green)
                             Text(item.title ?? "")
                                 .foregroundStyle(.black)
@@ -76,7 +73,7 @@ struct RouteView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
                 .onMove { from, to in
-                    listItems.move(fromOffsets: from, toOffset: to)
+                    listItems = swapListItems(listItems)
                     actions.onChangeRoute()
                 }
             }
@@ -84,6 +81,20 @@ struct RouteView: View {
                 EditButton()
             }.environment(\.editMode, .constant(.active))
         }
+    }
+    
+    private func swapListItems(_ list: [ListItem]) -> [ListItem] {
+        guard list.count == 2 else { return list }
+        return [
+            ListItem(
+                type: list[0].type,
+                title: list[1].title
+            ),
+            ListItem(
+                type: list[1].type,
+                title: list[0].title
+            )
+        ]
     }
 
     func setRouteStart(_ start: MapItem) {
