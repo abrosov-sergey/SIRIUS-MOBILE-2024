@@ -24,11 +24,7 @@ class Dijkstra {
     QueueElement closest;
     int u;
     double costOfSToU;
-    var adjacentNodes,
-        costOfE,
-        costOfSToUPlusCostOfE,
-        costOfSToV,
-        firstVisit;
+    var adjacentNodes, costOfE, costOfSToUPlusCostOfE, costOfSToV, firstVisit;
     while (!open.empty()) {
       /// In the nodes remaining in graph that have a known cost from s,
       /// find the node, u, that currently has the shortest path from s.
@@ -93,9 +89,9 @@ class Dijkstra {
     Map layout = {};
     Map graph = {};
     Set ids = {};
-    data.forEach((element) {
+    for (var element in data) {
       ids.addAll(element);
-    });
+    }
 
     for (var id in ids) {
       layout[id] = data

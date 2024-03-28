@@ -20,7 +20,9 @@ class GraphServise {
 
     List<int> tempRoute;
     try {
-      tempRoute = Dijkstra.findPathFromGraph(graph, start.id, finish.id).map((e) => e as int).toList();
+      tempRoute = Dijkstra.findPathFromGraph(graph, start.id, finish.id)
+          .map((e) => e as int)
+          .toList();
     } catch (e) {
       if (kDebugMode) {
         print('error while dijkstra: $e');

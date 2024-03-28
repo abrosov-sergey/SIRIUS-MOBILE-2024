@@ -32,7 +32,8 @@ class AppStateNotifier extends _$AppStateNotifier {
         state = currState.copyWith(finish: placePoint);
       } else if (override) {
         // если обе есть и хотим перезаписать, то первую
-        state = currState.copyWith(start: placePoint);}
+        state = currState.copyWith(start: placePoint);
+      }
     }
   }
 
