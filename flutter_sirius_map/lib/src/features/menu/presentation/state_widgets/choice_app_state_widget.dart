@@ -6,7 +6,6 @@ import 'package:flutter_sirius_map/src/app/domain/providers/app_state_provider.d
 import 'package:flutter_sirius_map/src/app/domain/states/app_state.dart';
 import 'package:flutter_sirius_map/src/core/utils/context.dart';
 import 'package:flutter_sirius_map/src/features/menu/presentation/widgets/bottom_bar_button.dart';
-import 'package:flutter_sirius_map/src/features/menu/presentation/widgets/build_route_button.dart';
 import 'package:flutter_sirius_map/src/features/menu/presentation/widgets/swap_icon.dart';
 import 'package:flutter_sirius_map/src/features/menu/presentation/widgets/textfield_with_cancel.dart';
 
@@ -30,12 +29,11 @@ class ChoiceAppStateWidget extends ConsumerWidget {
       children: [
         Row(
           children: [
+            SizedBox(width: 16.w),
             BackButton(
               color: context.themeExtendColors.iconColor,
               onPressed: notifier.setBaseState,
             ),
-            const Spacer(),
-            BuildRouteButton(callBack: notifier.onRouteBuild),
           ],
         ),
         Padding(
@@ -67,6 +65,18 @@ class ChoiceAppStateWidget extends ConsumerWidget {
             ],
           ),
         ),
+        SizedBox(height: 40.h),
+        BottomBarButton(
+          callBack: notifier.onRouteBuild,
+          icon: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 12.h),
+            child: Text(
+              context.localization.buildRoute,
+              style: context.themeExtendTextStyles.bodyStyle
+                  .copyWith(color: context.themeExtendColors.iconColor),
+            ),
+          ),
+        )
       ],
     );
   }

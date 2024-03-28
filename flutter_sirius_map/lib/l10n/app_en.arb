@@ -4,5 +4,6 @@
     "language" : "EN",
     "edit" : "Edit",
     "cancel" : "Cancel",
-    "add" : "Add"
+    "add" : "Add",
+    "buildRoute": "Build route"
 }
