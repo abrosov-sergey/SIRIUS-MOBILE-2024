@@ -69,8 +69,14 @@ struct RouteView: View {
                         HStack {
                             Image(systemName: item.type.rawValue)
                                 .foregroundStyle(item.type == .start ? .blue : .green)
-                            Text(item.title ?? "")
-                                .foregroundStyle(.black)
+                            Text(item.title ?? "Откуда")
+                                .foregroundStyle(
+                                    item.title != nil ? Color(
+                                        UIColor.label
+                                    ) : Color(
+                                        UIColor.tertiaryLabel
+                                    )
+                                )
                             Spacer()
                         }
                     }
