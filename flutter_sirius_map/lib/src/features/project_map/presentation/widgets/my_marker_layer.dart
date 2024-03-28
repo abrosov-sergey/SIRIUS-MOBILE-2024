@@ -31,7 +31,7 @@ class MyMarkerLayer extends StatelessWidget {
     super.key,
     required this.markers,
     this.alignment = Alignment.center,
-    this.rotate = false,
+    this.rotate = true,
   });
 
   @override
