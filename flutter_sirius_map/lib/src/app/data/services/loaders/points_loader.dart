@@ -9,8 +9,7 @@ class PointsLoader {
   late Map<int, LatLng> pointsById;
 
   /// подгрузка и декодинг координат точек
-  static const _pointsPath =
-      'assets/points/positions.geojson';
+  static const _pointsPath = 'assets/points/positions.geojson';
   Future<void> init() async {
     final json = await rootBundle.loadString(_pointsPath);
     final info = jsonDecode(json)['features'];

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sirius_map/src/app/domain/place_point.dart';
-import 'package:flutter_sirius_map/src/utils/context.dart';
+import 'package:flutter_sirius_map/src/core/utils/context.dart';
 
 class SelectedPoint extends StatelessWidget {
   final PlacePoint placePoint;
   final void Function(int) deletePoint;
   const SelectedPoint({
     super.key,
-    required this.placePoint, required this.deletePoint,
+    required this.placePoint,
+    required this.deletePoint,
   });
 
   String get text => 'id: ${placePoint.id}';

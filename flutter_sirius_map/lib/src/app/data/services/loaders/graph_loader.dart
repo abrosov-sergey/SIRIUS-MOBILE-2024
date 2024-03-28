@@ -20,7 +20,8 @@ class GraphLoader {
 
     graph = <int, Map<int, double>>{};
     for (var line in lines) {
-      final lineParsed = line.split(RegExp(':? ')).map((e) => int.parse(e)).toList();
+      final lineParsed =
+          line.split(RegExp(':? ')).map((e) => int.parse(e)).toList();
       final v = lineParsed[0];
       for (int i = 1; i < lineParsed.length; i++) {
         final u = lineParsed[i];

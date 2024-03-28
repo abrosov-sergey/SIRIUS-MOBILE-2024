@@ -18,7 +18,7 @@ class MapNotifier extends _$MapNotifier {
     if (appState is ChoiceAppState) {
       if (kDebugMode) {
         print(
-          'MapNotifier build - ChoiceAppState ${appState.start} ${appState.finish}');
+            'MapNotifier build - ChoiceAppState ${appState.start} ${appState.finish}');
       }
       return MapStatePoints(start: appState.start, finish: appState.finish);
     }

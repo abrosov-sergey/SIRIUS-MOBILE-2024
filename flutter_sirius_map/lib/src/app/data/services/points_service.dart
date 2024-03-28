@@ -20,6 +20,7 @@ class PointsService {
   }
 
   final _maxPointsDist = 0.001;
+
   /// возвращает ближайшую к данным координатам точку
   /// если отсутсвуют какие-либо точки, выкинет ошибку
   PlacePoint? getClosest(LatLng ll) {
@@ -35,7 +36,7 @@ class PointsService {
         }
       }
     }
-    
+
     return ans;
   }
 }
