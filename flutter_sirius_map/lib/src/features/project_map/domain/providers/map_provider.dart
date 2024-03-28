@@ -13,9 +13,13 @@ class MapNotifier extends _$MapNotifier {
   MapState build() {
     final appState = ref.watch(appStateNotifierProvider);
     if (kDebugMode) {
-      print(appState);
+      print('MapNotifier build - got $appState');
     }
     if (appState is ChoiceAppState) {
+      if (kDebugMode) {
+        print(
+          'MapNotifier build - ChoiceAppState ${appState.start} ${appState.finish}');
+      }
       return MapStatePoints(start: appState.start, finish: appState.finish);
     }
     if (appState is RouteBuilderLoaded) {
@@ -31,5 +35,13 @@ class MapNotifier extends _$MapNotifier {
     final appStateNotifier = ref.read(appStateNotifierProvider.notifier);
     // print('onMapTap - MapNotifier');
     appStateNotifier.onMapTap(ll);
+  }
+
+  void onPointCancel(int id) {
+    final appStateNotifier = ref.read(appStateNotifierProvider.notifier);
+    if (kDebugMode) {
+      print('onPointCancel - MapNotifier');
+    }
+    appStateNotifier.onPointCancel(id);
   }
 }

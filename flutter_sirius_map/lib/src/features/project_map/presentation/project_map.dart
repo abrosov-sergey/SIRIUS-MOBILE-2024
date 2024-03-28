@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_sirius_map/src/app/domain/place_point.dart';
 import 'package:flutter_sirius_map/src/features/project_map/domain/models/map_state.dart';
 import 'package:flutter_sirius_map/src/features/project_map/domain/providers/map_provider.dart';
 import 'package:flutter_sirius_map/src/features/project_map/presentation/widgets/background_map.dart';
+import 'package:flutter_sirius_map/src/features/project_map/presentation/widgets/my_marker_layer.dart';
+import 'package:flutter_sirius_map/src/features/project_map/presentation/widgets/selected_point.dart';
 import 'package:latlong2/latlong.dart';
 
 class ProjectMap extends ConsumerWidget {
@@ -68,7 +71,7 @@ class ProjectMap extends ConsumerWidget {
         ]),
         // отрисовка маршрута
         if (mapState is MapStateRoute)
-          ...[PolylineLayer(
+          PolylineLayer(
             polylines: [
               Polyline(
                 points: mapState.route,
@@ -76,9 +79,31 @@ class ProjectMap extends ConsumerWidget {
                 strokeWidth: 10,
               ),
             ],
-          ),]
-        
+          ),
+        if (mapState is MapStatePoints)
+          MyMarkerLayer(markers: [
+            if (mapState.start != null)
+              _marker(
+                mapState.start!,
+                mapNotifier.onPointCancel,
+              ),
+            if (mapState.finish != null)
+              _marker(
+                mapState.finish!,
+                mapNotifier.onPointCancel,
+              ),
+          ]),
       ],
+    );
+  }
+
+  Marker _marker(PlacePoint placePoint, void Function(int) deletePoint) {
+    return Marker(
+      point: placePoint.pos,
+      child: SelectedPoint(
+        placePoint: placePoint,
+        deletePoint: deletePoint,
+      ),
     );
   }
 }
