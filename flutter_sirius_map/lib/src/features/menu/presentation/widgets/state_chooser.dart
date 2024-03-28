@@ -19,7 +19,7 @@ class StateChooser extends ConsumerWidget {
     return switch (appState) {
       InitAppState() => const CircularProgressIndicator(),
       BaseAppState() => BaseAppStateWidget(),
-      ChoiceAppState() => ChoiceAppStateWidget(),
+      ChoiceAppState() => ChoiceAppStateWidget(appState: appState),
       RouteBuilderLoading() => const CircularProgressIndicator(),
       RouteBuilderError() => Text(appState.error.toString()),
       RouteBuilderLoaded() => RouteBuilderLoadedWidget(),

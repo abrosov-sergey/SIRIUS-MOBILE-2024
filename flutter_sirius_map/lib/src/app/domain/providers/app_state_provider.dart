@@ -21,16 +21,18 @@ class AppStateNotifier extends _$AppStateNotifier {
 
   late final RouteRepository _routeRepository;
 
-  void updateChoiceState(PlacePoint? placePoint) {
+  void updateChoiceState(PlacePoint? placePoint, {bool override = true}) {
     if (placePoint != null && state is ChoiceAppState) {
       final currState = state as ChoiceAppState;
-      // если при выборе маршрута нет первой точки или есть обе, заполняем первую
-      if (currState.start == null || currState.finish != null) {
+      // если при выборе маршрута нет первой точки, заполняем первую
+      if (currState.start == null) {
         state = currState.copyWith(start: placePoint);
-      } else {
-        // иначе нет второй, ее
+      } else if (currState.finish == null) {
+        // иначе если нет второй, ее
         state = currState.copyWith(finish: placePoint);
-      }
+      } else if (override) {
+        // если обе есть и хотим перезаписать, то первую
+        state = currState.copyWith(start: placePoint);}
     }
   }
 
@@ -42,7 +44,7 @@ class AppStateNotifier extends _$AppStateNotifier {
     if (state is BaseAppState) {
       state = ChoiceAppState(start: placePoint);
     } else if (state is ChoiceAppState) {
-      updateChoiceState(placePoint);
+      updateChoiceState(placePoint, override: false);
     }
   }
 
