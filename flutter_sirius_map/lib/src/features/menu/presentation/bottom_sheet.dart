@@ -3,20 +3,19 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sirius_map/src/features/menu/presentation/providers/scroll_controller_providrr.dart';
+
 import 'package:flutter_sirius_map/src/core/utils/context.dart';
 import 'package:flutter_sirius_map/src/core/utils/sliver_utils.dart';
 import 'package:flutter_sirius_map/src/features/menu/presentation/state_widgets/state_chooser.dart';
 
-class MenuBottomSheet extends StatelessWidget {
+class MenuBottomSheet extends ConsumerWidget {
   const MenuBottomSheet({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     return DraggableScrollableSheet(
+      controller: ref.read(scrollControllerProvider),
       builder: (context, scrollController) => ProviderScope(
-        overrides: [
-          scrollControllerProvider.overrideWith((ref) => scrollController)
-        ],
         child: Container(
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
@@ -37,19 +36,12 @@ class MenuBottomSheet extends StatelessWidget {
             alignment: Alignment.topCenter,
             children: [
               CustomScrollView(
+                physics: const BouncingScrollPhysics(),
                 slivers: [
                   SizedBox(
                     height: 20.h,
                   ).sliver,
                   const StateChooser().sliver,
-                  // Padding(
-                  //   padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  //   child: const Row(
-                  //     mainAxisAlignment: MainAxisAlignment.end,
-                  //     children: [BuildRouteButton()],
-                  //   ),
-                  // ).sliver,
-                  // const FavoriteBlocWidget().sliver,
                 ],
                 controller: scrollController,
               ),
@@ -67,6 +59,9 @@ class MenuBottomSheet extends StatelessWidget {
                         borderRadius: BorderRadius.circular(16),
                       ),
                     ),
+                  ),
+                  SizedBox(
+                    height: 10.h,
                   ),
                 ],
               ),

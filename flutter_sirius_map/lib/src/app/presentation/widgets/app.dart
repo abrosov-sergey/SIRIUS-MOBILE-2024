@@ -20,7 +20,7 @@ class MyApp extends ConsumerWidget {
     final locale = ref.watch(localeProvider);
 
     return ScreenUtilInit(
-      designSize: const Size(448, 998),
+      designSize: const Size(375, 804),
       minTextAdapt: true,
       child: MaterialApp(
         localizationsDelegates: const [

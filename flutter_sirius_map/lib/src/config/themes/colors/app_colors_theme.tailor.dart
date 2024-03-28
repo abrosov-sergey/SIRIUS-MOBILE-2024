@@ -15,6 +15,8 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme>
     required this.iconBackgroundColor,
     required this.iconColor,
     required this.primaryColor,
+    required this.searchFieldColor,
+    required this.searchFieldFillerColor,
     required this.secondaryColor,
     required this.shadowColor,
   });
@@ -23,6 +25,8 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme>
   final Color iconBackgroundColor;
   final Color iconColor;
   final Color primaryColor;
+  final Color searchFieldColor;
+  final Color searchFieldFillerColor;
   final Color secondaryColor;
   final Color shadowColor;
 
@@ -35,6 +39,8 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme>
         iconBackgroundColor: $_AppColorsTheme.iconBackgroundColor[0],
         iconColor: $_AppColorsTheme.iconColor[0],
         primaryColor: $_AppColorsTheme.primaryColor[0],
+        searchFieldColor: $_AppColorsTheme.searchFieldColor[0],
+        searchFieldFillerColor: $_AppColorsTheme.searchFieldFillerColor[0],
         secondaryColor: $_AppColorsTheme.secondaryColor[0],
         shadowColor: $_AppColorsTheme.shadowColor[0],
       );
@@ -44,6 +50,8 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme>
     iconBackgroundColor: $_AppColorsTheme.iconBackgroundColor[0],
     iconColor: $_AppColorsTheme.iconColor[0],
     primaryColor: $_AppColorsTheme.primaryColor[0],
+    searchFieldColor: $_AppColorsTheme.searchFieldColor[0],
+    searchFieldFillerColor: $_AppColorsTheme.searchFieldFillerColor[0],
     secondaryColor: $_AppColorsTheme.secondaryColor[0],
     shadowColor: $_AppColorsTheme.shadowColor[0],
   );
@@ -53,6 +61,8 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme>
         iconBackgroundColor: $_AppColorsTheme.iconBackgroundColor[1],
         iconColor: $_AppColorsTheme.iconColor[1],
         primaryColor: $_AppColorsTheme.primaryColor[1],
+        searchFieldColor: $_AppColorsTheme.searchFieldColor[1],
+        searchFieldFillerColor: $_AppColorsTheme.searchFieldFillerColor[1],
         secondaryColor: $_AppColorsTheme.secondaryColor[1],
         shadowColor: $_AppColorsTheme.shadowColor[1],
       );
@@ -62,6 +72,8 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme>
     iconBackgroundColor: $_AppColorsTheme.iconBackgroundColor[1],
     iconColor: $_AppColorsTheme.iconColor[1],
     primaryColor: $_AppColorsTheme.primaryColor[1],
+    searchFieldColor: $_AppColorsTheme.searchFieldColor[1],
+    searchFieldFillerColor: $_AppColorsTheme.searchFieldFillerColor[1],
     secondaryColor: $_AppColorsTheme.secondaryColor[1],
     shadowColor: $_AppColorsTheme.shadowColor[1],
   );
@@ -77,6 +89,8 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme>
     Color? iconBackgroundColor,
     Color? iconColor,
     Color? primaryColor,
+    Color? searchFieldColor,
+    Color? searchFieldFillerColor,
     Color? secondaryColor,
     Color? shadowColor,
   }) {
@@ -85,6 +99,9 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme>
       iconBackgroundColor: iconBackgroundColor ?? this.iconBackgroundColor,
       iconColor: iconColor ?? this.iconColor,
       primaryColor: primaryColor ?? this.primaryColor,
+      searchFieldColor: searchFieldColor ?? this.searchFieldColor,
+      searchFieldFillerColor:
+          searchFieldFillerColor ?? this.searchFieldFillerColor,
       secondaryColor: secondaryColor ?? this.secondaryColor,
       shadowColor: shadowColor ?? this.shadowColor,
     );
@@ -99,6 +116,10 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme>
           Color.lerp(iconBackgroundColor, other.iconBackgroundColor, t)!,
       iconColor: Color.lerp(iconColor, other.iconColor, t)!,
       primaryColor: Color.lerp(primaryColor, other.primaryColor, t)!,
+      searchFieldColor:
+          Color.lerp(searchFieldColor, other.searchFieldColor, t)!,
+      searchFieldFillerColor:
+          Color.lerp(searchFieldFillerColor, other.searchFieldFillerColor, t)!,
       secondaryColor: Color.lerp(secondaryColor, other.secondaryColor, t)!,
       shadowColor: Color.lerp(shadowColor, other.shadowColor, t)!,
     );
@@ -113,6 +134,9 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme>
       ..add(DiagnosticsProperty('iconBackgroundColor', iconBackgroundColor))
       ..add(DiagnosticsProperty('iconColor', iconColor))
       ..add(DiagnosticsProperty('primaryColor', primaryColor))
+      ..add(DiagnosticsProperty('searchFieldColor', searchFieldColor))
+      ..add(
+          DiagnosticsProperty('searchFieldFillerColor', searchFieldFillerColor))
       ..add(DiagnosticsProperty('secondaryColor', secondaryColor))
       ..add(DiagnosticsProperty('shadowColor', shadowColor));
   }
@@ -130,6 +154,10 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme>
             const DeepCollectionEquality()
                 .equals(primaryColor, other.primaryColor) &&
             const DeepCollectionEquality()
+                .equals(searchFieldColor, other.searchFieldColor) &&
+            const DeepCollectionEquality()
+                .equals(searchFieldFillerColor, other.searchFieldFillerColor) &&
+            const DeepCollectionEquality()
                 .equals(secondaryColor, other.secondaryColor) &&
             const DeepCollectionEquality()
                 .equals(shadowColor, other.shadowColor));
@@ -143,6 +171,8 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme>
         const DeepCollectionEquality().hash(iconBackgroundColor),
         const DeepCollectionEquality().hash(iconColor),
         const DeepCollectionEquality().hash(primaryColor),
+        const DeepCollectionEquality().hash(searchFieldColor),
+        const DeepCollectionEquality().hash(searchFieldFillerColor),
         const DeepCollectionEquality().hash(secondaryColor),
         const DeepCollectionEquality().hash(shadowColor));
   }
