@@ -16,6 +16,10 @@ protocol RouteViewControllerDelegate: AnyObject {
 }
 
 final class RouteViewController: UIViewController {
+    func setRouteStart(_: MapItem) {}
+
+    func setRouteEnd(_: MapItem) {}
+
     weak var delegate: RouteViewControllerDelegate?
 
     private lazy var actions: RouteView.Actions = .init(
