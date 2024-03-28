@@ -57,3 +57,8 @@ targets:
     sources: SiriusMapUITests
     dependencies:
       - target: SiriusMap
+    settings:
+      # INFOPLIST_FILE: SiriusMap/SiriusMapUITests/Info.plist
+      PRODUCT_BUNDLE_IDENTIFIER: "com.siriusMap.ui.test"
+      CODE_SIGN_STYLE: Manual
+    
