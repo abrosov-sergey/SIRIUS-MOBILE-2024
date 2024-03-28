@@ -44,6 +44,7 @@ final class NewMapViewController: UIViewController {
             let openingOverlays = level.openings.compactMap { $0.overlay }
 
             let overlays = [levelOverlay] + unitOverlays + openingOverlays
+            map.addAnnotations(level.occupants)
             guard let levelOverlay = overlays.first else { fatalError() }
 
             map.setVisibleMapRect(
@@ -109,6 +110,9 @@ extension NewMapViewController: MKMapViewDelegate {
             marker.markerTintColor = .systemGreen
         case is RouteStartAnnotation:
             break
+        case is Occupant:
+            return nil
+        // marker.glyphText = annotation.title!!
         default:
             fatalError()
         }
@@ -131,6 +135,17 @@ extension NewMapViewController: MKMapViewDelegate {
             return renderer
         default:
             fatalError()
+        }
+    }
+
+    func mapView(_: MKMapView, didSelect annotation: MKAnnotation) {
+        if annotation is Occupant {
+            let coordinate = Coordinate(
+                latitude: annotation.coordinate.latitude,
+                longitude: annotation.coordinate.longitude
+            )
+            map.view(for: annotation)?.isSelected = false
+            delegate?.mapViewControler(self, didSelect: RouteService.shared.getClosetItem(for: coordinate))
         }
     }
 }

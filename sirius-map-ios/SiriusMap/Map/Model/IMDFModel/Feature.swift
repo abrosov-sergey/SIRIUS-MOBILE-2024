@@ -10,8 +10,9 @@ import MapKit
 class Feature: NSObject, IMDFDecodable {
     let identifier: UUID
     let geometry: [MKShape & MKGeoJSONObject]
+    let properties: Occupant.Properties?
 
-    required init(feature: MKGeoJSONFeature) throws {
+    required init(feature: MKGeoJSONFeature, shouldParseProperties: Bool) throws {
         guard let uuidString = feature.identifier else {
             throw IMDFError.missingIdentifier
         }
@@ -23,5 +24,11 @@ class Feature: NSObject, IMDFDecodable {
         }
 
         geometry = feature.geometry
+
+        if shouldParseProperties, let propertiesData = feature.properties {
+            properties = try JSONDecoder().decode(Occupant.Properties.self, from: propertiesData)
+        } else {
+            properties = nil
+        }
     }
 }
