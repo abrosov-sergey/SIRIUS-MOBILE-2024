@@ -33,7 +33,7 @@ struct RouteView: View {
             onChangeRoute: { print("onChangeRoute") }
         )
     }
-    
+
     @ObservedObject var listItems = ItemsArray()
 
     private let actions: Actions
@@ -49,7 +49,7 @@ struct RouteView: View {
             ListItem(
                 type: .end,
                 title: endPoint.title
-            )
+            ),
         ]
     }
 
@@ -76,7 +76,7 @@ struct RouteView: View {
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
-                .onMove { from, to in
+                .onMove { _, _ in
                     listItems.array = swapListItems(listItems.array)
                     actions.onChangeRoute()
                 }
@@ -90,7 +90,7 @@ struct RouteView: View {
 
     func setRouteStart(_ start: MapItem) {
         guard listItems.array.count == 2 else { return }
-        
+
         let newItems = [
             ListItem(
                 type: .start,
@@ -99,15 +99,15 @@ struct RouteView: View {
             ListItem(
                 type: .end,
                 title: listItems.array[1].title
-            )
+            ),
         ]
-        
+
         listItems.array = newItems
     }
 
     func setRouteEnd(_ end: MapItem) {
         guard listItems.array.count == 2 else { return }
-        
+
         listItems.array = [
             ListItem(
                 type: .start,
@@ -116,7 +116,7 @@ struct RouteView: View {
             ListItem(
                 type: .end,
                 title: end.title
-            )
+            ),
         ]
     }
 }
@@ -131,7 +131,7 @@ private func swapListItems(_ list: [ListItem]) -> [ListItem] {
         ListItem(
             type: list[1].type,
             title: list[0].title
-        )
+        ),
     ]
 }
 

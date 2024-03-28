@@ -16,14 +16,13 @@ protocol RouteViewControllerDelegate: AnyObject {
 }
 
 final class RouteViewController: UIViewController {
-
     weak var delegate: RouteViewControllerDelegate?
-    
+
     private lazy var routeView = RouteView(
         endRouteItem,
         actions: actions
     )
-    
+
     private lazy var hostingController = UIHostingController(
         rootView: routeView
     )
@@ -54,7 +53,7 @@ final class RouteViewController: UIViewController {
         view.backgroundColor = .systemBackground
 
         title = "Маршрут"
-        
+
         setup()
     }
 
@@ -63,7 +62,7 @@ final class RouteViewController: UIViewController {
         if let sheet = sheetPresentationController {
             let fraction = UISheetPresentationController.Detent.custom { _ in self.sheetHeight }
             sheet.detents = [fraction]
-            
+
             sheet.largestUndimmedDetentIdentifier = fraction.identifier
 
             sheet.animateChanges {
@@ -71,7 +70,7 @@ final class RouteViewController: UIViewController {
             }
         }
     }
-    
+
     func setRouteStart(_ item: MapItem) {
         routeView.setRouteStart(item)
     }
@@ -83,7 +82,7 @@ final class RouteViewController: UIViewController {
     private func setup() {
         guard let routeUiView = hostingController.view else { return }
         routeUiView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         view.addSubview(routeUiView)
 
         NSLayoutConstraint.activate([
