@@ -14,9 +14,45 @@ protocol NewMapViewControllerDelegate: AnyObject {
 }
 
 final class NewMapViewController: UIViewController, MapViewControllerInterface {
-    func setRouteStart(_: MapItem) {}
+    private lazy var map = {
+        let mapView = MKMapView(frame: view.bounds)
+        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        return mapView
+    }()
 
-    func setRouteEnd(_: MapItem) {}
+    func setRouteStart(_ mapItem: MapItem) {
+        let coordinate = CLLocationCoordinate2D(
+            latitude: mapItem.coordinate.latitude,
+            longitude: mapItem.coordinate.longitude
+        )
+
+        map.addAnnotation(RouteStartAnnotation(coordinate: coordinate, title: mapItem.title))
+
+        map.setRegion(
+            MKCoordinateRegion(
+                center: coordinate,
+                span: MKCoordinateSpan(latitudeDelta: 0.0025, longitudeDelta: 0.0025)
+            ),
+            animated: true
+        )
+    }
+
+    func setRouteEnd(_ mapItem: MapItem) {
+        let coordinate = CLLocationCoordinate2D(
+            latitude: mapItem.coordinate.latitude,
+            longitude: mapItem.coordinate.longitude
+        )
+
+        map.addAnnotation(RouteEndAnnotation(coordinate: coordinate, title: mapItem.title))
+
+        map.setRegion(
+            MKCoordinateRegion(
+                center: coordinate,
+                span: MKCoordinateSpan(latitudeDelta: 0.0025, longitudeDelta: 0.0025)
+            ),
+            animated: true
+        )
+    }
 
     func drawRoute() {}
 
@@ -24,9 +60,25 @@ final class NewMapViewController: UIViewController, MapViewControllerInterface {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        map.delegate = self
+        view.addSubview(map)
+    }
+}
 
-        let mapView = MKMapView(frame: view.bounds)
-        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(mapView)
+extension NewMapViewController: MKMapViewDelegate {
+    func mapView(_: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let marker = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: nil)
+
+        switch annotation {
+        case is RouteEndAnnotation:
+            marker.setSelected(true, animated: true)
+            marker.markerTintColor = .systemGreen
+        case is RouteStartAnnotation:
+            marker.setSelected(true, animated: true)
+        // marker.markerTintColor = .systemRed
+        default:
+            fatalError()
+        }
+        return marker
     }
 }

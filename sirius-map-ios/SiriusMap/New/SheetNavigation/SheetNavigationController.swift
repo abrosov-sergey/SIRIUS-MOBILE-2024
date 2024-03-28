@@ -9,9 +9,19 @@ import UIKit
 
 protocol SheetNavigationControllerDelegate: AnyObject {
     func searchTableViewControllerDidSelect(mapItem: MapItem)
+
+    func routeViewControllerDidSelectStartCell()
+    func routeViewControllerDidSelectEndCell()
+    func routeViewControllerDidChangeRoute()
 }
 
 final class SheetNavigationController: UINavigationController {
+    func showSearch(with title: String) {
+        searchTableViewController.title = title
+        pushViewController(searchTableViewController, animated: true)
+        // popViewController(animated: true)
+    }
+
     func setRouteEnd(_ mapItem: MapItem) {
         if let routeViewController {
             routeViewController.setRouteEnd(mapItem)
@@ -19,6 +29,7 @@ final class SheetNavigationController: UINavigationController {
         }
 
         routeViewController = RouteViewController(endRouteItem: mapItem)
+        routeViewController?.delegate = self
     }
 
     func setRouteStart(_ mapItem: MapItem) {
@@ -54,6 +65,20 @@ final class SheetNavigationController: UINavigationController {
 extension SheetNavigationController: SearchTableViewControllerDelegate {
     func searchTableViewController(didSelect mapItem: MapItem) {
         sheetDelegate?.searchTableViewControllerDidSelect(mapItem: mapItem)
-        pushViewController(routeViewController!, animated: true)
+        setViewControllers([routeViewController!], animated: true)
+    }
+}
+
+extension SheetNavigationController: RouteViewControllerDelegate {
+    func onTapStartCell() {
+        sheetDelegate?.routeViewControllerDidSelectStartCell()
+    }
+
+    func onTapEndCell() {
+        sheetDelegate?.routeViewControllerDidSelectEndCell()
+    }
+
+    func onChangeRoute() {
+        sheetDelegate?.routeViewControllerDidChangeRoute()
     }
 }

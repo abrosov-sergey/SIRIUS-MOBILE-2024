@@ -40,7 +40,7 @@ protocol MapViewControllerInterface {
 }
 
 final class RootNavigationController: UINavigationController {
-    private let useNewMap = false
+    private let useNewMap = true
 
     init(routeService: Routing) {
         self.routeService = routeService
@@ -52,7 +52,7 @@ final class RootNavigationController: UINavigationController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private let routeService: Routing
+    private var routeService: Routing
 
     private lazy var mapViewController: MapViewControllerInterface & UIViewController = {
         if useNewMap {
@@ -102,6 +102,28 @@ extension RootNavigationController: NewMapViewControllerDelegate {
 }
 
 extension RootNavigationController: SheetNavigationControllerDelegate {
+    func routeViewControllerDidSelectStartCell() {
+        routeService.routeStart = nil
+
+        // Удалить точку старта на карте
+
+        sheetNavigationController.showSearch(with: "Откуда")
+    }
+
+    func routeViewControllerDidSelectEndCell() {
+        routeService.routeEnd = nil
+
+        // Удалить точку финиша на карте
+
+        sheetNavigationController.showSearch(with: "Куда")
+    }
+
+    func routeViewControllerDidChangeRoute() {
+        (routeService.routeEnd, routeService.routeStart) = (routeService.routeStart, routeService.routeEnd)
+
+        // Поменять местами точки на карте
+    }
+
     func searchTableViewControllerDidSelect(mapItem: MapItem) {
         /// Определить:
         ///  - конец или начало маршрута?
@@ -117,16 +139,21 @@ extension RootNavigationController: SheetNavigationControllerDelegate {
         ///
 
         if routeService.isEmptyRoute {
-            // TODO: - Показать экран маршрута
+            routeService.routeEnd = mapItem
+
             sheetNavigationController.setRouteEnd(mapItem)
             mapViewController.setRouteEnd(mapItem)
             return
         }
 
         if routeService.hasEnd {
+            routeService.routeStart = mapItem
+
             sheetNavigationController.setRouteEnd(mapItem)
             mapViewController.setRouteStart(mapItem)
         } else {
+            routeService.routeEnd = mapItem
+
             sheetNavigationController.setRouteStart(mapItem)
             mapViewController.setRouteEnd(mapItem)
         }
