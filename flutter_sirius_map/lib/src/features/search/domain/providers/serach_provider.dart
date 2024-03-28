@@ -1,9 +1,6 @@
-  import 'dart:math';
-import 'package:logger/logger.dart';
-  import 'package:flutter_riverpod/flutter_riverpod.dart';
+
   import 'package:flutter_sirius_map/src/features/search/data/providers/point_searched_repository.dart';
   import 'package:flutter_sirius_map/src/features/search/domain/entities/point_searched_entity/point_searched.dart';
-  import 'package:flutter_sirius_map/src/features/search/domain/repositories/point_searched_repository_interface.dart';
   import 'package:flutter_sirius_map/src/features/search/domain/states/search_state.dart';
   import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -35,13 +32,8 @@ import 'package:logger/logger.dart';
 
     void updateName(String name){
       pointName = name;
-      var logger = Logger(
-      printer: PrettyPrinter(),
-      );
-      logger.d(pointName);
       loadSearc();
-      onSearchTab();
-      logger.d(state);
+      onSearchTab();  
     }
 
     void onSearchTab(){
@@ -59,7 +51,7 @@ import 'package:logger/logger.dart';
         final curState =  state as LoadedPoint;
         pointSearched.clear();
         for(PointSearched point in curState.points){
-          if(point.name.toLowerCase().contains(pointName))
+          if(point.name.toLowerCase().contains(pointName) && pointSearched.length< 5)
             pointSearched.add(point);
         }
       }

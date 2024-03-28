@@ -3,9 +3,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sirius_map/src/app/domain/providers/app_state_provider.dart';
-import 'package:flutter_sirius_map/src/core/utils/context.dart';
 import 'package:flutter_sirius_map/src/features/favorite_place/presentation/widgets/favorite_bloc_widget.dart';
 import 'package:flutter_sirius_map/src/features/menu/presentation/widgets/build_route_button.dart';
+import 'package:flutter_sirius_map/src/features/search/presentation/search_field.dart';
 
 class BaseAppStateWidget extends ConsumerWidget {
   const BaseAppStateWidget({super.key});
@@ -21,11 +21,7 @@ class BaseAppStateWidget extends ConsumerWidget {
           child: Row(
             children: [
               Expanded(
-                child: Container(
-                  color: context.themeExtendColors.secondaryColor,
-                  child: const Text(
-                      'future textfield'), // TODO вставить тексфилд Максима
-                ),
+                  child: SearchField(),
               ),
               SizedBox(width: 10.w),
               BuildRouteButton(

@@ -104,5 +104,4 @@ Future<void> _tapAdd(WidgetRef ref) async {
           name: "AAAAAAAAA",
         ),
       );
-  // TODO: Обработать клик на добавление нового любимого места
 }

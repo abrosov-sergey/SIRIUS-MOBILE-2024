@@ -52,7 +52,6 @@ dependencies:
   sqlite3_flutter_libs: ^0.5.15
   riverpod_annotation: ^2.3.5
   google_fonts: ^6.2.1
-  json_annotation: ^4.8.1
   dijkstra: ^0.0.4
   shared_preferences: ^2.2.2
   json_annotation: ^4.8.1
@@ -104,14 +103,14 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: AndadaPro
+    - family: PlayfairDisplay
       fonts:
-        - asset: assets/fonts/AndadaPro-Regular.ttf
-        - asset: assets/fonts/AndadaPro-Italic.ttf
+        - asset: assets/fonts/PlayfairDisplay-Regular.ttf
+        - asset: assets/fonts/PlayfairDisplay-Italic.ttf
           style: italic
-        - asset: assets/fonts/AndadaPro-Bold.ttf
+        - asset: assets/fonts/PlayfairDisplay-Bold.ttf
           weight: 700
-        - asset: assets/fonts/AndadaPro-SemiBold.ttf
+        - asset: assets/fonts/PlayfairDisplay-SemiBold.ttf
           weight: 600
         # - asset: fonts/Schyler-Italic.ttf
         #   style: italic
