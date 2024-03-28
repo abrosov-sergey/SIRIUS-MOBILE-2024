@@ -13,6 +13,7 @@ class LoadindPoints extends SearchState{
   const LoadindPoints();
 }
 
+
 class LoadedPoint extends SearchState{
   final List<PointSearched> points;
   const LoadedPoint({required this.points});

@@ -20,7 +20,7 @@ import 'package:logger/logger.dart';
       return const StartSearch();
     }
     
-    String pointName ="";
+    String pointName = "";
     late final PointSearchedRepositoryImpl  _pointSearchedRepository;
     final List<PointSearched> pointSearched = [];
 
@@ -55,12 +55,11 @@ import 'package:logger/logger.dart';
     }
     
     List<PointSearched> searchPoint(){
-
-
       if(state is LoadedPoint){
         final curState =  state as LoadedPoint;
+        pointSearched.clear();
         for(PointSearched point in curState.points){
-          if(point.name.contains(pointName))
+          if(point.name.toLowerCase().contains(pointName))
             pointSearched.add(point);
         }
       }

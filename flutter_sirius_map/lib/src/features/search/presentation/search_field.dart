@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sirius_map/src/features/menu/presentation/widgets/build_route_button.dart';
+import 'package:flutter_sirius_map/src/features/search/domain/entities/point_searched_entity/point_searched.dart';
 import 'package:flutter_sirius_map/src/features/search/domain/providers/serach_provider.dart';
 import 'package:flutter_sirius_map/src/utils/context.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -11,26 +12,25 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 
-class SearchField extends ConsumerWidget{
-  SearchField();
-  final TextEditingController _controller1 = TextEditingController();
-
+class SearchField extends ConsumerWidget {
   @override
-  Widget build(context,ref){
+  Widget build(BuildContext context, ref) {
     final searchNotifier = ref.watch(searchStateNotifierProvider.notifier);
-    return TypeAheadField(
-      controller:  _controller1,
-      itemBuilder: itemBuilder,
-      onSelected: onSelected,
-      suggestionsCallback: suggestionsCallback,
-      builder: (context, controller, focusNode) {
-        return TextField(
-          controller: _controller1,
-          );
-        },  
-      )
-  } 
 
+    return TypeAheadField<PointSearched>(
+      suggestionsCallback: (search) {
+        searchNotifier.updateName(search);
+        return searchNotifier.searchPoint();
+      },
+      itemBuilder: (context, point) {
+        return ListTile(
+          title: Text(point.name),
+        );
+      },
+      onSelected:(value) {} ,
+      
+    );
+  }
 }
 
 
