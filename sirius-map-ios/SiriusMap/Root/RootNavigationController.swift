@@ -16,7 +16,7 @@ protocol Routing {
     var hasEnd: Bool { get }
 }
 
-struct RouteService: Routing {
+struct RoutePoints: Routing {
     var routeStart: MapItem?
     var routeEnd: MapItem?
 
@@ -36,7 +36,7 @@ struct RouteService: Routing {
 protocol MapViewControllerInterface {
     func setRouteStart(_ mapItem: MapItem)
     func setRouteEnd(_ mapItem: MapItem)
-    func drawRoute()
+    func drawRoute(start: MapItem, end: MapItem)
 }
 
 final class RootNavigationController: UINavigationController {
@@ -157,6 +157,6 @@ extension RootNavigationController: SheetNavigationControllerDelegate {
             sheetNavigationController.setRouteStart(mapItem)
             mapViewController.setRouteEnd(mapItem)
         }
-        mapViewController.drawRoute()
+        mapViewController.drawRoute(start: routeService.routeStart!, end: routeService.routeEnd!)
     }
 }
