@@ -10,22 +10,11 @@ import 'package:flutter_sirius_map/src/features/favorite_place/presentation/widg
 import 'package:flutter_sirius_map/src/core/utils/context.dart';
 import 'package:flutter_sirius_map/src/core/utils/sliver_utils.dart';
 
-class FavoriteBlocWidget extends ConsumerStatefulWidget {
+class FavoriteBlocWidget extends ConsumerWidget {
   const FavoriteBlocWidget({super.key});
 
   @override
-  ConsumerState<FavoriteBlocWidget> createState() => _FavoriteBlocWidgetState();
-}
-
-class _FavoriteBlocWidgetState extends ConsumerState<FavoriteBlocWidget> {
-  @override
-  void initState() {
-    ref.read(favoritePlacesProvider.notifier).fetchFavPlaces();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final favPlacesState = ref.watch(favoritePlacesProvider);
     final favPlaces = favPlacesState.favoritePlaces;
     final isEditMode = favPlacesState.isEditMode;
@@ -87,8 +76,8 @@ class _FavoriteBlocWidgetState extends ConsumerState<FavoriteBlocWidget> {
                 SliverList.builder(
                   itemCount: favPlaces.length,
                   itemBuilder: (context, index) => FavoriteItem(
-                    key: ValueKey(favPlaces[index].id.hashCode),
-                    id: favPlaces[index].id,
+                    key: ValueKey(favPlaces[index].placeId.hashCode),
+                    placeId: favPlaces[index].placeId,
                     text: favPlaces[index].name,
                     iconData: Icons.location_on,
                     showDeleteButton: isEditMode,
@@ -111,9 +100,8 @@ VoidCallback _tapFavoritePlace = () {
 Future<void> _tapAdd(WidgetRef ref) async {
   ref.read(favoritePlacesProvider.notifier).addNewPlace(
         FavoritePlaceInstance(
-          id: Random().nextInt(10959083).toString(),
+          placeId: Random().nextInt(10959083),
           name: "AAAAAAAAA",
-          placeId: 124,
         ),
       );
   // TODO: Обработать клик на добавление нового любимого места

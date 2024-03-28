@@ -14,12 +14,17 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+FavoritePlaceInstance _$FavoritePlaceInstanceFromJson(
+    Map<String, dynamic> json) {
+  return _FavoritePlaceInstance.fromJson(json);
+}
+
 /// @nodoc
 mixin _$FavoritePlaceInstance {
-  String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   int get placeId => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $FavoritePlaceInstanceCopyWith<FavoritePlaceInstance> get copyWith =>
       throw _privateConstructorUsedError;
@@ -31,7 +36,7 @@ abstract class $FavoritePlaceInstanceCopyWith<$Res> {
           $Res Function(FavoritePlaceInstance) then) =
       _$FavoritePlaceInstanceCopyWithImpl<$Res, FavoritePlaceInstance>;
   @useResult
-  $Res call({String id, String name, int placeId});
+  $Res call({String name, int placeId});
 }
 
 /// @nodoc
@@ -48,15 +53,10 @@ class _$FavoritePlaceInstanceCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? name = null,
     Object? placeId = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -78,7 +78,7 @@ abstract class _$$FavoritePlaceInstanceImplCopyWith<$Res>
       __$$FavoritePlaceInstanceImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, int placeId});
+  $Res call({String name, int placeId});
 }
 
 /// @nodoc
@@ -93,15 +93,10 @@ class __$$FavoritePlaceInstanceImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? name = null,
     Object? placeId = null,
   }) {
     return _then(_$FavoritePlaceInstanceImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -115,13 +110,14 @@ class __$$FavoritePlaceInstanceImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$FavoritePlaceInstanceImpl implements _FavoritePlaceInstance {
   const _$FavoritePlaceInstanceImpl(
-      {required this.id, required this.name, required this.placeId});
+      {required this.name, required this.placeId});
 
-  @override
-  final String id;
+  factory _$FavoritePlaceInstanceImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FavoritePlaceInstanceImplFromJson(json);
+
   @override
   final String name;
   @override
@@ -129,7 +125,7 @@ class _$FavoritePlaceInstanceImpl implements _FavoritePlaceInstance {
 
   @override
   String toString() {
-    return 'FavoritePlaceInstance(id: $id, name: $name, placeId: $placeId)';
+    return 'FavoritePlaceInstance(name: $name, placeId: $placeId)';
   }
 
   @override
@@ -137,13 +133,13 @@ class _$FavoritePlaceInstanceImpl implements _FavoritePlaceInstance {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FavoritePlaceInstanceImpl &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.placeId, placeId) || other.placeId == placeId));
   }
 
+  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, placeId);
+  int get hashCode => Object.hash(runtimeType, name, placeId);
 
   @JsonKey(ignore: true)
   @override
@@ -151,16 +147,23 @@ class _$FavoritePlaceInstanceImpl implements _FavoritePlaceInstance {
   _$$FavoritePlaceInstanceImplCopyWith<_$FavoritePlaceInstanceImpl>
       get copyWith => __$$FavoritePlaceInstanceImplCopyWithImpl<
           _$FavoritePlaceInstanceImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$FavoritePlaceInstanceImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _FavoritePlaceInstance implements FavoritePlaceInstance {
   const factory _FavoritePlaceInstance(
-      {required final String id,
-      required final String name,
+      {required final String name,
       required final int placeId}) = _$FavoritePlaceInstanceImpl;
 
-  @override
-  String get id;
+  factory _FavoritePlaceInstance.fromJson(Map<String, dynamic> json) =
+      _$FavoritePlaceInstanceImpl.fromJson;
+
   @override
   String get name;
   @override

@@ -12,11 +12,11 @@ class FavoriteItem extends StatelessWidget {
     required this.iconData,
     this.onTap,
     this.showDeleteButton = false,
-    this.id = "",
+    this.placeId = -1,
   });
 
   final String text;
-  final String id;
+  final int placeId;
   final bool showDeleteButton;
   final VoidCallback? onTap;
   final IconData iconData;
@@ -69,7 +69,7 @@ class FavoriteItem extends StatelessWidget {
           Consumer(
             builder: (context, ref, child) => IconButton(
               onPressed: () {
-                ref.read(favoritePlacesProvider.notifier).deletePlace(id);
+                ref.read(favoritePlacesProvider.notifier).deletePlace(placeId);
               },
               icon: const Icon(Icons.close),
             ),
