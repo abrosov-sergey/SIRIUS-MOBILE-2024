@@ -48,4 +48,12 @@ targets:
     preBuildScripts:
       - name: Run SwiftFormat Script
         script: "sh Scripts/swiftformat.sh"
-
+    scheme:
+      testTargets:
+        - SiriusMapUITests
+  SiriusMapUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: SiriusMapUITests
+    dependencies:
+      - target: SiriusMap
