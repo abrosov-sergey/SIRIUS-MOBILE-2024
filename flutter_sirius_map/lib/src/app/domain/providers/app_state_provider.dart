@@ -56,8 +56,7 @@ class AppStateNotifier extends _$AppStateNotifier {
         : null;
     if (state is BaseAppState) {
       state = ChoiceAppState(start: placePoint);
-    }
-    if (state is ChoiceAppState) {
+    } else if (state is ChoiceAppState) {
       updateChoiceState(placePoint);
     }
   }
@@ -68,8 +67,7 @@ class AppStateNotifier extends _$AppStateNotifier {
       state = ChoiceAppState(
         start: _routeRepository.getPointById(placePointId),
       );
-    }
-    if (state is ChoiceAppState) {
+    } else if (state is ChoiceAppState) {
       state = (state as ChoiceAppState).copyWith(
         start: _routeRepository.getPointById(placePointId),
       );
@@ -82,8 +80,7 @@ class AppStateNotifier extends _$AppStateNotifier {
       state = ChoiceAppState(
         finish: _routeRepository.getPointById(placePointId),
       );
-    }
-    if (state is ChoiceAppState) {
+    } else if (state is ChoiceAppState) {
       state = (state as ChoiceAppState).copyWith(
         finish: _routeRepository.getPointById(placePointId),
       );
