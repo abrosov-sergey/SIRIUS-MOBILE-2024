@@ -100,9 +100,8 @@ class FavoriteBlocWidget extends ConsumerWidget {
 Future<void> _tapAdd(WidgetRef ref) async {
   ref.read(favoritePlacesProvider.notifier).addNewPlace(
         FavoritePlaceInstance(
-          placeId: Random().nextInt(10959083),
+          placeId: Random().nextInt(100),
           name: "AAAAAAAAA",
         ),
       );
-  // TODO: Обработать клик на добавление нового любимого места
 }

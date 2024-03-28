@@ -49,6 +49,20 @@ class AppStateNotifier extends _$AppStateNotifier {
     }
   }
 
+  /// выбрать вторую точку
+  void onFinishPointChoice(int placePointId) {
+    if (state is BaseAppState) {
+      state = ChoiceAppState(
+        finish: _routeRepository.getPointById(placePointId),
+      );
+    }
+    if (state is ChoiceAppState) {
+      state = (state as ChoiceAppState).copyWith(
+        finish: _routeRepository.getPointById(placePointId),
+      );
+    }
+  }
+
   /// меняем точки местами при выборе маршрута
   void onPlacePointsSwap() {
     if (state is ChoiceAppState) {
