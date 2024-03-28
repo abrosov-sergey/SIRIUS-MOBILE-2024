@@ -15,7 +15,13 @@ protocol MapViewControllerDelegate: AnyObject {
 
 // MARK: - MapViewController
 
-final class MapViewController: UIViewController {
+final class MapViewController: UIViewController, MapViewControllerInterface {
+    func setRouteStart(_: MapItem) {}
+
+    func setRouteEnd(_: MapItem) {}
+
+    func drawRoute(start _: MapItem, end _: MapItem) {}
+
 //    private func updateUI() {
 //        if let routeStart, let routeEnd {
 //            buildRoute(start: routeStart, end: routeEnd)
