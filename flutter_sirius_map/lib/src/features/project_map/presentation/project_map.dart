@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_sirius_map/src/app/domain/place_point.dart';
+import 'package:flutter_sirius_map/src/features/project_map/domain/models/map_state.dart';
+import 'package:flutter_sirius_map/src/features/project_map/domain/providers/map_provider.dart';
 import 'package:flutter_sirius_map/src/features/project_map/presentation/widgets/background_map.dart';
+import 'package:flutter_sirius_map/src/features/project_map/presentation/widgets/my_marker_layer.dart';
+import 'package:flutter_sirius_map/src/features/project_map/presentation/widgets/selected_point.dart';
 import 'package:latlong2/latlong.dart';
 
 class ProjectMap extends ConsumerWidget {
   const ProjectMap({super.key});
-
-  get _marshrut => const [
-        LatLng(43.41482521465457, 39.951312004328557),
-        LatLng(43.414671691690607, 39.951024080506684),
-        LatLng(43.416017675651091, 39.953505467745707),
-        LatLng(43.412741314440822, 39.949842052848332),
-      ];
 
   final _maxPoint = const LatLng(43.412678630221023, 39.949135833185039);
 
@@ -37,6 +35,9 @@ class ProjectMap extends ConsumerWidget {
 
   @override
   Widget build(context, ref) {
+    final mapNotifier = ref.watch(mapNotifierProvider.notifier);
+    final mapState = ref.watch(mapNotifierProvider);
+
     return FlutterMap(
       mapController: MapController(),
       options: MapOptions(
@@ -46,8 +47,7 @@ class ProjectMap extends ConsumerWidget {
         initialCenter: _center,
         initialZoom: 17,
         onTap: (TapPosition tapPosition, LatLng point) {
-          // ignore: avoid_print
-          print("${tapPosition.toString()}   -   ${point.toString()}");
+          mapNotifier.onMapTap(point);
         },
       ),
       children: [
@@ -61,16 +61,40 @@ class ProjectMap extends ConsumerWidget {
                   const LatLng(43.412678630221023, 39.949135833185039)))
         ]),
         // отрисовка маршрута
-        PolylineLayer(
-          polylines: [
-            Polyline(
-              points: _marshrut,
-              gradientColors: [Colors.blue, Colors.purple, Colors.pink],
-              strokeWidth: 10,
-            ),
-          ],
-        ),
+        if (mapState is MapStateRoute)
+          PolylineLayer(
+            polylines: [
+              Polyline(
+                points: mapState.route,
+                gradientColors: [Colors.blue, Colors.purple, Colors.pink],
+                strokeWidth: 10,
+              ),
+            ],
+          ),
+        if (mapState is MapStatePoints)
+          MyMarkerLayer(markers: [
+            if (mapState.start != null)
+              _marker(
+                mapState.start!,
+                mapNotifier.onPointCancel,
+              ),
+            if (mapState.finish != null)
+              _marker(
+                mapState.finish!,
+                mapNotifier.onPointCancel,
+              ),
+          ]),
       ],
+    );
+  }
+
+  Marker _marker(PlacePoint placePoint, void Function(int) deletePoint) {
+    return Marker(
+      point: placePoint.pos,
+      child: SelectedPoint(
+        placePoint: placePoint,
+        deletePoint: deletePoint,
+      ),
     );
   }
 }

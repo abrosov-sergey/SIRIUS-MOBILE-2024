@@ -1,5 +1,8 @@
 {
     "search" : "Search",
     "favorites" : "Favorites",
-    "language" : "EN"
+    "language" : "EN",
+    "edit" : "Edit",
+    "cancel" : "Cancel",
+    "add" : "Add"
 }

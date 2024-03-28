@@ -21,6 +21,10 @@ configs:
 # Packages
 ############
 
+packages:
+  Collections:
+    url: https://github.com/apple/swift-collections.git
+    from: 1.1.0
 
 ############
 # Settings
@@ -34,10 +38,20 @@ targets:
     type: application
     platform: iOS
     deploymentTarget: "16.0"
-    sources: [SiriusMap]
+    sources:
+      - path: SiriusMap
+        excludes: SiriusMap/Map/Model/IMDFData
+      - path: SiriusMap/Map/Model/IMDFData
+        type: folder
     settings:
       base:
         MARKETING_VERSION: 1.0.0
         SWIFT_VERSION: 5.2
         SWIFT_OPTIMIZATION_LEVEL: "-Onone"
         TARGETED_DEVICE_FAMILY: 1
+    dependencies:
+      - package: Collections
+    preBuildScripts:
+      - name: Run SwiftFormat Script
+        script: "sh Scripts/swiftformat.sh"
+

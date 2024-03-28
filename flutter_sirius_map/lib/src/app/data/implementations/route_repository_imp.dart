@@ -27,12 +27,17 @@ class RouteRepositoryImpl implements RouteRepository {
   }
 
   @override
-  PlacePoint getClosestPoint(LatLng ll) {
+  PlacePoint? getClosestPoint(LatLng ll) {
     return _pointsService.getClosest(ll);
   }
 
   @override
   List<PlacePoint> getRoute(PlacePoint start, PlacePoint finish) {
     return _graphService.getRoute(start, finish);
+  }
+
+  @override
+  PlacePoint? getPointById(int id) {
+    return _pointsService.getById(id);
   }
 }

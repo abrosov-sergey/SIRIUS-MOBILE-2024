@@ -13,12 +13,12 @@ part 'app_text_theme.tailor.dart';
 class $_AppTextTheme {
   static const _headerStyle = TextStyle(
     fontWeight: FontWeight.w600,
-    fontSize: 15,
+    fontSize: 14,
   );
 
   static const _bodyStyle = TextStyle(
     fontWeight: FontWeight.w700,
-    fontSize: 17,
+    fontSize: 15,
   );
 
   static List<TextStyle> headerStyle = [

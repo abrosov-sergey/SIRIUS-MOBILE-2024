@@ -14,7 +14,6 @@ enum ButtonWithTextStyle {
 }
 
 final class ButtonWithText: UIButton {
-    
     convenience init(_ text: String, style: ButtonWithTextStyle = .blue) {
         switch style {
         case .blue:
@@ -26,16 +25,15 @@ final class ButtonWithText: UIButton {
             configuration.title = text
             self.init(configuration: configuration, primaryAction: nil)
         }
-        
+
         setup()
     }
-    
+
     func setup() {
         layer.shadowColor = UIColor.gray.cgColor
         layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
         layer.shadowOpacity = 0.1
     }
-    
 }
 
 extension UIButton.Configuration {
@@ -46,9 +44,10 @@ extension UIButton.Configuration {
         background.cornerRadius = 10.0
         background.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.7)
         style.background = background
-        
+
         return style
     }
+
     static func outlineGray() -> UIButton.Configuration {
         var style = UIButton.Configuration.plain()
         var background = UIButton.Configuration.plain().background
@@ -57,7 +56,7 @@ extension UIButton.Configuration {
         background.strokeWidth = 1.0
         background.strokeColor = .systemGray
         style.background = background
-        
+
         return style
     }
 }

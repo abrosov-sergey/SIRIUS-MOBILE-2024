@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_sirius_map/src/utils/context.dart';
+import 'package:flutter_sirius_map/src/core/utils/context.dart';
 
 class BuildRouteButton extends StatefulWidget {
-  const BuildRouteButton({super.key});
+  final void Function() callBack;
+  const BuildRouteButton({
+    super.key,
+    required this.callBack,
+  });
 
   @override
   State<BuildRouteButton> createState() => _BuildRouteButtonState();
@@ -31,22 +35,23 @@ class _BuildRouteButtonState extends State<BuildRouteButton> {
         });
       },
       onTap: () {
+        widget.callBack();
         HapticFeedback.lightImpact();
       },
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+        duration: kThemeChangeDuration,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(100),
-            color: context.themeExtendColors.secondaryColor,
-            boxShadow: [
-              BoxShadow(
-                color:
-                    context.themeExtendColors.shadowColor.withOpacity(opacity),
-                spreadRadius: 2,
-                blurRadius: 3,
-                offset: const Offset(0, 2),
-              ),
-            ]),
+          borderRadius: BorderRadius.circular(100),
+          color: context.themeExtendColors.secondaryColor,
+          boxShadow: [
+            BoxShadow(
+              color: context.themeExtendColors.shadowColor.withOpacity(opacity),
+              spreadRadius: 2,
+              blurRadius: 3,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Icon(

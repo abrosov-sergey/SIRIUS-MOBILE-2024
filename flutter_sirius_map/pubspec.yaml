@@ -54,10 +54,8 @@ dependencies:
   google_fonts: ^6.2.1
   json_annotation: ^4.8.1
   dijkstra: ^0.0.4
-  logger: ^2.2.0
-  
-
-
+  shared_preferences: ^2.2.2
+  json_annotation: ^4.8.1
 
 
 dev_dependencies:
