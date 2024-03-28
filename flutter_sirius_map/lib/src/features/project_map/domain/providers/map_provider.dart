@@ -33,7 +33,6 @@ class MapNotifier extends _$MapNotifier {
 
   void onMapTap(LatLng ll) {
     final appStateNotifier = ref.read(appStateNotifierProvider.notifier);
-    // print('onMapTap - MapNotifier');
     appStateNotifier.onMapTap(ll);
   }
 

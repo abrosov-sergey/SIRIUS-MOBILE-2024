@@ -47,7 +47,6 @@ class ProjectMap extends ConsumerWidget {
         initialCenter: _center,
         initialZoom: 17,
         onTap: (TapPosition tapPosition, LatLng point) {
-          // print('onMapTap - Widget');
           mapNotifier.onMapTap(point);
         },
       ),
