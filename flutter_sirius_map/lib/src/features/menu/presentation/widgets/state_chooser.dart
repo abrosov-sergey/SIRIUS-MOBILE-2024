@@ -16,7 +16,7 @@ class StateChooser extends ConsumerWidget {
   Widget build(context, ref) {
     final appState = ref.watch(appStateNotifierProvider);
 
-    return switch(appState) {
+    return switch (appState) {
       InitAppState() => const CircularProgressIndicator(),
       BaseAppState() => BaseAppStateWidget(),
       ChoiceAppState() => ChoiceAppStateWidget(),

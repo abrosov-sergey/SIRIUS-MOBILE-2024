@@ -30,7 +30,7 @@ class BaseAppStateWidget extends ConsumerWidget {
               SizedBox(width: 10.w),
               BuildRouteButton(
                 callBack: () => notifier.onSetChoiceAppState(),
-              ), // TODO заставить кнопку  работать
+              ),
             ],
           ),
         ),
