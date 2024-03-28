@@ -149,8 +149,7 @@ class AppStateNotifier extends _$AppStateNotifier {
           );
           if (route == null) {
             state = const BaseAppState();
-          }
-          else {
+          } else {
             state = RouteAppState(route: route);
           }
         } catch (error, stackTrace) {
